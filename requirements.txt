@@ -1,0 +1,10 @@
+# Data preparation
+dbt-duckdb ~= 1.4.0
+pandas ~= 1.5.3
+
+# Data transfer API
+fastapi[all] ~= 0.92.0
+
+# Miscellenea / dev things
+pip ~= 23.0.1
+black ~= 23.1.0
