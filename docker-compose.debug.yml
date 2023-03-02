@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  adkwrapped:
+    image: adkwrapped
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: ["sh", "-c", "pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5678 -m uvicorn adk_wrapped.app:app --host 0.0.0.0 --port 8765"]
+    ports:
+      - 8765:8765
+      - 5678:5678
