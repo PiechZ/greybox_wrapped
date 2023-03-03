@@ -6,5 +6,5 @@ pandas ~= 1.5.3
 fastapi[all] ~= 0.92.0
 
 # Miscellenea / dev things
-pip ~= 23.0.1
+# pip ~= 23.0.1 probably not necessary
 black ~= 23.1.0
