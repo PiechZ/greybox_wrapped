@@ -1,0 +1,1 @@
+select * from {{ ref('clovek_debata') }} where kidy > 90
