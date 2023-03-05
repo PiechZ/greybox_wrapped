@@ -22,13 +22,13 @@ In practice, it might be worthwhile to merge the transfer and presentation compo
         adk_wrapped:
             outputs:
                 dev:
-                path: "C:\\Users\\{username}\\.dbt\\adk_wrapped.db"
-                schema: adk_wrapped
-                type: duckdb
-                threads: 4
-                extensions:
-                    - httpfs
-                    - parquet
+                    path: "C:\\Users\\{username}\\.dbt\\adk_wrapped.db"
+                    schema: adk_wrapped
+                    type: duckdb
+                    threads: 4
+                    extensions:
+                        - httpfs
+                        - parquet
             target: dev
         ```
     - Add `clovek_debata.csv` to the `seeds/` folder. Make sure it's not committed to git (it should be in `.gitignore`, but make sure anyway).
