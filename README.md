@@ -16,7 +16,23 @@ In practice, it might be worthwhile to merge the transfer and presentation compo
 
 - Create a `requirements.txt` file with `dbt-duckdb`, `flask`/`FastAPI` and `pandas` as dependencies.
 - Create a `data/` folder that's ignored by git, with the file from Vašek in it. (Forward it to collaborators.)
-- Run `dbt init` to create a `dbt_project.yml` file, as well as the file structure.
+- ~~Run `dbt init` to create a `dbt_project.yml` file, as well as the file structure.~~ This is now part of the repository.
+    - Create, or add to, `~/.dbt/profiles.yml` with the following contents, replacing {username} with your account username (or, if not using Windows, the path you wish to store the DuckDB database in):
+        ```yaml
+        adk_wrapped:
+            outputs:
+                dev:
+                path: "C:\\Users\\{username}\\.dbt\\adk_wrapped.db"
+                schema: adk_wrapped
+                type: duckdb
+                threads: 4
+                extensions:
+                    - httpfs
+                    - parquet
+            target: dev
+        ```
+    - Add `clovek_debata.csv` to the `seeds/` folder. Make sure it's not committed to git (it should be in `.gitignore`, but make sure anyway).
+    - Run `dbt seed` to load the data into the database.
 - Create a `adk_wrapped/` folder with a `__init__.py` file in it, and a `app.py` file in it. That's where Flask/FastAPI will run.
 
 ### Endpoints
