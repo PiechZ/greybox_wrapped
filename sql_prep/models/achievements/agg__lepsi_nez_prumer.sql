@@ -1,7 +1,7 @@
-SELECT nazev, prijmeni, jmeno, COUNT() FROM {{ ref('clovek_debata') }}
+SELECT nazev, clovek_id, COUNT() FROM {{ ref('clovek_debata') }}
 WHERE nazev IN ('Debatní liga XXVIII.', 'Debate League XXVIII.')
 AND kidy > 75
-GROUP BY nazev, prijmeni, jmeno
+GROUP BY nazev, clovek_id
 
 /*Prvni pokus:
 SELECT * FROM {{ ref('clovek_debata') }} WHERE clovek_ID = 2956

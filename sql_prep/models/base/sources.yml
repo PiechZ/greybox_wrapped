@@ -1,0 +1,18 @@
+version: 2
+
+sources:
+  - name: raw
+    database: adk_wrapped
+    schema: debatovanicz
+    tables:
+      - name: clovek
+      - name: clovek_debata
+      - name: debata
+      - name: tym
+      - name: turnaj
+      - name: liga
+      - name: teze
+
+models:
+  - name: clovek_debata
+    description: Legacy model superseding the former seed file clovek_debata.csv
