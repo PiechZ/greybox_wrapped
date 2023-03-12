@@ -14,4 +14,3 @@ LEFT JOIN {{ source('raw', 'turnaj') }} USING (turnaj_id)
 LEFT JOIN {{ source('raw', 'liga') }} USING (liga_id)
 LEFT JOIN {{ source('raw', 'teze') }} ON debata.teze_id = teze.teze_id
 WHERE role IN ('a1', 'a2', 'a3', 'n1', 'n2', 'n3')
-AND turnaj.liga_ID IS NOT NULL
