@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: agg__lepsi_nez_prumer
+  - name: agg__ultimatni_kidy
+  - name: agg__multilingvni
+    columns:
+      - name: clovek_id
+        tests:
+          - not_null
+          - unique
+      - name: achievement
