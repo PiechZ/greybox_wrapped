@@ -3,4 +3,3 @@ run:
 setup:
 	python -m venv env
 	env/Scripts/pip install -r requirements.txt
-	env/Scripts/dbt init sql_prep
