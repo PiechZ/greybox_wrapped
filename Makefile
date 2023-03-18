@@ -1,3 +1,5 @@
+run:
+	cd sql_prep && dbt run
 backend:
 	cd backend && uvicorn src.app:app --reload --port 8765
 frontend:
@@ -6,4 +8,4 @@ setup:
 	python -m venv env
 	env/Scripts/pip install -r requirements.txt
 
-.PHONY: backend frontend setup
+.PHONY: run backend frontend setup

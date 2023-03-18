@@ -4,6 +4,7 @@ SELECT
     kidy,
     clovek.clovek_id,
     liga.liga_id,
+    liga.rocnik,
     liga.nazev,
     debata.teze_id,
     teze.jazyk
