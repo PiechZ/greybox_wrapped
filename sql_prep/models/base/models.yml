@@ -5,6 +5,9 @@ models:
     description: >
       Přepsaný model debaty tak, aby z něj šlo spolehlivě vyčíst přesvědčivost 
       vítězství/prohry a množství rozhodčích. Granularita: jedna debata.
+    tests:
+      - dbt_utils.equal_rowcount:
+          compare_model: source('raw', 'debata')
     columns:
       - name: debata_id
         description: PK
@@ -40,6 +43,9 @@ models:
       - name: school_year
         description: První den školního roku, ve kterém se debata odehrála
   - name: base__rozhodci_debata
+    tests:
+      - dbt_utils.fewer_rows_than:
+          compare_model: source('raw', 'clovek_debata')
     description: >
       Základní model, granularita: jeden rozhodčí za každou odrozhodovanou debatu.
       Nadstavba nad base__debata. Pro popisy nepopsaných sloupců viz base__debata.
@@ -59,6 +65,9 @@ models:
           Pořadí služebního stáří rozhodčího v greyboxu (souzeno dle clovek_id)
           mezi soudci této debaty.
   - name: base__debater_debata
+    tests:
+      - dbt_utils.fewer_rows_than:
+          compare_model: source('raw', 'clovek_debata')
     description: >
       Základní model, granularita: jeden debatér za každou svou debatu.
       Mělo by nahradit model clovek_debata.

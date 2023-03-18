@@ -45,6 +45,16 @@ ballots as (
     group by 1
 ),
 
+-- The above CTE does not return debates that have no judges, so we'll keep
+-- a list of judgeless debate_ids to join back later
+ballotless_debates as (
+    select 
+        debates.debata_id
+    from debates
+    left join ballots using (debata_id)
+    where ballots.debata_id is null
+),
+
 single_ballot_debates as (
     select
         ballots.debata_id,
@@ -85,10 +95,25 @@ multi_ballot_debates as (
     where ballots.total_ballots > 1
 ),
 
+no_ballot_debates as (
+    select
+        ballotless_debates.debata_id,
+        FALSE as is_affirmative_win,
+        FALSE as is_persuasive_win,
+        TRUE as is_draw,
+        1.5 as affirmative_ballots_normalized,
+        0 as affirmative_ballots,
+        0 as negative_ballots,
+        0 as judge_count
+    from ballotless_debates
+),
+
 all_debates as (
     select * from single_ballot_debates
     union all
     select * from multi_ballot_debates
+    union all
+    select * from no_ballot_debates
 ),
 
 final as (
