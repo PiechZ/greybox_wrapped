@@ -8,5 +8,29 @@ models:
       - name: clovek_id
         tests:
           - not_null
-          - unique
       - name: achievement
+  - name: agg_prehlasovan
+    columns: &STANDARD_ACHIEVEMENT_COLUMNS
+      - name: clovek_id
+        tests:
+          - not_null
+      - name: school_year
+        tests:
+          - not_null
+      - name: achievement_id
+        tests:
+          - unique
+          - not_null
+      - name: achievement_name
+        tests:
+          - not_null
+      - name: achievement_description
+        tests:
+          - not_null
+      - name: achievement_data
+      - name: achievement_type
+        tests:
+          - not_null
+      - name: achievement_priority
+        tests:
+          - not_null
