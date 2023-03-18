@@ -8,7 +8,12 @@ sources:
       - name: clovek
       - name: clovek_debata
       - name: debata
+      - name: debata_tym
+      - name: klub
       - name: tym
       - name: turnaj
       - name: liga
+      - name: soutez
       - name: teze
+      - name: clovek_debata_ibody
+      - name: clovek_ibody

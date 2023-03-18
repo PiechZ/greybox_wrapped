@@ -9,6 +9,22 @@ debates_in_years as (
     from debates
 ),
 
+motions as (
+    select * from {{ source('raw', 'teze') }}
+),
+
+tournaments as (
+    select * from {{ source('raw', 'turnaj') }}
+),
+
+competitions as (
+    select * from {{ source('raw', 'soutez') }}
+),
+
+leagues as (
+    select * from {{ source('raw', 'liga') }}
+),
+
 judges as (
     select 
         clovek_id,
@@ -79,10 +95,22 @@ final as (
     select
         all_debates.*,
         3 - all_debates.affirmative_ballots_normalized as negative_ballots_normalized,
-        debates_in_years.datum,
-        debates_in_years.school_year
+        debates_in_years.datum as debate_date,
+        debates_in_years.school_year,
+        motions.jazyk as language,
+        motions.tx as motion_text,
+        motions.tx_short as motion_short,
+        debates_in_years.turnaj_id is not null as is_tournament,
+        debates_in_years.soutez_id is not null as is_competition,
+        leagues.nazev as league_name,
+        -- tournaments.nazev as tournament_name,
+        competitions.nazev as competition_name
     from all_debates
     left join debates_in_years using (debata_id)
+    left join motions using (teze_id)
+    left join tournaments using (turnaj_id)
+    left join competitions on debates_in_years.soutez_id = competitions.soutez_id
+    left join leagues on tournaments.liga_id = leagues.liga_id
 )
 
 select * from final

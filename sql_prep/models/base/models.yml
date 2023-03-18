@@ -58,6 +58,10 @@ models:
         description: >
           Pořadí služebního stáří rozhodčího v greyboxu (souzeno dle clovek_id)
           mezi soudci této debaty.
+  - name: base__debater_debata
+    description: >
+      Základní model, granularita: jeden debatér za každou svou debatu.
+      Mělo by nahradit model clovek_debata.
 
 
   - name: clovek_debata
