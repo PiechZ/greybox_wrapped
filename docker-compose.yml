@@ -4,7 +4,14 @@ services:
   backend:
     image: backend
     build:
-      context: .
+      context: ./backend/
       dockerfile: ./Dockerfile
     ports:
       - 8765:8765
+  frontend:
+    image: frontend
+    build:
+      context: ./frontend/
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000

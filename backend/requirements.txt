@@ -1,11 +1,10 @@
-# This is an overall requirements file for local development
-
 # Data preparation
-dbt-duckdb ~= 1.4.0
+# dbt-duckdb ~= 1.4.0
 pandas ~= 1.5.3
 
 # Data transfer API
 fastapi[all] ~= 0.92.0
+gunicorn ~= 20.1.0
 
 # Miscellenea / dev things
 # pip ~= 23.0.1 # not necessary and breaks some things

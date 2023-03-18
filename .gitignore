@@ -163,4 +163,4 @@ cython_debug/
 clovek_debata.csv
 
 #folders
-data/*
+data/*.db
