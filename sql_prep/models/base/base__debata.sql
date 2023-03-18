@@ -2,6 +2,13 @@ with debates as (
     select * from {{ source('raw', 'debata') }}
 ),
 
+debates_in_years as (
+    select
+        *,
+        date_sub('year', DATE '2000-09-01', datum) as school_year
+    from debates
+),
+
 judges as (
     select 
         clovek_id,
@@ -72,9 +79,10 @@ final as (
     select
         all_debates.*,
         3 - all_debates.affirmative_ballots_normalized as negative_ballots_normalized,
-        debates.datum
+        debates_in_years.datum,
+        debates_in_years.school_year
     from all_debates
-    left join debates using (debata_id)
+    left join debates_in_years using (debata_id)
 )
 
 select * from final

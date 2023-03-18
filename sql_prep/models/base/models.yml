@@ -35,6 +35,32 @@ models:
         description: >
           Množství rozhodčích, kteří rozhodovali debatu. 
           (affirmative_ballots + negative_ballots)
+      - name: datum
+        description: Datum debaty
+      - name: school_year
+        description: První den školního roku, ve kterém se debata odehrála
+  - name: base__rozhodci_debata
+    description: >
+      Základní model, granularita: jeden rozhodčí za každou odrozhodovanou debatu.
+      Nadstavba nad base__debata. Pro popisy nepopsaných sloupců viz base__debata.
+    columns:
+      - name: clovek_id
+        description: Co-PK
+        test:
+          - is_unique
+          - not_null
+      - name: has_voted_affirmative
+        description: Hlasoval tento rozhodčí pro stranu afirmativní?
+      - name: judge_rank
+        description: >
+          Pořadí zanesení hlasu do greyboxu (1 typicky indikuje předsedu panelu)
+          mezi soudci této debaty. Ne zcela spolehlivé.
+      - name: judge_seniority
+        description: >
+          Pořadí služebního stáří rozhodčího v greyboxu (souzeno dle clovek_id)
+          mezi soudci této debaty.
+
+
   - name: clovek_debata
     description: >
       Základní model. Granularita: jeden debatér za každou oddebatovanou debatu.
