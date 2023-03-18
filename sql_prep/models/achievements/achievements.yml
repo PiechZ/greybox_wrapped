@@ -9,7 +9,7 @@ models:
         tests:
           - not_null
       - name: achievement
-  - name: agg_prehlasovan
+  - name: agg__prehlasovan
     columns: &STANDARD_ACHIEVEMENT_COLUMNS
       - name: clovek_id
         tests:

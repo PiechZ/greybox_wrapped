@@ -8,8 +8,8 @@ models:
     columns:
       - name: debata_id
         description: PK
-        test:
-          - is_unique
+        tests:
+          - unique
           - not_null
       - name: is_affirmative_win
         description: Vyhrála strana afirmativní?
@@ -19,13 +19,13 @@ models:
         description: Skončila debata remízou?
       - name: affirmative_ballots_normalized
         description: Normalizované množství afirmativních ballotů
-        test:
+        tests:
           - not_null
       - name: negative_ballots_normalized
         description: >
           Normalizované množství negativních ballotů 
           (3 - affirmative_ballots_normalized)
-        test:
+        tests:
           - not_null
       - name: affirmative_ballots
         description: Množství hlasů rozhodčích pro afirmaci
@@ -46,8 +46,7 @@ models:
     columns:
       - name: clovek_id
         description: Co-PK
-        test:
-          - is_unique
+        tests:
           - not_null
       - name: has_voted_affirmative
         description: Hlasoval tento rozhodčí pro stranu afirmativní?
