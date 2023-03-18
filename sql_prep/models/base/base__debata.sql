@@ -5,7 +5,7 @@ with debates as (
 debates_in_years as (
     select
         *,
-        date_sub('year', DATE '2000-09-01', datum) as school_year
+        date_sub('year', DATE '{{ var("first_school_year") }}', datum) as school_year
     from debates
 ),
 
