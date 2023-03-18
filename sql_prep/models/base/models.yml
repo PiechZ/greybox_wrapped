@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: base__debata
+    description: >
+      Přepsaný model debaty tak, aby z něj šlo spolehlivě vyčíst přesvědčivost 
+      vítězství/prohry a množství rozhodčích. Granularita: jedna debata.
+    columns:
+      - name: debata_id
+        description: PK
+        test:
+          - is_unique
+          - not_null
+      - name: is_affirmative_win
+        description: Vyhrála strana afirmativní?
+      - name: is_persuasive_win
+        description: Byla debata vyhrána přesvědčivě?
+      - name: is_draw
+        description: Skončila debata remízou?
+      - name: affirmative_ballots_normalized
+        description: Normalizované množství afirmativních ballotů
+        test:
+          - not_null
+      - name: negative_ballots_normalized
+        description: >
+          Normalizované množství negativních ballotů 
+          (3 - affirmative_ballots_normalized)
+        test:
+          - not_null
+      - name: affirmative_ballots
+        description: Množství hlasů rozhodčích pro afirmaci
+      - name: negative_ballots
+        description: Množství hlasů rozhodčích pro negaci
+      - name: total_ballots
+        description: >
+          Množství rozhodčích, kteří rozhodovali debatu. 
+          (affirmative_ballots + negative_ballots)
+  - name: clovek_debata
+    description: >
+      Základní model. Granularita: jeden debatér za každou oddebatovanou debatu.
+      (Legacy model superseding the former seed file clovek_debata.csv.)
