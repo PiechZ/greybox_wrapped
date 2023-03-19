@@ -12,6 +12,7 @@ We're using a standard client-server architecture with a stationary pre-filled b
 graph TD
   A(Spectacle) -->|Sends request to| B(FastAPI)
   B(FastAPI)   -->|Processes request and retrieves data from| C(DuckDB)
+  B(FastAPI)   -->|Sends data to| A(Spectacle)
 ```
 
 ## Environment
