@@ -13,6 +13,12 @@ class Database:
 
     # FIXME: Should this instead be a static method of Achievement?
     def get_achievements(self, clovek_id: int) -> List[Achievement]:
+        try:
+            clovek_id = int(clovek_id)
+        except ValueError:
+            return []
+        
+        # FIXME: This is literal SQL injection of user input - the above is sufficient for now, but test
         achievements = self.connection.sql(
             f"SELECT * FROM adk_wrapped.adk_wrapped.final__current_achievements WHERE clovek_id = {clovek_id}"
         ).df()
