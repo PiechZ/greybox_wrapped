@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line
 import { Deck, Slide, Heading, Text, SlideLayout, Progress, AnimatedProgress } from "spectacle";
 
@@ -6,29 +6,7 @@ const getImageUrl = (image) => {
   return `url(${process.env.PUBLIC_URL}/achievement_backgrounds/${image}.png)`;
 };
 
-var Achievements = [
-  {
-    id: "Gastarbeiter/932/2",
-    name: "Gastarbeiter",
-    description: "Debatoval/a jsi za týmy z alespoň dvou různých klubů!",
-    // image: "url(" + process.env.PUBLIC_URL + '/achievement_backgrounds/gastarbeiter.png)',
-    image: getImageUrl("gastarbeiter"),
-  },
-  {
-    id: "Lingvista/932/2",
-    name: "Lingvista",
-    description: "Mluvil/a jsi tento rok v debatách v alespoň dvou různých jazycích!",
-    // image: "url(" + process.env.PUBLIC_URL + '/achievement_backgrounds/linguist.png)',
-    image: getImageUrl("linguist"),
-  },
-  {
-    id: "Nemesis/932/2",
-    name: "Nemesis",
-    description: "Tvým úhlavním soupeřem byl tento rok... Nicolas Ivanov!",
-    // image: "url(" + process.env.PUBLIC_URL + '/achievement_backgrounds/nemesis.png)',,
-    image: getImageUrl("nemesis"),
-  }
-];
+const apiServer = "http://localhost:8765"
 
 const theme = {
   colors: {
@@ -45,6 +23,22 @@ const theme = {
 const progressBarPosition = "45%"
 
 function App() {
+  const [achievements, setAchievements] = useState([]);
+  // TODO: get personId from URL
+  const personId = 932;
+  // TODO: use personId as argument here?
+  useEffect (() => {
+    fetch(apiServer + `/achievements/${personId}`)
+      .then(response => response.json())
+      .then(data => {
+        setAchievements(data);
+        console.log(data);
+      });
+  }, (error) => {
+    console.log(error);
+  });
+  // FIXME: This retrieves the backend data, but it doesn't add the slides!
+
   return (
     <Deck theme={theme}>
       <Slide>
@@ -52,16 +46,17 @@ function App() {
         <Heading>Uplynulá sezóna Ti přinesla mnohé zážitky...</Heading>
         <Text>My jsme jich tu pár shrnuli :)</Text>
       </Slide>
-      {Achievements.map((achievement) => (
+      {achievements.map((achievement) => (
         <Slide
-          backgroundImage={achievement.image}
+          key={achievement.achievement_id}
+          backgroundImage={getImageUrl(achievement.achievement_name.toLowerCase())}
           backgroundSize="cover"
           backgroundPosition="center"
           backgroundRepeat="no-repeat"
         >
           <AnimatedProgress left={progressBarPosition} />
-          <Heading backgroundColor="black" opacity="0.6">{achievement.name}</Heading>
-          <Text backgroundColor="black" opacity="0.6">{achievement.description}</Text>
+          <Heading backgroundColor="black" opacity="0.6">{achievement.achievement_name}</Heading>
+          <Text backgroundColor="black" opacity="0.6">{achievement.achievement_description}</Text>
         </Slide>
         ))}
       <Slide>
