@@ -2,43 +2,50 @@
 
 ## Architecture
 
-- A training component that restructures the data into a series of achievements / presentable statistics. This *could* be handled using `dbt`/`SQL` with a sprinkle of Python on top of a DuckDB database, since our dataset is relatively small. I'll have to think about this some more.
-- A transfer component that communicates the data to the presentation layer via API. This should be handled by a Flask/FastAPI app.
-- A presentation component that displays the data in a meaningful/beautiful way. This could be handled either by Flask or by React.
+We're using a standard client-server architecture with a stationary pre-filled backend database.
 
-In practice, it might be worthwhile to merge the transfer and presentation components into a single component.
+- `sql_prep/`: A training component that restructures the data into a series of achievements / presentable statistics. **This is handled using dbt/SQL with a sprinkle of Python on top of a DuckDB database**, since our dataset is small (&lt;50MB).
+- `backend/`: A transfer component that communicates the data to the presentation layer via API. **FastAPI handles this.**
+- `frontend/`: A presentation component that displays the data in a meaningful/beautiful way. **React/Spectacle handles this.**
 
-----
+```mermaid
+graph TD
+  A(Spectacle) -->|Sends request to| B(FastAPI)
+  B(FastAPI)   -->|Processes request and retrieves data from| C(DuckDB)
+```
 
-## If we do it like that:
+## Environment
 
-### Setup
+1. Get a DuckDB export of the dataset and place it in `data/adk_wrapped.db`.
+2. Create a `profiles.yml` file in `~/.dbt` with the following contents:
+    ```yaml
+    adk_wrapped:
+        outputs:
+            dev:
+                path: "path/to/data/adk_wrapped.db"
+                schema: adk_wrapped
+                type: duckdb
+                threads: 4
+                extensions:
+                    - httpfs
+                    - parquet
+        target: dev
+    ```
+2. For local development, run `make setup` to install the dependencies, including and especially `dbt-duckdb`. (This doesn't set up the frontend, though.)
+    1. Run `make run` to let `dbt` populate the database with transformations.
+    2. Run `make backend` to start the FastAPI server.
+    3. In a separate terminal, run `make frontend` to start the React server.
+3. For deployment/testing, `docker-compose up` should do everything. _(Currently, it's still missing the nginx component.)_
 
-- Create a `requirements.txt` file with `dbt-duckdb`, `flask`/`FastAPI` and `pandas` as dependencies.
-- Create a `data/` folder that's ignored by git, with the file from Vašek in it. (Forward it to collaborators.)
-- ~~Run `dbt init` to create a `dbt_project.yml` file, as well as the file structure.~~ This is now part of the repository.
-    - Create, or add to, `~/.dbt/profiles.yml` with the following contents, replacing {username} with your account username (or, if not using Windows, the path you wish to store the DuckDB database in):
-        ```yaml
-        adk_wrapped:
-            outputs:
-                dev:
-                    path: "C:\\Users\\{username}\\.dbt\\adk_wrapped.db"
-                    schema: adk_wrapped
-                    type: duckdb
-                    threads: 4
-                    extensions:
-                        - httpfs
-                        - parquet
-            target: dev
-        ```
-    - Add `clovek_debata.csv` to the `seeds/` folder. Make sure it's not committed to git (it should be in `.gitignore`, but make sure anyway).
-    - Run `dbt seed` to load the data into the database.
-- Create a `adk_wrapped/` folder with a `__init__.py` file in it, and a `app.py` file in it. That's where Flask/FastAPI will run.
+## Endpoints _(To settle)_
 
-### Endpoints
+### React/Spectacle
 
-- `/` and `/gdpr` to handle initial consent and GDPR compliance (?).
-- `/set-person/{person_id_base64}` to set the person ID in the session.
-- `/achievements` to pass the achievements to the presentation layer.
-- `/achievement/{achievement_name}` to pass a single achievement (with extra details?) to the presentation layer.
+- `/` displays everything for now.
+
+### FastAPI
+
+- `/achievements/{greybox_id}` to pass the achievements to the presentation layer.
+- NOT DONE: `/gdpr` to handle initial consent and GDPR compliance (?).
+- NOT DONE: `/authenticate` to ensure Greybox 2.0 is logged into.
 
