@@ -6,3 +6,4 @@
 - `achievement_text` is the default text to display along with the achievement, which the frontend handler might override,
 - `achievement_data` is a JSON dictionary of any data that is relevant to the achievement,
 - `achievement_priority` is a tie-breaker in case of multiple awardings of the same kind of achievement and possibly a sorting mechanism.
+- `achievement_description` is ???

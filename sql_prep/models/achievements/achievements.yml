@@ -4,6 +4,9 @@ models:
   - name: agg__lepsi_nez_prumer
   - name: agg__ultimatni_kidy
   - name: agg__multilingvni
+  - name: agg__dobry_recnik
+  - name: agg__prvni_vyhra
+  - name: agg__zlepsuji_se
     columns:
       - name: clovek_id
         tests:
