@@ -25,16 +25,28 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "dbt_packages"
 
 
+# Project-wide variables
+vars:
+  # Which school year begins Year 1 - important because the count starts at 4 and 
+  # not all debates are league debates that come with year designation. Used 
+  # primarily in base__debata.sql.
+  first_school_year: '2000-09-01'
+  # Which achievements do we want to return by default for the current year?
+  current_school_year: 22
+
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
-
-# In this example config, we tell dbt to build all models in the example/
-# directory as views. These settings can be overridden in the individual model
-# files using the `{{ config(...) }}` macro.
 models:
+  # Apply to all models regardless of folder
+  # (DuckDB cannot write comments into relations/columns, so we're leaving them out for now)
+  # +persist_docs:
+  #   relation: true
+  #   columns: true
   sql_prep:
-    # Config indicated by + and applies to all files under models/example/
+    # Config indicated by + and applies to all files under models/[folder]/
     base:
       +materialized: view
     achievements:
-      +materialized: view
+      +materialized: table
+    final:
+      +materialized: table

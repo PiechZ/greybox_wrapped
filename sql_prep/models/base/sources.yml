@@ -8,11 +8,12 @@ sources:
       - name: clovek
       - name: clovek_debata
       - name: debata
+      - name: debata_tym
+      - name: klub
       - name: tym
       - name: turnaj
       - name: liga
+      - name: soutez
       - name: teze
-
-models:
-  - name: clovek_debata
-    description: Legacy model superseding the former seed file clovek_debata.csv
+      - name: clovek_debata_ibody
+      - name: clovek_ibody
