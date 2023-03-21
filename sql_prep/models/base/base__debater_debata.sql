@@ -17,15 +17,20 @@ debaters_in_debates as (
         clovek_id,
         role,
         kidy,
+        role in ('a1', 'a2', 'a3') as is_affirmative_speaker
     from {{ source('raw', 'clovek_debata') }}
     where role in ('a1', 'a2', 'a3', 'n1', 'n2', 'n3')
 ),
 
 final as (
     select
-        *,
+        debaters_in_debates.*,
         debates.*,
-        people.klub_id
+        people.klub_id,
+        not debates.is_draw and (
+            (debaters_in_debates.is_affirmative_speaker and debates.is_affirmative_win)
+            or (not debaters_in_debates.is_affirmative_speaker and not debates.is_affirmative_win)
+        ) as is_winner
     from debaters_in_debates
     left join debates using (debata_id)
     left join people using (clovek_id)
