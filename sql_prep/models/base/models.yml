@@ -71,6 +71,14 @@ models:
     description: >
       Základní model, granularita: jeden debatér za každou svou debatu.
       Mělo by nahradit model clovek_debata.
+  - name: base__newbies
+    description: >
+      Seznam ID lidí, kteří začali v této sezóně. Pro začátečnické achievementy
+      na něj lze učinit `right join on (clovek_id)`.
+    columns:
+      - name: clovek_id
+        tests:
+          - unique
 
 
   - name: clovek_debata
