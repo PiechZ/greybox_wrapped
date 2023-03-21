@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// eslint-disable-next-line
-import { Deck, Slide, Heading, Text, SlideLayout, Progress, AnimatedProgress } from "spectacle";
+import { Deck, Slide, Heading, Text, AnimatedProgress } from "spectacle";
 
 const getImageUrl = (image) => {
   return `url(${process.env.PUBLIC_URL}/achievement_backgrounds/${image}.png)`;
@@ -24,42 +23,44 @@ const progressBarPosition = "45%"
 
 function App() {
   const [achievements, setAchievements] = useState([]);
-  // TODO: get personId from URL
-  const personId = 932;
-  // TODO: use personId as argument here?
-  useEffect (() => {
+  const [personId, setPersonId] = useState(932);
+
+  useEffect(() => {
     fetch(apiServer + `/achievements/${personId}`)
       .then(response => response.json())
       .then(data => {
         setAchievements(data);
         console.log(data);
+      })
+      .catch(error => {
+        console.log("Error while fetching achievements");
+        console.log(error);
       });
-  }, (error) => {
-    console.log(error);
-  });
-  // FIXME: This retrieves the backend data, but it doesn't add the slides!
+  }, [personId]);
 
   return (
     <Deck theme={theme}>
-      <Slide>
+      <Slide key="introduction">
         <AnimatedProgress left={progressBarPosition} />
         <Heading>Uplynulá sezóna Ti přinesla mnohé zážitky...</Heading>
         <Text>My jsme jich tu pár shrnuli :)</Text>
       </Slide>
-      {achievements.map((achievement) => (
-        <Slide
-          key={achievement.achievement_id}
-          backgroundImage={getImageUrl(achievement.achievement_name.toLowerCase())}
-          backgroundSize="cover"
-          backgroundPosition="center"
-          backgroundRepeat="no-repeat"
-        >
-          <AnimatedProgress left={progressBarPosition} />
-          <Heading backgroundColor="black" opacity="0.6">{achievement.achievement_name}</Heading>
-          <Text backgroundColor="black" opacity="0.6">{achievement.achievement_description}</Text>
-        </Slide>
-        ))}
-      <Slide>
+      {achievements.length > 0 && achievements.map((achievement) => (
+        // <React.Fragment key={achievement.achievement_id}>
+          <Slide
+            key={achievement.achievement_id}
+            backgroundImage={getImageUrl(achievement.achievement_name)}
+            backgroundSize="cover"
+            backgroundPosition="center"
+            backgroundRepeat="no-repeat"
+          >
+            <AnimatedProgress left={progressBarPosition} />
+            <Heading backgroundColor="black" opacity="0.6">{achievement.achievement_name}</Heading>
+            <Text backgroundColor="black" opacity="0.6">{achievement.achievement_description}</Text>
+          </Slide>
+        // </React.Fragment>
+      ))}
+      <Slide key="conclusion">
         <AnimatedProgress left={progressBarPosition} />
         <Heading>Děkujeme Ti, že debatuješ 💕</Heading>
       </Slide>
