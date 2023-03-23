@@ -1,25 +1,24 @@
 WITH achievement AS (
     SELECT
         clovek_id,
-        rocnik,
+        school_year,
         AVG(kidy) AS prumerne_kidy,
-        'průměrně' || prumerne_kidy || 'řečnických bodů' AS achievement_text,
         COUNT() AS pocet_debat,
-    FROM {{ ref('clovek_debata') }}
-    WHERE clovek_id IS NOT null
+    FROM {{ ref('base__debater_debata') }}
+    GROUP BY clovek_id, school_year
 ),
 
 final AS(
     SELECT
         clovek_id,
-        rocnik,
+        school_year,
         'Dobrý řečník' AS achievement_name,
-        'Během letošního roku máš' || achievement_text || 'v' || pocet_debat || 'debatách za tento rok!' AS achievement_description,
-        'achievement_dobry_recnik/' || clovek_id || '/' || rocnik AS achievement_id,
+        'Během letošního roku máš průměrně' || prumerne_kidy || 'řečnických bodů v' || pocet_debat || 'debatách za tento rok!' AS achievement_description,
+        'achievement_dobry_recnik/' || clovek_id || '/' || school_year AS achievement_id,
         'numeric' AS achievement_type,
     FROM achievement
-    WHERE prumerne_kidy IS NOT null
-
+    WHERE prumerne_kidy IS NOT NULL
+    GROUP BY clovek_id, school_year
 )
 
-SELECT * FROM final
+SELECT * FROM achievement
