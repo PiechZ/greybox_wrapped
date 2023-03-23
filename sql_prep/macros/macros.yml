@@ -1,0 +1,22 @@
+version: 2
+
+macros:
+  - name: make_achievement_id
+    description: >
+      A macro to replace string concatenation in making an achievement_id.
+    arguments:
+      - name: achievement
+        type: string
+        description: >
+          Name of the achievement / root of the ID to assign. The macro will 
+          quote it.
+      - name: person_colname
+        type: string
+        description: >
+          Optional (clovek_id by default) - name of column that specifies the 
+          ID of the person the achievement is awarded to.
+      - name: year_colname
+        type: string
+        description: >
+          Optional (school_year by default) - name of column that specifies 
+          the school year during which the achievement is awarded.
