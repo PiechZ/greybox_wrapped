@@ -71,6 +71,27 @@ models:
     description: >
       Základní model, granularita: jeden debatér za každou svou debatu.
       Mělo by nahradit model clovek_debata.
+    columns:
+      - name: clovek_id
+      - name: debata_id
+      - name: role
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['a1', 'a2', 'a3', 'n1', 'n2', 'n3']
+      - name: kidy
+        # tests:
+        #   - dbt_expectations.expect_column_values_to_be_between:
+        #       min_value: 50
+        #       max_value: 100
+        #       row_condition: "kidy is not null"
+      - name: is_affirmative_speaker
+        description: Mluvčí má jednu z afirmativních rolí (A1-3)
+      - name: is_winner
+        description: Mluvčí byl na vítězné straně (a debata měla vítěze)
+      - name: klub_id
+        description: Identifikátor původového klubu debatéra
+
   - name: base__newbies
     description: >
       Seznam ID lidí, kteří začali v této sezóně. Pro začátečnické achievementy
