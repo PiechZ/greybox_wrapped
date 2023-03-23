@@ -43,3 +43,8 @@ models:
       stejném týmu. (Ocenění dostávají jen ti, kteří svůj klub zastupovali 
       sami, ne ti, kteří byli "v převaze".)
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  
+  - name: agg__skewed
+    description: >
+      Rozhodčí, kteří rozhodovali pro jednu ze stran ve více než 80% případů.
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
