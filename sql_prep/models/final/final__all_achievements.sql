@@ -9,6 +9,7 @@ with all_achievements_unioned as (
     {{
         dbt_utils.union_relations(
             relations=[
+                ref("agg__gastarbeiter"),
                 ref("agg__prehlasovan"),
                 ref("agg__multilingvni"),
             ],
