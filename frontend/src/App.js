@@ -36,7 +36,7 @@ function App() {
         console.log("Error while fetching achievements");
         console.log(error);
       });
-  }, [personId]);
+  }, []);
 
   return (
     <Deck theme={theme}>
