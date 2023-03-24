@@ -1,30 +1,38 @@
-WITH achievement AS (
+WITH base AS (
+    SELECT * FROM {{ ref('base__debater_debata') }}
+),
+
+newbies AS (
+    SELECT * from base
+    RIGHT JOIN {{ ref('base__newbies') }} using (clovek_id)
+),
+
+kidy_malych_kidu AS (
     SELECT
         clovek_id,
-        rocnik,
+        school_year,
         debate_date,
-        CASE
-            WHEN COUNT(rocnik) = 1 THEN 'První ročník' 
-            ELSE null
-        END AS condition_first,
+    FROM newbies
+    WHERE kidy > 75
+    ORDER BY debate_date
+),
 
-        CASE
-            WHEN kidy > 75 THEN 'První nadprůměrná řeč!' 
-            ELSE null
-        END AS achievement_text,
+achievement AS (
+    SELECT DISTINCT ON (clovek_id) *
+    FROM kidy_malych_kidu
 ),
 
 final AS ( 
     SELECT    
         clovek_id,
-        rocnik,
+        school_year,
         debate_date,
         'Zlepšuji se.' AS achievement_name,
-        achievement_text || 'Gratulujeme, zlepšuješ se! Letos se ti povedlo mít první řeč s více než 75 řečnickými body, a to' || debate_date || '!' AS achievement_description,
-        'achievement_zlepsuji_se/' || clovek_id || '/' || rocnik AS achievement_id,
+        'Gratulujeme, zlepšuješ se! Letos se ti povedlo mít první řeč s více než 75 řečnickými body, a to ' || debate_date || ' !' AS achievement_description,
+        'achievement_zlepsuji_se/' || clovek_id || '/' || school_year AS achievement_id,
         'binary' AS achievement_type,
+        2 AS achievement_priority
     FROM achievement
-    WHERE condition_first IS NOT null 
 )
 
 SELECT * FROM final

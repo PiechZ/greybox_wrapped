@@ -1,5 +1,9 @@
 # ADK Wrapped – Achievementy
-Seznam achievementů, které se implementují, seznam není konečný a může dojít k úpravám
+Seznam achievementů, které se implementují, seznam není konečný a může dojít k úpravám.
+Pravidla pro udělování achievementů:
+- Člověk by měl získat 3 a více achievemntů
+- Člověk získává nejdříve achievementy s vyšší prioritou
+- Člověk získá maximálně 5 achievemntů
 
 ## Jednoduché na implementaci
 ### Pro zkušené debatéry
@@ -8,7 +12,7 @@ Seznam achievementů, které se implementují, seznam není konečný a může d
 - „Dotknout se hvězd“ – počet debat, kde má člověk více než 85 Kidů - `numeric` - priorita 8
 
 ### Pro průměrné debatéry
-- „Gastarbeiter“ – počet týmů, za které člověk debatoval - `numeric` - priorita 2
+- „Gastarbeiter“ – počet týmů, za které člověk debatoval - `numeric` - priorita 4
 - „Lepší než průměr“ – počet debat, kdy má člověk více než 75 speaker pointů - `numeric` - priorita 3
 - „Sběratel bodů“ – počet IB bodů jako debatér za sezónu - `numeric` - priorita 1
 - „Dobrý řečník“ - průměrný počet Kidů za sezónu - `numeric` - priorita 1

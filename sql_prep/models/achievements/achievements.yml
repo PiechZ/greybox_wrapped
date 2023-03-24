@@ -6,6 +6,8 @@ models:
   - name: agg__multilingvni
   - name: agg__dobry_recnik
   - name: agg__prvni_vyhra
+  - name: agg__talent
+  - name: agg__dotknout_se_hvezd
   - name: agg__zlepsuji_se
     columns:
       - name: clovek_id
