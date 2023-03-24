@@ -17,6 +17,15 @@ vyhry AS (
     ORDER BY debate_date
 ),
 
+/*achievement AS (
+    SELECT
+        clovek_id,
+        school_year,
+        MIN(debate_date)
+    FROM vyhry
+    GROUP BY clovek_id
+),*/
+
 achievement AS (
     SELECT DISTINCT ON (clovek_id) *
     FROM vyhry
@@ -31,6 +40,7 @@ final AS (
         'Letos se ti povedlo dosáhnout první výhry, a to' || debate_date || '!' AS achievement_description,
         'achievement_prvni_vyhra/' || clovek_id || '/' || school_year AS achievement_id,
         'binary' AS achievement_type,
+        3 as achievement_priority
     FROM achievement
 )
 
