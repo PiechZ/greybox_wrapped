@@ -31,7 +31,7 @@ final AS(
         'numeric' AS achievement_type,
         8 AS achievement_priority
     FROM achievement
-    WHERE pocet_debat > 2
+    WHERE pocet_debat >= 2
 )
 
 SELECT * FROM final
