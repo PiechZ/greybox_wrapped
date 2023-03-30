@@ -30,11 +30,21 @@ const Slides = ({ personId }) => {
   return (
     <div className="reveal" ref={revealRef}>
       <div className="slides">
-        <section><h1>Introduction Slide</h1></section>
+        <AchievementSlide
+          key="_introduction"
+          achievement_id="_introduction"
+          achievement_name="Introduction"
+          achievement_description="We made a slide for you!" />
+        <section id="introduction"><h1>Introduction Slide</h1></section>
         {achievements.map((achievement) => (
           <AchievementSlide key={achievement.achievement_id} {...achievement} />
         ))}
-        <section><h2>Conclusion Slide</h2></section>
+        <AchievementSlide
+          key="_conclusion" 
+          achievement_id="_conclusion" 
+          achievement_name="Conclusion" 
+          achievement_description="We made an ending slide for you!" />
+        <section id="conclusion"><h2>Conclusion Slide</h2></section>
       </div>
     </div>
   );

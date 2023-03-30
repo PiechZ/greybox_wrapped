@@ -2,13 +2,13 @@
 import React from 'react';
 
 const AchievementSlide = ({
-  achievementId,
-  achievementName,
-  achievementDescription,
+  achievement_id,
+  achievement_name,
+  achievement_description,
 }) => (
-  <section data-achievement-id={achievementId}>
-    <h2>{achievementName}</h2>
-    <p>{achievementDescription}</p>
+  <section data-achievement-id={achievement_id} id={achievement_id}>
+    <h2>{achievement_name}</h2>
+    <p>{achievement_description}</p>
   </section>
 );
 
