@@ -12,6 +12,7 @@ with all_achievements_unioned as (
                 ref("agg__gastarbeiter"),
                 ref("agg__prehlasovan"),
                 ref("agg__multilingvni"),
+                ref("agg__neporazitelny"),
             ],
         )
     }}
