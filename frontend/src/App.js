@@ -6,7 +6,7 @@ const getImageUrl = (image) => {
   return `url(${process.env.PUBLIC_URL}/achievement_backgrounds/${image}.png)`;
 };
 
-const apiServer = "http://localhost:8765"
+const apiServer = "/api"
 
 const theme = {
   colors: {
