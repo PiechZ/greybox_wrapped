@@ -1,17 +1,6 @@
 version: 2
 
 models:
-  - name: agg__lepsi_nez_prumer
-  - name: agg__ultimatni_kidy
-  - name: agg__multilingvni
-  - name: agg__dobry_recnik
-  - name: agg__prvni_vyhra
-  - name: agg__zlepsuji_se
-    columns:
-      - name: clovek_id
-        tests:
-          - not_null
-      - name: achievement
   - name: agg__prehlasovan
     columns: &STANDARD_ACHIEVEMENT_COLUMNS
       - name: clovek_id
@@ -42,6 +31,22 @@ models:
       Debatéři, kteří debatovali alespoň jednou se členy jiných klubů ve 
       stejném týmu. (Ocenění dostávají jen ti, kteří svůj klub zastupovali 
       sami, ne ti, kteří byli "v převaze".)
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__lepsi_nez_prumer
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__ultimatni_kidy
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__multilingvni
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__dobry_recnik
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__prvni_vyhra
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__talent
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__dotknout_se_hvezd
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__zlepsuji_se
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   
   - name: agg__neporazitelny

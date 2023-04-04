@@ -7,19 +7,28 @@ newbies AS (
     RIGHT JOIN {{ ref('base__newbies') }} using (clovek_id)
 ),
 
-kidy_malych_kidu AS (
+vyhry AS (
     SELECT
         clovek_id,
         school_year,
         debate_date,
     FROM newbies
-    WHERE kidy > 75
+    WHERE is_winner = true
     ORDER BY debate_date
 ),
 
+/*achievement AS (
+    SELECT
+        clovek_id,
+        school_year,
+        MIN(debate_date)
+    FROM vyhry
+    GROUP BY clovek_id
+),*/
+
 achievement AS (
     SELECT DISTINCT ON (clovek_id) *
-    FROM kidy_malych_kidu
+    FROM vyhry
 ),
 
 final AS ( 
@@ -27,11 +36,11 @@ final AS (
         clovek_id,
         school_year,
         debate_date,
-        'Zlepšuji se.' AS achievement_name,
-        'Gratulujeme, zlepšuješ se! Letos se ti povedlo mít první řeč s více než 75 řečnickými body, a to ' || debate_date || ' !' AS achievement_description,
-        'achievement_zlepsuji_se/' || clovek_id || '/' || school_year AS achievement_id,
+        'První výhra' AS achievement_name,
+        'Letos se ti povedlo dosáhnout první výhry, a to' || debate_date || '!' AS achievement_description,
+        'achievement_prvni_vyhra/' || clovek_id || '/' || school_year AS achievement_id,
         'binary' AS achievement_type,
-        2 AS achievement_priority
+        3 as achievement_priority
     FROM achievement
 )
 

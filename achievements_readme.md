@@ -1,24 +1,28 @@
 # ADK Wrapped – Achievementy
-Seznam achievementů, které se implementují, seznam není konečný a může dojít k úpravám
+Seznam achievementů, které se implementují, seznam není konečný a může dojít k úpravám.
+Pravidla pro udělování achievementů:
+- Člověk by měl získat 3 a více achievemntů
+- Člověk získává nejdříve achievementy s vyšší prioritou
+- Člověk získá maximálně 5 achievemntů
 
 ## Jednoduché na implementaci
 ### Pro zkušené debatéry
-- „Ultimátní řečník“ - získá člověk, který v sezóně získal alespoň jednou více než 90 Kidů - `binary`
-- „Neporazitelný“ – počet vyhraných debat v řadě - `numeric`
-- „Dotknout se hvězd“ – počet debat, kde má člověk více než 85 Kidů - `numeric`
+- „Ultimátní řečník“ - získá člověk, který v sezóně získal alespoň jednou více než 90 Kidů - `binary` - priorita 10
+- „Neporazitelný“ – počet vyhraných debat v řadě - `numeric` - priorita 9
+- „Dotknout se hvězd“ – počet debat, kde má člověk více než 85 Kidů - `numeric` - priorita 8
 
 ### Pro průměrné debatéry
-- „Gastarbeiter“ – počet týmů, za které člověk debatoval - `numeric`
-- „Lepší než průměr“ – počet debat, kdy má člověk více než 75 speaker pointů - `numeric`
-- „Sběratel bodů“ – počet IB bodů jako debatér za sezónu - `numeric`
-- „Dobrý řečník“ - průměrný počet Kidů za sezónu - `numeric`
-- „Příprava je základ“ - získá člověk, který na oficiální teze má winrate více než 60% - `binary`
+- „Gastarbeiter“ – počet týmů, za které člověk debatoval - `numeric` - priorita 4
+- „Lepší než průměr“ – počet debat, kdy má člověk více než 75 speaker pointů - `numeric` - priorita 3
+- „Sběratel bodů“ – počet IB bodů jako debatér za sezónu - `numeric` - priorita 1
+- „Dobrý řečník“ - průměrný počet Kidů za sezónu - `numeric` - priorita 1
+- „Příprava je základ“ - získá člověk, který na oficiální teze má winrate více než 60% - `binary` - priorita 3
 
 ### Pro začínající debatéry
-- „Moje první výhra“ - první vyhraná debata - `binary`
-- „Jsem (poprvé) nejlepší!“ - první best speaker - `binary`
-- „Zlepšuji se“ - první debata nad 75 kidů - `binary`
-- „Talent“ - debatující první rok a zároveň s průměrem nad 75 kidů - `binary`
+- „Moje první výhra“ - první vyhraná debata - `binary` - priorita 3
+- „Jsem (poprvé) nejlepší!“ - první best speaker - `binary` - priorita 5
+- „Zlepšuji se“ - první debata nad 75 kidů - `binary` - priorita 2
+- „Talent“ - debatující první rok a zároveň s průměrem nad 75 kidů - `binary` - priorita 5
 
 ## Těžší na implementaci
 - „Mistr pozice“ – řečnická pozice, na které má člověk nejvyšší průměr Kidů - `numeric`

@@ -66,7 +66,7 @@ final as (
         'Debatoval jsi v týmu s členy jiných klubů! Tvá tolerance tě šlechtí.' as achievement_description,
         json_object('debate_count', debate_count) as achievement_data,
         'binary' as achievement_type,
-        2 as achievement_priority
+        4 as achievement_priority
     from gastarbeiter_stats
 )
 
