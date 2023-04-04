@@ -8,13 +8,20 @@ services:
       dockerfile: ./Dockerfile
     command: ["sh", "-c", "pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5678 -m uvicorn src.app:app --host 0.0.0.0 --port 8765"]
     ports:
-      - 8765:8765
+      # - 8765:8765
       - 5678:5678
+    volumes:
+      - ./data:/data
   frontend:
     image: frontend
     build:
       context: ./frontend/
       dockerfile: ./Dockerfile
+    volumes:
+      - ./frontend/src:/usr/src/app/src
+      - ./frontend/public:/usr/src/app/public
+    environment:
+      - NODE_ENV=development
     ports:
-      - 3000:3000
+      - 80:80
       
