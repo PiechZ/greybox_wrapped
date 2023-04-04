@@ -48,3 +48,9 @@ models:
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__zlepsuji_se
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  
+  - name: agg__neporazitelny
+    description: >
+      Debatér za sebou vyhrál v alespoň N debatách - N je nyní stanoveno na 10,
+      ale lze flexibilně měnit.
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
