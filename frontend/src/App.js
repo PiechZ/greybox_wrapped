@@ -37,8 +37,11 @@ function App() {
   }, (error) => {
     console.log(error);
   });
-  // FIXME: This retrieves the backend data, but it doesn't add the slides!
-
+  if (!achievements.length || achievements.length === 0) {
+    return (
+      <div>Loading...</div>
+    )
+  }
   return (
     <Deck theme={theme}>
       <Slide>
