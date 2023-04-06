@@ -11,5 +11,9 @@ frontend:
 setup:
 	python -m venv env
 	env/Scripts/pip install -r requirements.txt
+deploy:
+	fly deploy backend/
+	fly deploy frontend/
+	echo "You need to manually deploy the database."
 
-.PHONY: run backend frontend setup adk logs
+.PHONY: run backend frontend setup adk logs deploy

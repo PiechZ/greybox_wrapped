@@ -19,7 +19,8 @@ graph TD
   B(FastAPI)   -->|Sends data to| A(Spectacle)
 ```
 
-## Environment
+## Environment (dev)
+
 
 1. Get a DuckDB export of the dataset and place it in `data/adk_wrapped.db`.
 2. Create a `profiles.yml` file in `~/.dbt` with the following contents:
@@ -54,3 +55,34 @@ graph TD
 - NOT DONE: `/gdpr` to handle initial consent and GDPR compliance (?).
 - NOT DONE: `/authenticate` to ensure Greybox 2.0 is logged into.
 
+## Deployment to fly.io
+
+We're using [fly.io](https://fly.io) to deploy the backend and frontend, both using the `Dockerfile` and `fly.toml` in the respective directories. We're basically playing the role of `docker-compose.yml` by manually handling the volumes, networking, and environment variables.
+
+### Setup
+
+The `fly.toml` files are already set up now. The prerequisites were:
+
+```bash
+cd frontend
+fly apps create adk-wrapped
+cd ../backend
+fly apps create adk-wrapped-api
+fly volumes create adk_wrapped_data --region ams --size 
+```
+
+The app is currently deployed to the Amsterdam (`ams`) region.
+
+### Deployment
+
+`make deploy` pushes both the frontend and backend to fly.io. However, to update the volume, we must ssh/SFTP into the backend nad `puts` it there manually.
+
+```bash
+cd backend
+fly ssh sftp shell
+# SFTP prompt will appear
+cd /data
+puts ../data/adk_wrapped.db
+```
+
+Before you can do either, you need to be a member of the deploying organization, which is Simon's personal one, and install fly CLI + authenticate.
