@@ -1,0 +1,21 @@
+app = "adk-wrapped-api"
+primary_region = "ams"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8765"
+
+[mounts]
+  source="adk_wrapped_data"
+  destination="/data"
+
+[http_service]
+  internal_port = 8765
+  
+  [http_service.concurrency]
+    type = "requests"
+    soft_limit = 200
+    hard_limit = 250
+

@@ -1,0 +1,15 @@
+app = "adk-wrapped"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "80"
+
+[http_service]
+  internal_port = 80
+  
+  [http_service.concurrency]
+    type = "requests"
+    soft_limit = 200
+    hard_limit = 250
