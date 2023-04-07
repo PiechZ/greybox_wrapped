@@ -4,8 +4,8 @@ app = "adk-wrapped"
   dockerfile = "Dockerfile"
 
   [build.args]
+    # TODO: replace with internal address / figure out why that's not working
     BACKEND_SERVER = "adk-wrapped-api.fly.dev"
-
 
 [env]
   PORT = "80"
