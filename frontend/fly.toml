@@ -3,8 +3,13 @@ app = "adk-wrapped"
 [build]
   dockerfile = "Dockerfile"
 
+  [build.args]
+    BACKEND_SERVER = "adk-wrapped-api.fly.dev"
+
+
 [env]
   PORT = "80"
+  BACKEND_SERVER = "adk-wrapped-api.fly.dev"
 
 [http_service]
   internal_port = 80

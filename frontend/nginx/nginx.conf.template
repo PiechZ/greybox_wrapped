@@ -1,7 +1,7 @@
 http {
     upstream backend {
         # TODO: replace with internal address / figure out why that's not working
-        server adk-wrapped-api.fly.dev;
+        server __BACKEND_SERVER__;
     }
 
     server {
