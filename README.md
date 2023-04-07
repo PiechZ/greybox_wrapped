@@ -39,18 +39,19 @@ graph TD
 2. For local development, run `make setup` to install the dependencies, including and especially `dbt-duckdb`. (This doesn't set up the frontend, though.)
     1. Run `make run` to let `dbt` populate the database with transformations.
     2. Run `make backend` to start the FastAPI server.
-    3. In a separate terminal, run `make frontend` to start the React server.
-3. For deployment/testing, `docker-compose up` should do everything. _(Currently, it's still missing the nginx component.)_
+    3. In a separate terminal, run `make frontend` to start the React server. (To be able to do that, you'll need to set up [Node Version Manager for Windows - `nvm`](https://github.com/coreybutler/nvm-windows) first and, using it, Node v18.15.0.)
+3. For deployment/testing, `docker-compose up` should do everything.
 
 ## Endpoints _(To settle)_
 
 ### React/Spectacle
 
-- `/` displays everything for now.
+- `/` displays a prompt to go back to Greybox 2.0 and follow the requisite link.
+- `/slides/{person_id}` to display the achievements of a given person.
+- NOT DONE: `/link/{hash}` to display the achievements of a given person, with a lookup provided via a rainbow table entry.
 
 ### FastAPI
 
-- `/achievements/{greybox_id}` to pass the achievements to the presentation layer.
-- NOT DONE: `/gdpr` to handle initial consent and GDPR compliance (?).
-- NOT DONE: `/authenticate` to ensure Greybox 2.0 is logged into.
+- `/api` to display the API documentation.
+- `/api/achievements/{greybox_id}` to pass the achievements to the presentation layer.
 
