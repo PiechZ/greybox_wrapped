@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line
 import { Deck, Slide, Heading, Text, SlideLayout, Progress, AnimatedProgress } from "spectacle";
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
 
 const getImageUrl = (image) => {
   return `url(${process.env.PUBLIC_URL}/achievement_backgrounds/${image}.png)`;
@@ -22,21 +23,19 @@ const theme = {
 
 const progressBarPosition = "45%"
 
-function App() {
+function Slides() {
   const [achievements, setAchievements] = useState([]);
-  // TODO: get personId from URL
-  const personId = 932;
-  // TODO: use personId as argument here?
-  useEffect (() => {
-    fetch(apiServer + `/achievements/${personId}`)
-      .then(response => response.json())
-      .then(data => {
+  const { person_id } = useParams();
+
+  useEffect(() => {
+    fetch(apiServer + `/achievements/${person_id}`)
+      .then((response) => response.json())
+      .then((data) => {
         setAchievements(data);
         console.log(data);
       });
-  }, (error) => {
-    console.log(error);
-  });
+  }, [person_id]);
+
   if (!achievements.length || achievements.length === 0) {
     return (
       <div>Loading...</div>
@@ -47,7 +46,7 @@ function App() {
       <Slide>
         <AnimatedProgress left={progressBarPosition} />
         <Heading>Uplynulá sezóna Ti přinesla mnohé zážitky...</Heading>
-        <Text>My jsme jich tu pár shrnuli :)</Text>
+        <Text>My jsme jich tu pár shrnuli 🙃</Text>
       </Slide>
       {achievements.map((achievement) => (
         <Slide
@@ -67,6 +66,17 @@ function App() {
         <Heading>Děkujeme Ti, že debatuješ 💕</Heading>
       </Slide>
     </Deck>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/slides/:person_id" element={<Slides />} />
+        <Route path="/" element={<div>This app cannot be accessed directly. Please go back to <a href="https://www.debatovani.cz/greybox/registrace">Greybox 2.0</a> and follow your specific link.</div>} />
+      </Routes>
+    </Router>
   );
 }
 
