@@ -1,7 +1,7 @@
 with debates_per_language as (
     select
         clovek_id,
-        rocnik,
+        school_year,
         jazyk,
         count() as pocet_debat
     from {{ ref('clovek_debata') }}
@@ -11,7 +11,7 @@ with debates_per_language as (
 languages_per_debater as (
     select
         clovek_id,
-        rocnik,
+        school_year,
         count() as pocet_jazyku
     from debates_per_language
     group by 1, 2
@@ -20,7 +20,7 @@ languages_per_debater as (
 achievement as (
     select
         clovek_id,
-        rocnik,
+        school_year,
         pocet_jazyku,
         case 
             when pocet_jazyku > 2 then 'multilingvní'
@@ -35,7 +35,7 @@ achievement as (
 final as (
     select
         clovek_id,
-        rocnik,  -- NOTE: This will always be null for three-or-more languages, since it's only assigned to league debates
+        school_year,
         'achievement_linguist/' || clovek_id || '/' || rocnik as achievement_id,
         'Lingvista' as achievement_name,
         'Gratuluji, jsi debatně ' || achievement_text || '!' as achievement_description,
