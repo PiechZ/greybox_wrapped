@@ -2,9 +2,9 @@ with debates_per_language as (
     select
         clovek_id,
         school_year,
-        jazyk,
+        language,
         count() as pocet_debat
-    from {{ ref('clovek_debata') }}
+    from {{ ref('base__debater_debata') }}
     group by 1, 2, 3
 ),
 
@@ -36,7 +36,7 @@ final as (
     select
         clovek_id,
         school_year,
-        'achievement_linguist/' || clovek_id || '/' || rocnik as achievement_id,
+        'achievement_linguist/' || clovek_id || '/' || school_year as achievement_id,
         'Lingvista' as achievement_name,
         'Gratuluji, jsi debatně ' || achievement_text || '!' as achievement_description,
         json_object('pocet_jazyku', pocet_jazyku) as achievement_data,  -- => e.g. {"pocet_jazyku": 3}

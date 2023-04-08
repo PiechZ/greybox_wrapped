@@ -5,6 +5,7 @@ WITH achievement AS (
         AVG(kidy) AS prumerne_kidy,
         COUNT() AS pocet_debat,
     FROM {{ ref('base__debater_debata') }}
+    WHERE school_year is not NULL
     GROUP BY clovek_id, school_year
 ),
 
