@@ -9,6 +9,7 @@ with people as (
 
 debates as (
     select * from {{ ref('base__debata') }}
+    where debata_id != 0
 ),
 
 debaters_in_debates as (

@@ -13,6 +13,7 @@ class Achievement(BaseModel):
     achievement_priority: PositiveInt
     achievement_description: str
     achievement_data: Mapping[str, Any]
+    achievement_image: str
 
     @property
     def achievement_text(self):

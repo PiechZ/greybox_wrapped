@@ -5,6 +5,7 @@ WITH achievement AS (
         COUNT() AS pocet_debat,
     FROM {{ ref('base__debater_debata') }}
     WHERE kidy > 75
+    AND school_year is not NULL
     GROUP BY clovek_id, school_year
 ),
 
