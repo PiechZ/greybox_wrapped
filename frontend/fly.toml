@@ -1,0 +1,20 @@
+app = "adk-wrapped"
+
+[build]
+  dockerfile = "Dockerfile"
+
+  [build.args]
+    # TODO: replace with internal address / figure out why that's not working
+    BACKEND_SERVER = "adk-wrapped-api.fly.dev"
+
+[env]
+  PORT = "80"
+  BACKEND_SERVER = "adk-wrapped-api.fly.dev"
+
+[http_service]
+  internal_port = 80
+  
+  [http_service.concurrency]
+    type = "requests"
+    soft_limit = 200
+    hard_limit = 250

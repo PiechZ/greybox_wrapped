@@ -8,12 +8,16 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - ./data:/data
-    # ports:
-    #   - 8765:8765
+    environment:
+      - SERVER=backend
   frontend:
     image: frontend
     build:
       context: ./frontend/
       dockerfile: ./Dockerfile
+      args:
+        - BACKEND_SERVER=backend:8765
     ports:
       - 80:80
+    environment:
+      - BACKEND_SERVER=backend:8765

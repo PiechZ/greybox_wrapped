@@ -1,6 +1,8 @@
 http {
     upstream backend {
-        server backend:8765;
+        # This is replaced with `sed` at container build time - see 
+        # fly.toml and docker-compose.yml for the ARG that is passed in.
+        server __BACKEND_SERVER__;
     }
 
     server {
