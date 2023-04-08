@@ -10,7 +10,10 @@ debates_in_years as (
 ),
 
 motions as (
-    select * from {{ source('raw', 'teze') }}
+    select
+    *, {{ ref('official_teze_id') }}.teze_id is not null as is_official_motion
+    from {{ source('raw', 'teze') }}
+    left join {{ ref('official_teze_id') }} using (teze_id)
 ),
 
 tournaments as (
@@ -125,6 +128,7 @@ final as (
         motions.jazyk as language,
         motions.tx as motion_text,
         motions.tx_short as motion_short,
+        motions.is_official_motion,
         debates_in_years.turnaj_id is not null as is_tournament,
         debates_in_years.soutez_id is not null as is_competition,
         leagues.nazev as league_name,
