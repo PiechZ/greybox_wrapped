@@ -1,5 +1,7 @@
 run:
 	cd sql_prep && dbt run
+test:
+	cd sql_prep && dbt test
 adk:
 	docker-compose up -d
 logs:
