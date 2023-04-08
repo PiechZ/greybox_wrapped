@@ -14,7 +14,7 @@ Pravidla pro udělování achievementů:
 ### Pro průměrné debatéry
 - „Gastarbeiter“ – počet týmů, za které člověk debatoval - `numeric` - priorita 4
 - „Lepší než průměr“ – počet debat, kdy má člověk více než 75 speaker pointů - `numeric` - priorita 3
-- „Sběratel bodů“ – počet IB bodů jako debatér za sezónu - `numeric` - priorita 1
+- „Sběratel debat“ – počet IB bodů jako debatér za sezónu - `numeric` - priorita 1
 - „Dobrý řečník“ - průměrný počet Kidů za sezónu - `numeric` - priorita 1
 - „Příprava je základ“ - získá člověk, který na oficiální teze má winrate více než 60% - `binary` - priorita 3
 
@@ -28,7 +28,7 @@ Pravidla pro udělování achievementů:
 - „Mistr pozice“ – řečnická pozice, na které má člověk nejvyšší průměr Kidů - `numeric`
 - „Vítězná pozice“ – řečnická pozice, na které má člověk nejvíce výher/nejlepší winrate - `numeric`
 - „Můj nejlepší turnaj“ – turnaj, na kterém má člověk nejlepší průměr Kidů - `numeric`
-- „Důležité je skóre, ne body“ – počet low point winů - `numeric`
+- „Co je doma, to se počítá“ – počet low point winů - `numeric`
 - „Pyrrhovo vítězství“ – počet prohraných debat jako best speaker - `numeric`
 
 ## Těžké na implementaci
