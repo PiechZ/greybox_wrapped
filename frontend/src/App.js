@@ -51,7 +51,7 @@ function Slides() {
       {achievements.map((achievement) => (
         <Slide
           key={achievement.achievement_id}
-          backgroundImage={getImageUrl(achievement.achievement_name.toLowerCase())}
+          backgroundImage={getImageUrl(achievement.achievement_image)}
           backgroundSize="cover"
           backgroundPosition="center"
           backgroundRepeat="no-repeat"

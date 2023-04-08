@@ -32,7 +32,10 @@ final as (
         achievement_id,
         achievement_name,
         achievement_description,
-        achievement_data,
+        case when achievement_data is null 
+            then json_object()
+            else achievement_data
+        end as achievement_data,
         achievement_type,
         achievement_priority,
         -- Grab internal name of achievement as identifier for the slide image
