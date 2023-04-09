@@ -13,6 +13,7 @@ with all_achievements_unioned as (
                 ref('agg__dotknout_se_hvezd'),
                 ref("agg__gastarbeiter"),
                 ref('agg__lepsi_nez_prumer'),
+                ref("agg__lpw_count"),
                 ref("agg__multilingvni"),
                 ref("agg__neporazitelny"),
                 ref("agg__prehlasovan"),
