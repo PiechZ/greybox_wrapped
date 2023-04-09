@@ -9,9 +9,9 @@ function Slides({ achievements }) {
 
   const theme = {
     colors: {
-      primary: "#fff",
-      secondary: "#fff",
-      tertiary: "#03A9FC",
+      primary: "#fff",  // default heading color
+      secondary: "#fff",  // default paragraph color
+      tertiary: "#03A9FC",  // default background color
     },
     shadows: {
       primary: "10px 5px 5px black",
@@ -24,7 +24,9 @@ function Slides({ achievements }) {
   }
   return (
     <Deck theme={theme}>
-      <Slide>
+      <Slide
+        key="introduction"
+      >
         <AnimatedProgress left={progressBarPosition} />
         <Heading>Uplynulá sezóna Ti přinesla mnohé zážitky...</Heading>
         <Text>My jsme jich tu pár shrnuli 🙃</Text>
@@ -46,7 +48,9 @@ function Slides({ achievements }) {
           </Text>
         </Slide>
       ))}
-      <Slide>
+      <Slide
+        key="conclusion"
+      >
         <AnimatedProgress left={progressBarPosition} />
         <Heading>Děkujeme Ti, že debatuješ 💕</Heading>
       </Slide>
