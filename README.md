@@ -80,10 +80,15 @@ The app is currently deployed to the Amsterdam (`ams`) region.
 
 ```bash
 cd backend
+fly ssh console
+# SSH prompt will appear
+rm /data/adk_wrapped.db
+exit
 fly ssh sftp shell
 # SFTP prompt will appear
 cd /data
 puts ../data/adk_wrapped.db
+# press Ctrl+D to exit
 ```
 
 Before you can do either, you need to be a member of the deploying organization, which is Simon's personal one, and install fly CLI + authenticate.
