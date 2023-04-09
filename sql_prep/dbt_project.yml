@@ -30,7 +30,7 @@ vars:
   # Which school year begins Year 1 - important because the count starts at 4 and 
   # not all debates are league debates that come with year designation. Used 
   # primarily in base__debata.sql.
-  first_school_year: '2000-09-01'
+  first_school_year: '2000-04-25'
   # Which achievements do we want to return by default for the current year?
   current_school_year: 22
 
