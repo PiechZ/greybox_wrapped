@@ -16,6 +16,7 @@ with all_achievements_unioned as (
                 ref("agg__multilingvni"),
                 ref("agg__neporazitelny"),
                 ref("agg__prehlasovan"),
+                ref("agg__pripravenost"),
                 ref("agg__prvni_vyhra"),
                 ref("agg__talent"),
                 ref("agg__ultimatni_kidy"),
