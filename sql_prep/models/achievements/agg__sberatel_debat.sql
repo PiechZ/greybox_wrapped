@@ -6,8 +6,7 @@ prepare_hours AS(
     SELECT
         clovek_id,
         school_year,
-        COUNT() AS pocet_debat,
-        pocet_debat * 2 AS hours_debated
+        COUNT(*) * 2 AS hours_debated
     FROM base
     WHERE school_year IS NOT NULL
     GROUP BY clovek_id, school_year
