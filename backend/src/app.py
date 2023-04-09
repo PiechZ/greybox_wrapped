@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from src.database import Database
 from src.achievement import Achievement
+import pandas as pd
 import pathlib
 
 app = FastAPI()
@@ -13,14 +14,37 @@ try:
 except Exception as e:
     db = None
 
+path_to_rainbow_table = pathlib.Path(__file__).parent.parent.parent / "data/rainbow_table.csv"
+if path_to_rainbow_table.exists():
+    rt = pd.read_csv(path_to_rainbow_table, dtype=str)
+else:
+    rt = None
+
+
 @app.get("/api")
 def show_instructions():
     return {
         "headline": "Welcome to the ADK Wrapped API",
-        "content": "Please find your greybox ID and enter it at /achievements/{greybox_id}",
+        "content": "Please go to Greybox 2.0 and look up your individual link to use at /api/link/{id_hash}",
     }
 
 
 @app.get("/api/achievements/{greybox_id}")
 def show_achievements(greybox_id: int):
     return db.get_achievements(clovek_id=greybox_id)
+
+
+@app.get("/api/link/{id_hash}")
+def get_achievements_from_hash(id_hash: str):
+    if rt is None:
+        return {
+            "error": "Rainbow table not found. Please contact the administrator."
+        }
+    else:
+        try:
+            greybox_id = rt.loc[rt["hash"] == id_hash, "greybox_id"].values[0]
+            return db.get_achievements(clovek_id=greybox_id)
+        except IndexError as e:
+            return {
+                "error": "Provided hash is not a valid hash."
+            }

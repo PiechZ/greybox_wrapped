@@ -164,3 +164,4 @@ clovek_debata.csv
 
 #folders
 data/*.db
+data/*.csv
