@@ -37,24 +37,28 @@ graph TD
                     - parquet
         target: dev
     ```
-2. For local development, run `make setup` to install the dependencies, including and especially `dbt-duckdb`. (This doesn't set up the frontend, though.)
+2. Optionally, get a copy of the rainbow tables and place them in `data/rainbow_tables.csv`. Ensure that the column names are `greybox_id` and `hash`.
+3. For local development, run `make setup` to install the dependencies, including and especially `dbt-duckdb`. (This doesn't set up the frontend, though.)
     1. Run `make run` to let `dbt` populate the database with transformations.
     2. Run `make backend` to start the FastAPI server.
     3. In a separate terminal, run `make frontend` to start the React server. (To be able to do that, you'll need to set up [Node Version Manager for Windows - `nvm`](https://github.com/coreybutler/nvm-windows) first and, using it, Node v18.15.0.)
-3. For deployment/testing, `docker-compose up` should do everything.
+4. For deployment/testing, `docker-compose up` should do everything.
 
-## Endpoints _(To settle)_
+## Endpoints
 
-### React/Spectacle
+All endpoints are managed by nginx, which is packaged in `frontend/Dockerfile`.
+
+### Frontend (React/Spectacle)
 
 - `/` displays a prompt to go back to Greybox 2.0 and follow the requisite link.
 - `/slides/{person_id}` to display the achievements of a given person.
-- NOT DONE: `/link/{hash}` to display the achievements of a given person, with a lookup provided via a rainbow table entry.
+- `/link/{id_hash}` to display the achievements of a given person, with a lookup provided via a rainbow table entry.
 
-### FastAPI
+### Backend (FastAPI)
 
 - `/api` to display the API documentation.
 - `/api/achievements/{greybox_id}` to pass the achievements to the presentation layer.
+- `/api/link/{id_hash}` to pass the achievements to the presentation layer, with a lookup provided via a rainbow table entry.
 
 ## Deployment to fly.io
 
