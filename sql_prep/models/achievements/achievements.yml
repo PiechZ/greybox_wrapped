@@ -50,9 +50,15 @@ models:
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__sberatel_debat
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
-  
+  - name: agg__lpw_count
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__neporazitelny
     description: >
       Debatér za sebou vyhrál v alespoň N debatách - N je nyní stanoveno na 10,
       ale lze flexibilně měnit.
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
+
+  - name: agg__pripravenost
+    description: >
+      Debatér vyhrál alespoň 60% debat na oficiální připravené teze.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
