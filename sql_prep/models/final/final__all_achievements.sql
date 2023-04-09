@@ -20,6 +20,7 @@ with all_achievements_unioned as (
                 ref("agg__talent"),
                 ref("agg__ultimatni_kidy"),
                 ref("agg__zlepsuji_se"),
+                ref("agg__sberatel_debat"),
             ],
         )
     }}
