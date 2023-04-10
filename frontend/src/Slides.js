@@ -1,10 +1,13 @@
 import { Deck, Slide, Heading, Text, AnimatedProgress } from "spectacle";
+import useWindowSize from "./useWindowSize";
 
 const getImageUrl = (image) => {
   return `url(${process.env.PUBLIC_URL}/achievement_backgrounds/${image}.png)`;
 };
 
 function Slides({ achievements }) {
+  const windowSize = useWindowSize();
+  const minDimension = Math.min(windowSize.width, windowSize.height);
   const progressBarPosition = "45%";
 
   const theme = {
@@ -17,13 +20,19 @@ function Slides({ achievements }) {
       primary: "10px 5px 5px black",
       secondary: "10px 5px 5px black",
     },
+    size: {
+      width: `${minDimension}px`,
+      height: `${minDimension}px`
+    }
   };
 
   if (!achievements.length || achievements.length === 0) {
     return <div>Loading...</div>;
   }
   return (
-    <Deck theme={theme}>
+    <Deck 
+      theme={theme}
+    >
       <Slide
         key="introduction"
       >
