@@ -52,6 +52,8 @@ models:
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__lpw_count
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__first_best_speaker
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__neporazitelny
     description: >
       Debatér za sebou vyhrál v alespoň N debatách - N je nyní stanoveno na 10,
