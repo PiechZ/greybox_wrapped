@@ -2,6 +2,8 @@
 
 with base as (
     select * from {{ ref('base__debater_debata') }}
+    -- Ignore draws, since they typically mean show-debates or other unusual cases
+    where not is_draw
 ),
 
 victory_window as (
