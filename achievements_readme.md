@@ -1,4 +1,4 @@
-# ADK Wrapped – Achievementy
+# greybox Wrapped – Achievementy
 Seznam achievementů, které se implementují, seznam není konečný a může dojít k úpravám.
 Pravidla pro udělování achievementů:
 - Člověk by měl získat 3 a více achievemntů
