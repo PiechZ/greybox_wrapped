@@ -35,10 +35,14 @@ function Slides({ achievements }) {
     >
       <Slide
         key="introduction"
+        backgroundImage={getImageUrl("ADK_wrapped_background")}
+        backgroundSize="cover"
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
       >
         <AnimatedProgress left={progressBarPosition} />
-        <Heading>Uplynulá sezóna Ti přinesla mnohé zážitky...</Heading>
-        <Text>My jsme jich tu pár shrnuli 🙃</Text>
+        <Heading color="black">Uplynulá sezóna Ti přinesla mnohé zážitky...</Heading>
+        <Text color="black">My jsme jich tu pár shrnuli 🙃</Text>
       </Slide>
       {achievements.map((achievement) => (
         <Slide
@@ -59,9 +63,13 @@ function Slides({ achievements }) {
       ))}
       <Slide
         key="conclusion"
+        backgroundImage={getImageUrl("ADK_wrapped_background")}
+        backgroundSize="cover"
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
       >
         <AnimatedProgress left={progressBarPosition} />
-        <Heading>Děkujeme Ti, že debatuješ 💕</Heading>
+        <Heading color="black">Děkujeme Ti, že debatuješ 💕</Heading>
       </Slide>
     </Deck>
   );
