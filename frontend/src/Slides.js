@@ -23,7 +23,15 @@ function Slides({ achievements }) {
     size: {
       width: `${minDimension}px`,
       height: `${minDimension}px`
-    }
+    },
+    // Scale font sizes with viewport
+    fontSizes: {
+      primary: "3em",  // doesn't work
+      secondary: "2em",  // doesn't work
+      header: "3.5em",
+      paragraph: "1.5em",
+      text: "1.5em",
+    },
   };
 
   if (!achievements.length || achievements.length === 0) {
@@ -41,8 +49,8 @@ function Slides({ achievements }) {
         backgroundRepeat="no-repeat"
       >
         <AnimatedProgress left={progressBarPosition} />
-        <Heading color="black">Uplynulá sezóna Ti přinesla mnohé zážitky...</Heading>
-        <Text color="black">My jsme jich tu pár shrnuli 🙃</Text>
+        <Heading color="black" fontSize="header">Uplynulá sezóna Ti přinesla mnohé zážitky...</Heading>
+        <Text color="black" fontSize="paragraph">My jsme jich tu pár shrnuli 🙃</Text>
       </Slide>
       {achievements.map((achievement) => (
         <Slide
@@ -53,10 +61,10 @@ function Slides({ achievements }) {
           backgroundRepeat="no-repeat"
         >
           <AnimatedProgress left={progressBarPosition} />
-          <Heading backgroundColor="black" opacity="0.6">
+          <Heading backgroundColor="black" opacity="0.6" fontSize="header">
             {achievement.achievement_name}
           </Heading>
-          <Text backgroundColor="black" opacity="0.6">
+          <Text backgroundColor="black" opacity="0.6" fontSize="paragraph">
             {achievement.achievement_description}
           </Text>
         </Slide>
@@ -69,7 +77,7 @@ function Slides({ achievements }) {
         backgroundRepeat="no-repeat"
       >
         <AnimatedProgress left={progressBarPosition} />
-        <Heading color="black">Děkujeme Ti, že debatuješ 💕</Heading>
+        <Heading color="black" fontSize="header">Děkujeme Ti, že debatuješ 💕</Heading>
       </Slide>
     </Deck>
   );
