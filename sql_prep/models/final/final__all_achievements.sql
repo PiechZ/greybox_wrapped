@@ -9,8 +9,10 @@ with all_achievements_unioned as (
     {{
         dbt_utils.union_relations(
             relations=[
+                ref("agg__best_speaker_role"),
                 ref('agg__dobry_recnik'),
                 ref('agg__dotknout_se_hvezd'),
+                ref("agg__favorite_role"),
                 ref("agg__gastarbeiter"),
                 ref('agg__lepsi_nez_prumer'),
                 ref("agg__lpw_count"),
