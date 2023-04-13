@@ -37,7 +37,7 @@ final AS (
         school_year,
         debate_date,
         'První výhra' AS achievement_name,
-        'Letos se ti povedlo dosáhnout první výhry, a to' || debate_date || '!' AS achievement_description,
+        'Letos se ti povedlo dosáhnout první výhry, a to ' || strftime(debate_date, '%d. %m. %Y') || '!' AS achievement_description,
         'achievement_prvni_vyhra/' || clovek_id || '/' || school_year AS achievement_id,
         'binary' AS achievement_type,
         3 as achievement_priority

@@ -29,6 +29,7 @@ final as (
         3 as achievement_priority
     from achievement_base
     where win_rate > 0.6
+    and total_official_debates > 4
 )
 
 select * from final

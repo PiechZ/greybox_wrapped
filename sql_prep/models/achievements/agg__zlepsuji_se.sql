@@ -28,7 +28,7 @@ final AS (
         school_year,
         debate_date,
         'Zlepšuji se.' AS achievement_name,
-        'Gratulujeme, zlepšuješ se! Letos se ti povedlo mít první řeč s více než 75 řečnickými body, a to ' || debate_date || ' !' AS achievement_description,
+        'Gratulujeme, zlepšuješ se! Letos se ti povedlo mít první řeč s více než 75 řečnickými body, a to ' || strftime(debate_date, '%d. %m. %Y') || '!' AS achievement_description,
         'achievement_zlepsuji_se/' || clovek_id || '/' || school_year AS achievement_id,
         'binary' AS achievement_type,
         2 AS achievement_priority

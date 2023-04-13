@@ -67,7 +67,7 @@ final as (
         school_year,
         {{ make_achievement_id('lpw_count') }},
         'Co je doma, to se počítá' as achievement_name,
-        'Vyhrál/a jsi alespoň jednu debatu, ve které měl soupeř dohromady více bodů než ty.' as achievement_description,
+        'Vyhrál/a jsi alespoň jednu debatu, ve které měl soupeř dohromady více bodů než tvůj tým.' as achievement_description,
         json_object(
             'lpw_debate_count', lpw_debate_count
         ) as achievement_data,

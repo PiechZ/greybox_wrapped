@@ -19,12 +19,12 @@ achievement AS (
         --WHEN hours_debated > 200 THEN 'dohrát Total War: Empire - Definitive Edition'
         --WHEN hours_debated > 100 THEN 'dokončit průměrný online kurz na Udemy'
         -- THESE ARE IRRELEVANT SINCE NOONE HAS THAT MUCH DEBATES
-        WHEN hours_debated > 60 THEN 'zhlédnout všechny série nového seriálu'
-        WHEN hours_debated > 40 THEN 'zaletět na otočku do Japonska'
-        WHEN hours_debated > 32 THEN 'dohrát Hogwarts Legacy'
-        WHEN hours_debated > 24 THEN 'nespat a zvládnout nepřetržitý hackathon'
-        WHEN hours_debated > 16 THEN 'zhlédnout všechny episody nové série oblíbeného seriálu'
-        WHEN hours_debated > 8 THEN 'odpracovat jednu směnu'
+        WHEN hours_debated >= 60 THEN 'zhlédnout všechny série nového seriálu'
+        WHEN hours_debated >= 40 THEN 'zaletět na otočku do Japonska'
+        WHEN hours_debated >= 32 THEN 'dohrát Cyberpunk 2077'
+        WHEN hours_debated >= 24 THEN 'nespat a zvládnout nepřetržitý hackathon'
+        WHEN hours_debated >= 16 THEN 'zhlédnout všechny episody nové série oblíbeného seriálu'
+        WHEN hours_debated >= 8 THEN 'odpracovat jednu směnu'
         ELSE NULL
        END AS achievement_decider 
     FROM prepare_hours

@@ -26,7 +26,7 @@ final AS(
         clovek_id,
         school_year,
         'Dotknout se hvězd' AS achievement_name,
-        'V této sezoně se ti podařilo dotknout se hvězd ' || pocet_debat || ' krát. Tolikrát byly tvé řečnické body lepší než 85!' AS achievement_description,
+        'V této sezoně se ti podařilo ve ' || pocet_debat || ' debatách podat výkon nad 85 bodů! Bravo!' AS achievement_description,
         'achievement_dotknout_se_hvezd/' || clovek_id || '/' || school_year AS achievement_id,
         'numeric' AS achievement_type,
         8 AS achievement_priority

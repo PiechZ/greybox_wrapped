@@ -14,7 +14,7 @@ final AS(
         clovek_id,
         school_year,
         'Lepší než průměr' AS achievement_name,
-        'Gratuluji, povedlo se ti být lepší než průměr v ' || pocet_debat || ' debatách za tento rok!' AS achievement_description,
+        'Gratuluji, povedlo se ti překonat hranici 75 bodů v ' || pocet_debat || ' debatách!' AS achievement_description,
         'achievement_lepsi_nez_prumer/' || clovek_id || '/' || school_year AS achievement_id,
         'numeric' AS achievement_type,
         3 as achievement_priority

@@ -24,7 +24,7 @@ final as (
         school_year,
         'outvoted/' || clovek_id || '/' || school_year as achievement_id,
         'Přehlasován/a' as achievement_name,
-        'Byl/a jsi jako rozhodčí přehlasován v alespoň jedné debatě. (V skutečnosti {outvoted_debate_count}x.)' as achievement_description,
+        'Byl/a jsi jako rozhodčí přehlasován v ' || outvoted_debate_count || ' debatách.' as achievement_description,
         json_object(
             'outvoted_debate_count', outvoted_debate_count
         ) as achievement_data,
