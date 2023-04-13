@@ -18,6 +18,7 @@ with all_achievements_unioned as (
                 ref("agg__lpw_count"),
                 ref("agg__multilingvni"),
                 ref("agg__neporazitelny"),
+                ref("agg__poprve_nejlepsi"),
                 ref("agg__prehlasovan"),
                 ref("agg__pripravenost"),
                 ref("agg__prvni_vyhra"),
