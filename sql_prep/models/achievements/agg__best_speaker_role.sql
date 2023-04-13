@@ -50,7 +50,7 @@ final as (
   select
     clovek_id,
     school_year,
-    {{ make_achievement_id('best_speaker_role') }},
+    {{ make_achievement_id('best_speaker_role', 'clovek_id || role') }},
     'Nejlepší mluvčí roku v roli ' || upper(role) || '!' as achievement_name,
     round(total_points, 2) || ' je skvělý výkon :)' as achievement_description,
     7 as achievement_priority,

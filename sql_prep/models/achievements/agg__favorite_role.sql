@@ -94,7 +94,7 @@ final as (
   select
     clovek_id,
     school_year,
-    {{ make_achievement_id('favorite_role') }},
+    {{ make_achievement_id('favorite_role', 'clovek_id || role') }},
     'Tvá oblíbená role je...' as achievement_name,
     '...' || upper(role) || '! Dosáhl/a jsi na ní průměrně ' || round(avg_points, 2) || ' bodů.' as achievement_description,
     json_object(
