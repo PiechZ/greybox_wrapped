@@ -22,25 +22,32 @@ achievement as (
         clovek_id,
         school_year,
         pocet_jazyku,
-        case 
+        case
             when pocet_jazyku > 2 then 'multilingvní'
             when pocet_jazyku > 1 then 'bilingvní'
-            else null
         end as achievement_text
     from languages_per_debater
-    where clovek_id is not null
-    and pocet_jazyku > 1
+    where
+        clovek_id is not null
+        and pocet_jazyku > 1
 ),
 
 final as (
     select
         clovek_id,
         school_year,
-        'achievement_linguist/' || clovek_id || '/' || school_year as achievement_id,
         'Lingvista' as achievement_name,
-        'Gratuluji, jsi debatně ' || achievement_text || '!' as achievement_description,
-        json_object('pocet_jazyku', pocet_jazyku) as achievement_data,  -- => e.g. {"pocet_jazyku": 3}
-        'binary' as achievement_type,  -- or 'percentile' or 'numeric'
+        'binary' as achievement_type,
+        'achievement_linguist/'
+        || clovek_id
+        || '/'
+        || school_year as achievement_id,
+        -- => e.g. {"pocet_jazyku": 3}
+        'Gratuluji, jsi debatně '
+        || achievement_text
+        || '!' as achievement_description,
+        -- or 'percentile' or 'numeric'
+        json_object('pocet_jazyku', pocet_jazyku) as achievement_data,
         pocet_jazyku + 3 as achievement_priority
     from
         achievement

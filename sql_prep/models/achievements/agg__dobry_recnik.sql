@@ -1,25 +1,32 @@
-WITH achievement AS (
-    SELECT
+with achievement as (
+    select
         clovek_id,
         school_year,
-        AVG(kidy) AS prumerne_kidy,
-        COUNT() AS pocet_debat,
-    FROM {{ ref('base__debater_debata') }}
-    WHERE school_year is not NULL
-    GROUP BY clovek_id, school_year
+        AVG(kidy) as prumerne_kidy,
+        COUNT() as pocet_debat
+    from {{ ref('base__debater_debata') }}
+    where school_year is not null
+    group by clovek_id, school_year
 ),
 
-final AS(
-    SELECT
+final as (
+    select
         clovek_id,
         school_year,
-        'Dobrý řečník' AS achievement_name,
-        'Během letošního roku máš průměrně ' || prumerne_kidy || ' řečnických bodů v ' || pocet_debat || ' debatách za tento rok!' AS achievement_description,
-        'achievement_dobry_recnik/' || clovek_id || '/' || school_year AS achievement_id,
-        'numeric' AS achievement_type,
-        1 as achievement_priority
-    FROM achievement
-    WHERE prumerne_kidy IS NOT NULL
+        'Dobrý řečník' as achievement_name,
+        'numeric' as achievement_type,
+        1 as achievement_priority,
+        'Během letošního roku máš průměrně '
+        || prumerne_kidy
+        || ' řečnických bodů v '
+        || pocet_debat
+        || ' debatách za tento rok!' as achievement_description,
+        'achievement_dobry_recnik/'
+        || clovek_id
+        || '/'
+        || school_year as achievement_id
+    from achievement
+    where prumerne_kidy is not null
 )
 
-SELECT * FROM final
+select * from final

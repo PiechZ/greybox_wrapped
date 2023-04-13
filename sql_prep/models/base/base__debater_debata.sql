@@ -1,5 +1,5 @@
 with people as (
-    select 
+    select
         clovek_id,
         klub_id
     from {{ source('raw', 'clovek') }}
@@ -29,8 +29,14 @@ final as (
         debates.*,
         people.klub_id,
         not debates.is_draw and (
-            (debaters_in_debates.is_affirmative_speaker and debates.is_affirmative_win)
-            or (not debaters_in_debates.is_affirmative_speaker and not debates.is_affirmative_win)
+            (
+                debaters_in_debates.is_affirmative_speaker
+                and debates.is_affirmative_win
+            )
+            or (
+                not debaters_in_debates.is_affirmative_speaker
+                and not debates.is_affirmative_win
+            )
         ) as is_winner
     from debaters_in_debates
     left join debates using (debata_id)

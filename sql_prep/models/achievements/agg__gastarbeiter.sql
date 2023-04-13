@@ -43,7 +43,7 @@ gastarbeiters as (
         school_year,
         klub_id,
         club_count_json,
-        club_count_json->klub_id as teammates_from_club_in_debate
+        club_count_json -> klub_id as teammates_from_club_in_debate
     from merge_back
 ),
 
@@ -61,12 +61,12 @@ final as (
     select
         clovek_id,
         school_year,
-        'gastarbeiter/' || clovek_id || '/' || school_year as achievement_id,
         'Gastarbeiter' as achievement_name,
         'Debatoval jsi v týmu s členy jiných klubů! Tvá tolerance tě šlechtí.' as achievement_description,
-        json_object('debate_count', debate_count) as achievement_data,
         'binary' as achievement_type,
-        4 as achievement_priority
+        4 as achievement_priority,
+        'gastarbeiter/' || clovek_id || '/' || school_year as achievement_id,
+        json_object('debate_count', debate_count) as achievement_data
     from gastarbeiter_stats
 )
 

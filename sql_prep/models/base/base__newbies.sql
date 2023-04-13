@@ -12,11 +12,10 @@ debate_min_max_year as (
 ),
 
 min_year_current as (
-    select
-        clovek_id
+    select clovek_id
     from debate_min_max_year
     where min_year = {{ var('current_school_year') }}
-    -- and min_year = max_year
+-- and min_year = max_year
 ),
 
 judges as (

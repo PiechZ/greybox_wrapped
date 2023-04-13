@@ -1,4 +1,4 @@
-SELECT
+select
     debata.debata_id,
     role,
     kidy,
@@ -8,10 +8,10 @@ SELECT
     liga.nazev,
     debata.teze_id,
     teze.jazyk
-FROM {{ source('raw', 'clovek_debata') }}
-LEFT JOIN {{ source('raw', 'clovek') }} USING (clovek_id)
-LEFT JOIN {{ source('raw', 'debata') }} USING (debata_id)
-LEFT JOIN {{ source('raw', 'turnaj') }} USING (turnaj_id)
-LEFT JOIN {{ source('raw', 'liga') }} USING (liga_id)
-LEFT JOIN {{ source('raw', 'teze') }} ON debata.teze_id = teze.teze_id
-WHERE role IN ('a1', 'a2', 'a3', 'n1', 'n2', 'n3')
+from {{ source('raw', 'clovek_debata') }}
+left join {{ source('raw', 'clovek') }} using (clovek_id)
+left join {{ source('raw', 'debata') }} using (debata_id)
+left join {{ source('raw', 'turnaj') }} using (turnaj_id)
+left join {{ source('raw', 'liga') }} using (liga_id)
+left join {{ source('raw', 'teze') }} on debata.teze_id = teze.teze_id
+where role in ('a1', 'a2', 'a3', 'n1', 'n2', 'n3')
