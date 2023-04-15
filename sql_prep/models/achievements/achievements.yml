@@ -62,3 +62,6 @@ models:
     description: >
       Debatér vyhrál alespoň 60% debat na oficiální připravené teze.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
+
+  - name: agg__turnajovy_zavislak
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
