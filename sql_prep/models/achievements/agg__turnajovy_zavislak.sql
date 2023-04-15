@@ -19,7 +19,7 @@ achievement as (
     select
         tournament_debates.*,
         case
-            when num_tournaments <= 2 then 'turnajový začátečník'
+            when num_tournaments >= 1 and num_tournaments <= 2 then 'turnajový začátečník'
             when num_tournaments <= 4 then 'hotový turnajový harcovník'
             when num_tournaments <= 6 then 'kompletní turnajový štamgast'
             when num_tournaments > 6 then 'vyložený turnajový závislák'
@@ -43,6 +43,7 @@ final as (
         'binary' as achievement_type
     from
         achievement
+    where characteristic is not null
 )
 
 select * from final
