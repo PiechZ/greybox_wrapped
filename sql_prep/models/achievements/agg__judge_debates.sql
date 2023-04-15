@@ -21,6 +21,9 @@ summary_characteristics as (
             when hour_count >= 12 then 'trilogii Problém tří těles (a pak se o něm dva dny písemně hádat na Redditu)'
             when hour_count >= 18 then 'všechny Harry Pottery (a pak se týden hádat na Facebooku o transfobii JK Rowling)'
             when hour_count >= 30 then 'týdenní šichtu (a pak o ní napsat díl do Hrdinů kapitalistické práce)'
+            when hour_count >= 45 then 'týdenní sekci El Camino Santiago (a pak o ní napsat 30 lifestylových článků do Vlasty)'
+            when hour_count >= 60 then 'všechny seriály a filmy Aarona Sorkina (a pak napsat zbylých 51 Federalist Papers)'
+
         end as activity
     from debate_stats
 ),
