@@ -65,3 +65,7 @@ models:
 
   - name: agg__turnajovy_zavislak
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__first_judge
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__judge_debates
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
