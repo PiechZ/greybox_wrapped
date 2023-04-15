@@ -42,7 +42,7 @@ function Slides({ achievements }) {
       >
         <AnimatedProgress left={progressBarPosition} />
         <Heading color="black">Uplynulá sezóna Ti přinesla mnohé zážitky...</Heading>
-        <Text color="black">My jsme jich tu pár shrnuli 🙃</Text>
+        <Text color="black">My jsme jich tu pár shrnuli 😊</Text>
       </Slide>
       {achievements.map((achievement) => (
         <Slide

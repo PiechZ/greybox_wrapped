@@ -31,7 +31,7 @@ final AS (
         school_year,
         {{ make_achievement_id('first_judge') }},
         'Tvá první rozhodnutá debata!' as achievement_name,
-        '...byla dne ' || strftime(debate_date, '%d. %m. %Y') || ' na téma ' || motion_text || '.' as achievement_description,
+        '...byla dne ' || strftime(debate_date, '%d. %m. %Y') || ' na tezi ' || motion_text || '.' as achievement_description,
         json_object('debate_date', debate_date, 'motion_text', motion_text) as achievement_data,
         5 as achievement_priority,
         'binary' as achievement_type

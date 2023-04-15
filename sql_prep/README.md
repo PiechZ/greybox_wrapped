@@ -1,13 +1,12 @@
-Welcome to your new dbt project!
+This is our dbt project with a database of all debates.
 
-### Using the starter project
-
-Try running the following commands:
 - dbt run
 - dbt test
+- dbt seed
+- dbt build
 
 
-### Resources:
+### Other resources:
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
 - Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
 - Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support

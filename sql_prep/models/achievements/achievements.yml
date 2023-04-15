@@ -75,3 +75,5 @@ models:
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__judge_debates
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__vazena_pomoc
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS

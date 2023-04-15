@@ -72,7 +72,7 @@ final as (
             'lpw_debate_count', lpw_debate_count
         ) as achievement_data,
         'binary' as achievement_type,
-        4 as achievement_priority
+        5 as achievement_priority
     from achievement_base
 )
 
