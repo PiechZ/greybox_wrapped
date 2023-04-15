@@ -22,7 +22,7 @@ earliest_debate as (
     FROM 
         earliest_debate_id
     INNER JOIN 
-        debates ON earliest_debate_id.first_debata_id = debates.debata_id
+        debates ON earliest_debate_id.first_debata_id = debates.debata_id and earliest_debate_id.clovek_id = debates.clovek_id
 ),
 
 final AS (
