@@ -22,7 +22,7 @@ final AS (
         clovek_id,
         school_year,
         'Talent' AS achievement_name,
-        'Gratulujeme, jsi talent! Debatuješ první rok, a v ' || pocet_debat || ' debatách máš průměrně ' || prumerne_kidy || ' řečnických bodů!' AS achievement_description,
+        'Gratulujeme, jsi talent! Debatuješ první rok, a v ' || pocet_debat || ' debatách máš průměrně ' || round(prumerne_kidy, 2) || ' řečnických bodů!' AS achievement_description,
         'achievement_talent/' || clovek_id || '/' || school_year AS achievement_id,
         'binary' AS achievement_type,
         5 AS achievement_priority
