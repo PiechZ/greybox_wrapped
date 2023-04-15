@@ -1,3 +1,5 @@
+-- NOTE: Doesn't actually count up separate tournament_id's because they're not in the base model
+-- -- only approximates the tournament count by counting up the number of tournament debates
 with tournament_debates as (
     select
         clovek_id,
