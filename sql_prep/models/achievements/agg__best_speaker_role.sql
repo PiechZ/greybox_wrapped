@@ -1,9 +1,11 @@
-with speaker_points_sum as (
+-- NOTE: Doesn't currently separate between languages, 
+-- nor does it rule out non-Cup debates
+with speaker_points_avg as (
   select
     clovek_id,
     school_year,
     role,
-    avg(kidy) as total_points,
+    avg(kidy) as average_points,
     count(*) as samples
   from
     {{ ref('base__debater_debata') }}
@@ -19,13 +21,13 @@ best_speaker as (
     school_year,
     role,
     clovek_id,
-    total_points,
+    average_points,
     samples,
     rank() over (
-      partition by school_year, role order by total_points desc
+      partition by school_year, role order by average_points desc
     ) as speaker_rank
   from
-    speaker_points_sum
+    speaker_points_avg
   where samples >= 5
 ),
 
@@ -34,7 +36,7 @@ achievement as (
     school_year,
     role,
     clovek_id,
-    total_points,
+    average_points,
     speaker_rank,
     samples
   from
@@ -52,10 +54,10 @@ final as (
     school_year,
     {{ make_achievement_id('best_speaker_role', 'clovek_id || role') }},
     'Nejlepší mluvčí roku v roli ' || upper(role) || '!' as achievement_name,
-    round(total_points, 2) || ' je skvělý výkon :)' as achievement_description,
-    7 as achievement_priority,
+    round(average_points, 2) || ' je skvělý výkon 😎' as achievement_description,
+    10 as achievement_priority,
     'binary' as achievement_type,
-    json_object('role', role, 'total_points', total_points) as achievement_data
+    json_object('role', role, 'average_points', average_points) as achievement_data
   from achievement
 )
 
