@@ -23,6 +23,8 @@ with all_achievements_unioned as (
                 ref("agg__ultimatni_kidy"),
                 ref("agg__zlepsuji_se"),
                 ref("agg__sberatel_debat"),
+                ref("agg__first_judge"),
+                ref("agg__judge_debates"),
             ],
         )
     }}
