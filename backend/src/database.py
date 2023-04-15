@@ -16,7 +16,9 @@ class Database:
         # This is not SQL injection because Pydantic/FastAPI guarantees
         # clovek_id passed in URI is int
         achievements = self.connection.sql(
-            f"SELECT * FROM adk_wrapped.adk_wrapped.final__current_achievements WHERE clovek_id = {clovek_id}"
+            "SELECT * FROM adk_wrapped.adk_wrapped.final__current_achievements "
+            f"WHERE clovek_id = {clovek_id} "
+            "ORDER BY achievement_priority DESC"
         ).df()
         achievements['achievement_data'] = achievements['achievement_data'].apply(json.loads)
         return [Achievement(**achievement) for _, achievement in achievements.iterrows()]
