@@ -14,10 +14,21 @@ We're using a standard client-server architecture with a stationary pre-filled b
 - `frontend/`: A presentation component that displays the data in a meaningful/beautiful way. **React/Spectacle handles this.**
 
 ```mermaid
+
 graph TD
-  A(Spectacle) -->|Sends request to| B(FastAPI)
-  B(FastAPI)   -->|Processes request and retrieves data from| C(DuckDB)
-  B(FastAPI)   -->|Sends data to| A(Spectacle)
+  subgraph Frontend Container
+    A(Spectacle/React) 
+  end
+  subgraph Backend Container
+    A(Spectacle/React) -->|Requests data from| B(FastAPI)
+    B(FastAPI) -->|Sends data to| A(Spectacle/React)
+    B(FastAPI) -->|Processes request and retrieves data from| C(DuckDB)
+    C(DuckDB) -->| Sends data to| B(FastAPI)
+  end
+  subgraph dbt
+    D(dbt/SQL) -->| Ahead of time, prepares views and tables in | C(DuckDB)
+  end
+
 ```
 
 ## Environment (dev)
