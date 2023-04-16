@@ -1,6 +1,7 @@
 import { Deck, Slide, Heading, Text, AnimatedProgress } from "spectacle";
 import useWindowSize from "./useWindowSize";
 import "./Slides.sass";
+import swipeLeftImg from "./assets/swipe-left.gif";
 
 const getImageUrl = (image) => {
   return `url(${process.env.PUBLIC_URL}/achievement_backgrounds/${image}.png)`;
@@ -29,6 +30,7 @@ function Slides({ achievements }) {
         <AnimatedProgress className="slide__progress" />
         <Heading className="slide__heading">Uplynulá sezóna Ti přinesla mnohé zážitky...</Heading>
         <Text className="slide__text">My jsme jich tu pár shrnuli 😊</Text>
+        <img src={swipeLeftImg} alt="Swajpni doleva" className="slide__swipe-left"/>
       </Slide>
       {achievements.map((achievement) => (
         <Slide

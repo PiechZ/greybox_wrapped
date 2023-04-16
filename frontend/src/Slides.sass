@@ -31,10 +31,22 @@ body
         margin: 1rem
 
     .slide__heading
-        font-size: 2rem
+        font-size: 1.75rem
 
     .slide__text
-        font-size: 1.3rem
+        font-size: 1.2rem
+
+    .slide__swipe-left
+        align-self: center
+        max-width: Min(6rem, 25vw)
+        margin-top: 2rem
+
+    @media #{$xsAndUp}
+        .slide__heading
+            font-size: 2.25rem
+
+        .slide__text
+            font-size: 1.5rem
 
     @media #{$smAndUp}
         .slide__heading
