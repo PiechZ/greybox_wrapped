@@ -1,35 +1,23 @@
-http {
-    upstream backend {
-        # This is replaced with `sed` at container build time - see 
-        # fly.toml and docker-compose.yml for the ARG that is passed in.
-        server __BACKEND_SERVER__;
+server {
+    listen 80;
+
+    location ^~ /api/ {
+        proxy_pass http://backend/api/;
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Real-IP $remote_addr;
+        proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Host $server_name;
     }
 
-    server {
-        listen 80;
-
-        location ^~ /api/ {
-            proxy_pass http://backend/api/;
-            proxy_set_header   Host $host;
-            proxy_set_header   X-Real-IP $remote_addr;
-            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header   X-Forwarded-Host $server_name;
-        }
-
-        location / {
-            root   /usr/share/nginx/html;
-            index  index.html index.htm;
-            try_files $uri $uri/ /index.html;
-        }
-
-        error_page   500 502 503 504  /50x.html;
-
-        location = /50x.html {
-            root   /usr/share/nginx/html;
-        }
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+        try_files $uri $uri/ /index.html;
     }
-}
 
-events {
-    worker_connections 1024;
+    error_page   500 502 503 504  /50x.html;
+
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
 }
