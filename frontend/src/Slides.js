@@ -3,10 +3,9 @@ import useWindowSize from "./useWindowSize";
 import "./Slides.sass";
 import swipeLeftImg from "./assets/swipe-left.gif";
 import NavigationButtons from "./NavigationButtons";
+import ShareButton from "./ShareButton";
 
-const getImageUrl = (image) => {
-  return `url(${process.env.PUBLIC_URL}/achievement_backgrounds/${image}.png)`;
-};
+const getImageUrl = (image) => `${process.env.PUBLIC_URL}/achievement_backgrounds/${image}.png`;
 
 function Slides({ achievements }) {
   const windowSize = useWindowSize();
@@ -25,9 +24,9 @@ function Slides({ achievements }) {
     <Deck theme={theme} className="deck">
       <Slide
         key="introduction"
-        backgroundImage={getImageUrl("ADK_wrapped_background")}
         className="slide slide--introduction"
       >
+        <img src={getImageUrl("ADK_wrapped_background")} className="slide__bg" alt="Ilustrativní obrázek" />
         <AnimatedProgress className="slide__progress" />
         <Heading className="slide__heading">Uplynulá sezóna Ti přinesla mnohé zážitky...</Heading>
         <Text className="slide__text">My jsme jich tu pár shrnuli 😊</Text>
@@ -37,9 +36,9 @@ function Slides({ achievements }) {
       {achievements.map((achievement) => (
         <Slide
           key={achievement.achievement_id}
-          backgroundImage={getImageUrl(achievement.achievement_image)}
           className="slide"
         >
+          <img src={getImageUrl(achievement.achievement_image)} className="slide__bg" alt="Ilustrativní obrázek" />
           <AnimatedProgress className="slide__progress" />
           <Heading className="slide__heading">
             {achievement.achievement_name}
@@ -47,14 +46,15 @@ function Slides({ achievements }) {
           <Text className="slide__text">
             {achievement.achievement_description}
           </Text>
+            <ShareButton />
           <NavigationButtons />
         </Slide>
       ))}
       <Slide
         key="conclusion"
-        backgroundImage={getImageUrl("ADK_wrapped_background")}
         className="slide slide--conclusion"
       >
+        <img src={getImageUrl("ADK_wrapped_background")} className="slide__bg" alt="Ilustrativní obrázek" />
         <AnimatedProgress className="slide__progress" />
         <Heading className="slide__heading">Děkujeme Ti, že debatuješ 💕</Heading>
         <NavigationButtons />
