@@ -36,7 +36,7 @@ final AS (
         school_year,
         {{ make_achievement_id('vazena_pomoc') }},
         'Díky za pomoc na turnajích!' AS achievement_name,
-        'Děkujeme za pomoc při rozhodování na ' || round(num_tournaments,0) || ' turnajích. Jsi ' || characteristic || '!' AS achievement_description,
+        'Děkujeme za pomoc při rozhodování na ' || num_tournaments::integer || ' turnajích. Jsi ' || characteristic || '!' AS achievement_description,
         1 AS achievement_priority,
         json_object(
             'num_tournaments', num_tournaments,
