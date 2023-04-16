@@ -9,13 +9,16 @@ with all_achievements_unioned as (
     {{
         dbt_utils.union_relations(
             relations=[
+                ref("agg__best_speaker_role"),
                 ref('agg__dobry_recnik'),
                 ref('agg__dotknout_se_hvezd'),
+                ref("agg__favorite_role"),
                 ref("agg__gastarbeiter"),
                 ref('agg__lepsi_nez_prumer'),
                 ref("agg__lpw_count"),
                 ref("agg__multilingvni"),
                 ref("agg__neporazitelny"),
+                ref("agg__poprve_nejlepsi"),
                 ref("agg__prehlasovan"),
                 ref("agg__pripravenost"),
                 ref("agg__prvni_vyhra"),
@@ -23,6 +26,10 @@ with all_achievements_unioned as (
                 ref("agg__ultimatni_kidy"),
                 ref("agg__zlepsuji_se"),
                 ref("agg__sberatel_debat"),
+                ref("agg__turnajovy_zavislak"),
+                ref("agg__first_judge"),
+                ref("agg__judge_debates"),
+                ref("agg__vazena_pomoc"),
             ],
         )
     }}

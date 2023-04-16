@@ -14,7 +14,7 @@ final AS(
         clovek_id,
         school_year,
         'Dobrý řečník' AS achievement_name,
-        'Během letošního roku máš průměrně ' || prumerne_kidy || ' řečnických bodů v ' || pocet_debat || ' debatách za tento rok!' AS achievement_description,
+        'Během letošního roku máš průměrně ' || round(prumerne_kidy, 2) || ' řečnických bodů v ' || pocet_debat || ' debatách za tento rok!' AS achievement_description,
         'achievement_dobry_recnik/' || clovek_id || '/' || school_year AS achievement_id,
         'numeric' AS achievement_type,
         1 as achievement_priority

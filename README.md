@@ -3,7 +3,7 @@
 greybox Wrapped is a project that allows us to display statistics and achievements from academic debates.
 As the Czech Debating Association, we track all academic debates that take place at our events. From this database, data can be extracted to analyse performance and award individuals with achievements.
 This project will allow us to analyse the data and award individuals' achievements on the backend. On the frontend, individuals will be able to request personalised presentation of their achievements each year, just as other applications do a "rewind" of the year.
-Sometimes in the code, greybox wrapped can be called ADK wrapped, which is the same thing, only an older name.
+**Sometimes in the code, greybox wrapped can be called ADK wrapped, which is the same thing, only an older name.**
 
 ## Architecture
 
