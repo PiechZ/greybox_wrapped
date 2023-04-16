@@ -5,7 +5,7 @@ with tournament_debates as (
         clovek_id,
         school_year,
         count(*) as num_tournament_debates,
-        ceil(count(*) / 5) as num_tournaments
+        ceil(count(*) / 5.0) as num_tournaments
     from
         {{ ref('base__debater_debata') }}
     where
@@ -19,8 +19,9 @@ achievement as (
     select
         tournament_debates.*,
         case
-            when num_tournaments < 1 then null
-            when num_tournaments >= 1 and num_tournaments <= 2 then 'turnajový začátečník'
+
+            when num_tournaments = 1 then 'turnajový začátečník'
+            when num_tournaments <= 2 then 'počínající turnajová stálice'
             when num_tournaments <= 4 then 'hotový turnajový harcovník'
             when num_tournaments <= 6 then 'kompletní turnajový štamgast'
             when num_tournaments > 6 then 'vyložený turnajový závislák'
@@ -35,8 +36,8 @@ final as (
         school_year,
         {{ make_achievement_id('turnajovy_zavislak') }},
         'Díky za účast na turnajích!' as achievement_name,
-        'Po ' || round(num_tournaments,0) || ' turnajích je z tebe ' || characteristic || '!' as achievement_description,
-        2 as achievement_priority,
+        'Po ' || num_tournaments::integer || ' turnajích je z tebe ' || characteristic || '!' as achievement_description,
+        4 as achievement_priority,
         json_object(
             'num_tournaments', num_tournaments,
             'num_tournament_debates', num_tournament_debates
