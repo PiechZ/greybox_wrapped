@@ -37,7 +37,7 @@ final as (
         'Vyhrál/a jsi v alespoň {{ victory_window }} debatách za sebou!' as achievement_description,
         json_object('victory_window', {{ victory_window }}) as achievement_data,
         'binary' as achievement_type,
-        3 as achievement_priority
+        9 as achievement_priority
     from victories_through_window
 )
 

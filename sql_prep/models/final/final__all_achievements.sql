@@ -29,6 +29,7 @@ with all_achievements_unioned as (
                 ref("agg__turnajovy_zavislak"),
                 ref("agg__first_judge"),
                 ref("agg__judge_debates"),
+                ref("agg__vazena_pomoc"),
             ],
         )
     }}

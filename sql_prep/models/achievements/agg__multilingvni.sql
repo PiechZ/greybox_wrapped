@@ -41,7 +41,7 @@ final as (
         'Gratuluji, jsi debatně ' || achievement_text || '!' as achievement_description,
         json_object('pocet_jazyku', pocet_jazyku) as achievement_data,  -- => e.g. {"pocet_jazyku": 3}
         'binary' as achievement_type,  -- or 'percentile' or 'numeric'
-        pocet_jazyku + 3 as achievement_priority
+        pocet_jazyku + 2 as achievement_priority
     from
         achievement
     where

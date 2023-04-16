@@ -36,7 +36,7 @@ final AS (
         'Rozhodl/a jsi ' || debate_count || ' debat!' as achievement_name,
         'Za tu dobu sis mohl/a užít ' || activity || '.' as achievement_description,
         json_object('debate_count', debate_count, 'hour_count', hour_count) as achievement_data,
-        4 as achievement_priority,
+        2 as achievement_priority,
         'numeric' as achievement_type
     FROM 
         summary_characteristics

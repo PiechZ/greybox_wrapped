@@ -63,7 +63,7 @@ final as (
         school_year,
         'gastarbeiter/' || clovek_id || '/' || school_year as achievement_id,
         'Gastarbeiter' as achievement_name,
-        'Debatoval jsi v týmu s členy jiných klubů! Tvá tolerance tě šlechtí.' as achievement_description,
+        'Debatoval/a jsi v týmu s členy jiných klubů! Tvá tolerance tě šlechtí.' as achievement_description,
         json_object('debate_count', debate_count) as achievement_data,
         'binary' as achievement_type,
         4 as achievement_priority

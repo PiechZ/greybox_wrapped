@@ -19,6 +19,7 @@ achievement as (
     select
         tournament_debates.*,
         case
+
             when num_tournaments = 1 then 'turnajový začátečník'
             when num_tournaments <= 2 then 'počínající turnajová stálice'
             when num_tournaments <= 4 then 'hotový turnajový harcovník'
