@@ -22,7 +22,7 @@ achievement AS (
         WHEN hours_debated >= 60 THEN 'zhlédnout všechny díly seriálu Breaking Bad'
         WHEN hours_debated >= 40 THEN 'zaletět na otočku do Japonska'
         WHEN hours_debated >= 32 THEN 'dohrát Cyberpunk 2077'
-        WHEN hours_debated >= 24 THEN 'nespat a zvládnout nepřetržitý hackathon, nebo zhlédnout všechny díly seriálu Comeback'
+        WHEN hours_debated >= 24 THEN 'zhlédnout všechny díly seriálu Comeback'
         WHEN hours_debated >= 16 THEN 'projet všech 254 stanic metra v Dillí'
         WHEN hours_debated >= 8 THEN 'odpracovat jednu směnu'
         ELSE NULL

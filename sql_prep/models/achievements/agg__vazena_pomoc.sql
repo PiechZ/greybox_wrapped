@@ -20,10 +20,11 @@ achievement AS (
         tournament_debates.*,
         CASE
             WHEN num_tournaments < 1 THEN null
-            WHEN num_tournaments >= 1 AND num_tournaments <= 2 THEN 'dobrý pomocník'
-            WHEN num_tournaments <= 4 THEN 'vážená pomoc při organizování turnajů'
-            WHEN num_tournaments <= 6 THEN 'srdcař, díky kterému mohou být turnaje tak skvělé. Děkujeme'
-            WHEN num_tournaments > 6 THEN 'turnajový závislák, díky kterému turnaje mohou probíhat jedna radost. Takové my milujeme'
+            WHEN num_tournaments = 1 THEN 'skvělý pomocník'
+            WHEN num_tournaments <= 2 THEN 'vážená pomoc při organizování turnajů'
+            WHEN num_tournaments <= 4 THEN 'srdcař, díky kterému mohou být turnaje tak skvělé. Děkujeme'
+            WHEN num_tournaments <= 6 THEN 'turnajový závislák, díky kterému turnaje mohou probíhat jedna radost. Takové my milujeme'
+            WHEN num_tournaments > 6 THEN 'doslova duše našich turnajů a epická pomoc. Jsme Ti opravdu vděčni'
         END AS characteristic
     FROM
         tournament_debates
