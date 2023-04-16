@@ -7,8 +7,8 @@ function NavigationButtons() {
 
     return (
         <>
-            {c.activeView.slideIndex !== 0 && <button className="slide__nav-btn slide__nav-btn--backward" onClick={() => c.stepBackward()}>🮤</button>}
-            {c.activeView.slideIndex !== c.slideCount - 1 && <button className="slide__nav-btn slide__nav-btn--forward" onClick={() => c.stepForward()}>🮥</button>}
+            {c.activeView.slideIndex !== 0 && <button className="slide__nav-btn slide__nav-btn--backward" onClick={() => c.stepBackward()}>⯇</button>}
+            {c.activeView.slideIndex !== c.slideCount - 1 && <button className="slide__nav-btn slide__nav-btn--forward" onClick={() => c.stepForward()}>⯈</button>}
         </>
     );
 }
