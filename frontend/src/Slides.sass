@@ -1,0 +1,44 @@
+@use "config" as *
+
+/* increase priority by wrapping the selectors in body */
+body
+    .slide
+        background-color: $primaryColor
+
+    .slide::before
+        background-size: cover
+        background-position: center center
+        background-repeat: no-repeat
+
+    .slide--introduction::before, .slide--conclusion::before
+        background-position: bottom center
+
+    .slide__progress
+        justify-content: center
+        margin-bottom: 1rem
+
+    /* progress Pacman */
+    .slide__progress > div:first-child
+        filter: drop-shadow(1px 1px 10px rgba(0,0,0,0.5))
+
+    /* progress dots */
+    .slide__progress > div:not(:first-child)
+        box-shadow: rgba(0,0,0,0.5) 1px 1px 10px
+
+    .slide__heading, .slide__text
+        color: $textColor
+        background-color: $backgroundColor
+        margin: 1rem
+
+    .slide__heading
+        font-size: 2rem
+
+    .slide__text
+        font-size: 1.3rem
+
+    @media #{$smAndUp}
+        .slide__heading
+            font-size: 3rem
+
+        .slide__text
+            font-size: 2rem
