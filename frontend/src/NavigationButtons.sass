@@ -1,0 +1,23 @@
+@use "config" as *
+
+.slide__nav-btn
+  border: none
+  position: absolute
+  top: 50%
+  transform: translateY(-50%)
+  font-size: 3rem
+  cursor: pointer
+  padding: 2rem .5rem
+  color: $textColor
+  background-color: $backgroundColor
+
+.slide__nav-btn--backward
+  left: 0
+
+.slide__nav-btn--forward
+  right: 0
+
+/* touch device */
+@media (pointer: coarse)
+  .slide__nav-btn
+    display: none

@@ -5,6 +5,10 @@ body
     .slide
         background-color: $primaryColor
 
+        /* slide content wrapper */
+        > div
+            padding: 2rem 0.5rem
+
     .slide::before
         background-size: cover
         background-position: center center
@@ -54,3 +58,13 @@ body
 
         .slide__text
             font-size: 2rem
+
+    @media #{$mdAndUp}
+        /* slide content wrapper */
+        .slide > div
+            padding: 3rem
+
+    /* device with a mouse */
+    @media (pointer: fine)
+        .slide__swipe-left
+            display: none
