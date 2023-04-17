@@ -24,6 +24,7 @@ function Slides({ achievements }) {
     <Deck theme={theme} className="deck">
       <Slide
         key="introduction"
+        backgroundImage={`url(${getImageUrl("ADK_wrapped_background")})`}
         className="slide slide--introduction"
       >
         <img src={getImageUrl("ADK_wrapped_background")} className="slide__bg" alt="Ilustrativní obrázek" />
@@ -36,6 +37,7 @@ function Slides({ achievements }) {
       {achievements.map((achievement) => (
         <Slide
           key={achievement.achievement_id}
+          backgroundImage={`url(${getImageUrl(achievement.achievement_image)})`}
           className="slide"
         >
           <img src={getImageUrl(achievement.achievement_image)} className="slide__bg" alt="Ilustrativní obrázek" />
@@ -52,6 +54,7 @@ function Slides({ achievements }) {
       ))}
       <Slide
         key="conclusion"
+        backgroundImage={`url(${getImageUrl("ADK_wrapped_background")})`}
         className="slide slide--conclusion"
       >
         <img src={getImageUrl("ADK_wrapped_background")} className="slide__bg" alt="Ilustrativní obrázek" />
