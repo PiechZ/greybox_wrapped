@@ -21,7 +21,7 @@ COPY nginx/nginx.conf.template /etc/nginx/nginx.template
 # 5. Replace __BACKEND_SERVER__ with the actual backend server in nginx.conf
 #    (Must be set in docker-compose.yml or fly.toml as a build arg)
 ARG BACKEND_SERVER
-RUN sed "s|__BACKEND_SERVER__|${BACKEND_SERVER}|" /etc/nginx/nginx.template > /etc/nginx/nginx.conf
+RUN sed "s|__BACKEND_SERVER__|${BACKEND_SERVER}|" /etc/nginx/nginx.template > /etc/nginx/conf.d/default.conf
 
 # Alternative, more elegant way of doing the same (that didn't work):
 # RUN apk add --no-cache gettext
