@@ -4,11 +4,27 @@ import "./Slides.sass";
 import swipeLeftImg from "./assets/swipe-left.gif";
 import NavigationButtons from "./NavigationButtons";
 import ShareButton from "./ShareButton";
+import StaticMessage from "./StaticMessage";
 
 const getImageUrl = (image) => `${process.env.PUBLIC_URL}/achievement_backgrounds/${image}.png`;
 
 function Slides({ achievements: { loading, data } }) {
   const windowSize = useWindowSize();
+
+  // Loading
+  if (loading) {
+      return <StaticMessage>Načítání...</StaticMessage>;
+  }
+
+  // Error
+  if (!Array.isArray(data)) {
+      return <StaticMessage>Zde se bohužel něco pokazilo. Prosím, zkuste to jindy.</StaticMessage>;
+  }
+
+  // No achievements
+  if (!data.length) {
+      return <StaticMessage>Bohužel pro Vás žádné achievementy nemáme 😢. Aplikace je zatím v první fázi testování, budeme doplňovat další achievementy postupně. Zkuste to třeba příští rok.</StaticMessage>;
+  }
 
   const theme = {
     size: {
@@ -16,18 +32,6 @@ function Slides({ achievements: { loading, data } }) {
       height: `${windowSize.height}px`
     },
   };
-
-  if (loading) {
-      return <div>Načítání...</div>;
-  }
-
-  if (!Array.isArray(data)) {
-      return <div>Zde se bohužel něco pokazilo. Prosím, zkuste to jindy.</div>;
-  }
-
-  if (!data.length) {
-      return <div>Bohužel pro Vás žádné achievementy nemáme 😢. Aplikace je zatím v první fázi testování, budeme doplňovat další achievementy postupně. Zkuste to třeba příští rok.</div>;
-  }
 
   return (
     <Deck theme={theme} className="deck">

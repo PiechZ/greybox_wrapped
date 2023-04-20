@@ -6,6 +6,7 @@ import {
   useParams,
 } from "react-router-dom";
 import Slides from "./Slides";
+import StaticMessage from "./StaticMessage";
 
 const apiServer = "/api";
 
@@ -56,13 +57,13 @@ function App() {
         <Route
           path="/"
           element={
-            <div>
+            <StaticMessage>
               K této aplikaci není možné přistoupit napřímo. Běžte prosím na{" "}
               <a href="https://www.debatovani.cz/greybox/registrace">
                 Greybox 2.0
               </a>{" "}
               a klikněte na svůj Wrapped odkaz v levém menu.
-            </div>
+            </StaticMessage>
           }
         />
       </Routes>
