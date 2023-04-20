@@ -7,7 +7,7 @@ import ShareButton from "./ShareButton";
 
 const getImageUrl = (image) => `${process.env.PUBLIC_URL}/achievement_backgrounds/${image}.png`;
 
-function Slides({ achievements }) {
+function Slides({ achievements: { loading, data } }) {
   const windowSize = useWindowSize();
 
   const theme = {
@@ -17,9 +17,18 @@ function Slides({ achievements }) {
     },
   };
 
-  if (!achievements.length || achievements.length === 0) {
-    return <div>Loading...</div>;
+  if (loading) {
+      return <div>Načítání...</div>;
   }
+
+  if (!Array.isArray(data)) {
+      return <div>Zde se bohužel něco pokazilo. Prosím, zkuste to jindy.</div>;
+  }
+
+  if (!data.length) {
+      return <div>Bohužel pro Vás žádné achievementy nemáme 😢. Aplikace je zatím v první fázi testování, budeme doplňovat další achievementy postupně. Zkuste to třeba příští rok.</div>;
+  }
+
   return (
     <Deck theme={theme} className="deck">
       <Slide
@@ -34,7 +43,7 @@ function Slides({ achievements }) {
         <img src={swipeLeftImg} alt="Swajpni doleva" className="slide__swipe-left"/>
         <NavigationButtons />
       </Slide>
-      {achievements.map((achievement) => (
+      {data.map((achievement) => (
         <Slide
           key={achievement.achievement_id}
           backgroundImage={`url(${getImageUrl(achievement.achievement_image)})`}
