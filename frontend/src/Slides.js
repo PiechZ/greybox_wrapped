@@ -4,11 +4,27 @@ import "./Slides.sass";
 import swipeLeftImg from "./assets/swipe-left.gif";
 import NavigationButtons from "./NavigationButtons";
 import ShareButton from "./ShareButton";
+import StaticMessage from "./StaticMessage";
 
 const getImageUrl = (image) => `${process.env.PUBLIC_URL}/achievement_backgrounds/${image}.png`;
 
-function Slides({ achievements }) {
+function Slides({ achievements: { loading, data } }) {
   const windowSize = useWindowSize();
+
+  // Loading
+  if (loading) {
+      return <StaticMessage>Načítání...</StaticMessage>;
+  }
+
+  // Error
+  if (!Array.isArray(data)) {
+      return <StaticMessage>Zde se bohužel něco pokazilo. Prosím, zkuste to jindy.</StaticMessage>;
+  }
+
+  // No achievements
+  if (!data.length) {
+      return <StaticMessage>Bohužel pro Vás žádné achievementy nemáme 😢. Aplikace je zatím v první fázi testování, budeme doplňovat další achievementy postupně. Zkuste to třeba příští rok.</StaticMessage>;
+  }
 
   const theme = {
     size: {
@@ -17,9 +33,6 @@ function Slides({ achievements }) {
     },
   };
 
-  if (!achievements.length || achievements.length === 0) {
-    return <div>Loading...</div>;
-  }
   return (
     <Deck theme={theme} className="deck">
       <Slide
@@ -34,7 +47,7 @@ function Slides({ achievements }) {
         <img src={swipeLeftImg} alt="Swajpni doleva" className="slide__swipe-left"/>
         <NavigationButtons />
       </Slide>
-      {achievements.map((achievement) => (
+      {data.map((achievement) => (
         <Slide
           key={achievement.achievement_id}
           backgroundImage={`url(${getImageUrl(achievement.achievement_image)})`}
