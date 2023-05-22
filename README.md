@@ -44,7 +44,7 @@ graph TD
     ```yaml
     adk_wrapped:
         outputs:
-            dev:
+            dev: &DB
                 path: "path/to/data/adk_wrapped.db"
                 schema: adk_wrapped
                 type: duckdb
@@ -52,6 +52,10 @@ graph TD
                 extensions:
                     - httpfs
                     - parquet
+            
+            prod:
+                <<: *DB
+                schema: adk_wrapped_prod
         target: dev
     ```
 2. Optionally, get a copy of the rainbow tables and place them in `data/rainbow_tables.csv`. Ensure that the column names are `greybox_id` and `hash`.

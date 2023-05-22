@@ -34,6 +34,11 @@ vars:
   # Which achievements do we want to return by default for the current year?
   current_school_year: 22
 
+  data_diff:
+    prod_database: 'adk_wrapped'
+    prod_schema: 'adk_wrapped_prod'
+
+
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 models:

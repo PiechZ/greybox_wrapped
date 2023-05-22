@@ -3,6 +3,7 @@
 # Data preparation
 dbt-duckdb ~= 1.4.0
 pandas ~= 1.5.3
+data-diff
 
 # Data transfer API
 fastapi[all] ~= 0.92.0
