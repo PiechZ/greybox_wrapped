@@ -16,6 +16,11 @@ We're using a standard client-server architecture with a stationary pre-filled b
 ```mermaid
 
 graph TD
+  subgraph Meltano Data Load
+    DB1(MySQL Remote) -->|Exports data to| Dump(SQL Dump)
+    Dump -->|Loads data into| DB2(MySQL Local)
+    DB2 -->|Loads data via Meltano into| C(DuckDB)
+  end
   subgraph Frontend Container
     A(Spectacle/React) 
   end
