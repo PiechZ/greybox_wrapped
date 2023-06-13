@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  backend:
+    image: 637364745310.dkr.ecr.eu-central-1.amazonaws.com/greybox-wrapped:backend
+    volumes:
+      - data:/data
+    environment:
+      - SERVER=backend
+  frontend:
+    image: 637364745310.dkr.ecr.eu-central-1.amazonaws.com/greybox-wrapped:frontend
+    ports:
+      - 80:80
+    environment:
+      - BACKEND_SERVER=backend:8765
+volumes:
+  data:
