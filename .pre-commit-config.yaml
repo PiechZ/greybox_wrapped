@@ -5,16 +5,24 @@ repos:
     - id: check-yaml
     - id: end-of-file-fixer
     - id: trailing-whitespace
+    - id: check-merge-conflict
+
 
 - repo: https://github.com/dbt-checkpoint/dbt-checkpoint
   rev: v2.0.0
   hooks:
     - id: dbt-deps
+      files: ^sql_prep/
     - id: dbt-parse
+      files: ^sql_prep/
     - id: dbt-docs-generate
+      files: ^sql_prep/
     - id: dbt-run
+      files: ^sql_prep/
     - id: dbt-test
+      files: ^sql_prep/
     - id: check-script-semicolon
+      files: ^sql_prep/
     # - id: check-script-has-no-table-name
     # - id: check-model-has-description
 
@@ -27,3 +35,16 @@ repos:
       args: [ --fix ]
     # Run the formatter.
     - id: ruff-format
+
+- repo: https://github.com/sqlfluff/sqlfluff
+  rev: 3.0.4
+  hooks:
+    - id: sqlfluff-lint
+      additional_dependencies:
+        - "dbt-duckdb"
+        - "sqlfluff-templater-dbt"
+    - id: sqlfluff-fix
+      additional_dependencies:
+        - "dbt-duckdb"
+        - "sqlfluff-templater-dbt"
+      # args: [--config, "./pyproject.toml"]
