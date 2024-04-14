@@ -27,7 +27,7 @@ final AS (
     clovek_id,
     school_year,
     celkem_ib,
-    {{ make_achievement_id('IB_fanatik') }},
+    {{ make_achievement_id('ib_fanatik') }},
     'IB fanatik' as achievement_name,
     'Za tuto sezónu máte na kontě více než 25 IB bodů! To by stačilo na odznáček, na který jiní střádají několik sezón.' as achievement_description,
     3 as achievement_priority,
