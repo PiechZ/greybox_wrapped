@@ -40,6 +40,6 @@ Pravidla pro udělování achievementů:
 - „Vítězná pozice“ – řečnická pozice, na které má člověk nejvíce výher/nejlepší winrate - `numeric`
 - „Můj nejlepší turnaj“ – turnaj, na kterém má člověk nejlepší průměr řečnických bodů - `numeric`
 - „Pyrrhovo vítězství“ – počet prohraných debat jako best speaker - `numeric`
-- „Turnaj mistrů“ – turnaj, na kterém byl celkově nejlepší průměr řečnických bodů 
+- „Turnaj mistrů“ – turnaj, na kterém byl celkově nejlepší průměr řečnických bodů
 - „Dream Team“ – tým, složený z lidí co na dané pozici mají nejlepší speaker pointy (každý člověk může být uveden jen jednou)
-- „Gaussova křivka“ – ověření, že opravdu udělujeme body na základě Gaussovy křivky 
+- „Gaussova křivka“ – ověření, že opravdu udělujeme body na základě Gaussovy křivky

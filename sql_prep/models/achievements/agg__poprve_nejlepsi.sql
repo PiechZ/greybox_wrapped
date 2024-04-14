@@ -48,7 +48,7 @@ final AS (
     first_congratulations.school_year,
     {{ make_achievement_id("poprve_nejlepsi") }},
     'Poprvé nejlepší!' as achievement_name,
-    'Dne ' || strftime(first_congratulations.first_congratulation_date, '%d. %m. %Y') || 
+    'Dne ' || strftime(first_congratulations.first_congratulation_date, '%d. %m. %Y') ||
         ' jsi byl/a poprvé nejlepším mluvčím debaty ve svém prvním roce debatování!' AS achievement_description,
     7 as achievement_priority,
     'binary' as achievement_type,

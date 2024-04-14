@@ -22,8 +22,8 @@ achievement AS (
     FROM kidy_malych_kidu
 ),
 
-final AS ( 
-    SELECT    
+final AS (
+    SELECT
         clovek_id,
         school_year,
         debate_date,

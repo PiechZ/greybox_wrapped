@@ -1,0 +1,29 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.5.0
+  hooks:
+    - id: check-yaml
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+
+- repo: https://github.com/dbt-checkpoint/dbt-checkpoint
+  rev: v2.0.0
+  hooks:
+    - id: dbt-deps
+    - id: dbt-parse
+    - id: dbt-docs-generate
+    - id: dbt-run
+    - id: dbt-test
+    - id: check-script-semicolon
+    # - id: check-script-has-no-table-name
+    # - id: check-model-has-description
+
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  # Ruff version.
+  rev: v0.3.7
+  hooks:
+    # Run the linter.
+    - id: ruff
+      args: [ --fix ]
+    # Run the formatter.
+    - id: ruff-format

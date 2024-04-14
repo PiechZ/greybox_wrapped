@@ -13,7 +13,7 @@ app = "adk-wrapped"
 
 [http_service]
   internal_port = 80
-  
+
   [http_service.concurrency]
     type = "requests"
     soft_limit = 200

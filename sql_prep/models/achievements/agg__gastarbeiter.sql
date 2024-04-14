@@ -13,7 +13,7 @@ team_club_count as (
 ),
 
 team_club_count_json as (
-    -- Group the previous query so that we can have a single row per 
+    -- Group the previous query so that we can have a single row per
     -- team-within-debate, and a JSON object with the club counts that we can
     -- use as a lookup table.
     select
@@ -35,7 +35,7 @@ merge_back as (
 ),
 
 gastarbeiters as (
-    -- Subset to relevant columns before making the cull (for some reason, 
+    -- Subset to relevant columns before making the cull (for some reason,
     -- trying to do `where club_count_json->klub_id = 1` directly throws an
     -- aggregation error)
     select

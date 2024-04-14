@@ -19,12 +19,12 @@ compare_points_between_sides as (
         debata_id,
         -- pivot within group-by to get the points for each side
         sum(
-            case 
+            case
                 when is_affirmative_speaker then points else 0
             end
         ) as affirmative_points,
         sum(
-            case 
+            case
                 when not is_affirmative_speaker then points else 0
             end
         ) as negative_points

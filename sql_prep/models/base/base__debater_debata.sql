@@ -1,5 +1,5 @@
 with people as (
-    select 
+    select
         clovek_id,
         klub_id
     from {{ source('raw', 'clovek') }}

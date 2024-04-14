@@ -1,12 +1,12 @@
 WITH debate_stats AS (
-    SELECT 
-        clovek_id, 
+    SELECT
+        clovek_id,
         school_year,
         COUNT(*) AS debate_count,
         COUNT(*) * 1.5 as hour_count
-    FROM 
+    FROM
         {{ ref('base__rozhodci_debata') }}
-    GROUP BY 
+    GROUP BY
         clovek_id,
         school_year
 ),
@@ -29,8 +29,8 @@ summary_characteristics as (
 ),
 
 final AS (
-    SELECT 
-        clovek_id, 
+    SELECT
+        clovek_id,
         school_year,
         {{ make_achievement_id('judge_debates') }},
         'Rozhodl/a jsi ' || debate_count || ' debat!' as achievement_name,
@@ -38,7 +38,7 @@ final AS (
         json_object('debate_count', debate_count, 'hour_count', hour_count) as achievement_data,
         2 as achievement_priority,
         'numeric' as achievement_type
-    FROM 
+    FROM
         summary_characteristics
     WHERE activity is not null
 )

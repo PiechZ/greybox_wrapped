@@ -1,4 +1,4 @@
--- NOTE: Doesn't currently separate between languages, 
+-- NOTE: Doesn't currently separate between languages,
 -- nor does it rule out non-Cup debates
 with speaker_points_avg as (
   select

@@ -17,8 +17,8 @@ achievement AS (
     GROUP BY clovek_id, school_year
 ),
 
-final AS ( 
-    SELECT    
+final AS (
+    SELECT
         clovek_id,
         school_year,
         'Talent' AS achievement_name,

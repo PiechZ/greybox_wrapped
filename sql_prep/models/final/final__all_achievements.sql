@@ -1,4 +1,4 @@
-{% 
+{%
     set achievement_relations = dbt_utils.get_relations_by_pattern(
         'adk_wrapped',
         'agg__%',
@@ -42,7 +42,7 @@ final as (
         achievement_id,
         achievement_name,
         achievement_description,
-        case when achievement_data is null 
+        case when achievement_data is null
             then json_object()
             else achievement_data
         end as achievement_data,

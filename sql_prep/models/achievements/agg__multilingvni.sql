@@ -22,7 +22,7 @@ achievement as (
         clovek_id,
         school_year,
         pocet_jazyku,
-        case 
+        case
             when pocet_jazyku > 2 then 'multilingvní'
             when pocet_jazyku > 1 then 'bilingvní'
             else null

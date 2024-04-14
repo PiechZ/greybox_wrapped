@@ -22,7 +22,7 @@ graph TD
     DB2 -->|Loads data via Meltano into| C(DuckDB)
   end
   subgraph Frontend Container
-    A(Spectacle/React) 
+    A(Spectacle/React)
   end
   subgraph Backend Container
     A(Spectacle/React) -->|Requests data from| B(FastAPI)
@@ -90,7 +90,7 @@ cd frontend
 fly apps create adk-wrapped
 cd ../backend
 fly apps create adk-wrapped-api
-fly volumes create adk_wrapped_data --region ams --size 
+fly volumes create adk_wrapped_data --region ams --size
 ```
 
 The app is currently deployed to the Amsterdam (`ams`) region.

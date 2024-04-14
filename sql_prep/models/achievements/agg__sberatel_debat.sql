@@ -26,7 +26,7 @@ achievement AS (
         WHEN hours_debated >= 16 THEN 'projet všech 254 stanic metra v Dillí'
         WHEN hours_debated >= 8 THEN 'odpracovat jednu směnu'
         ELSE NULL
-       END AS achievement_decider 
+       END AS achievement_decider
     FROM prepare_hours
 
 ),

@@ -31,8 +31,8 @@ achievement AS (
     FROM vyhry
 ),
 
-final AS ( 
-    SELECT    
+final AS (
+    SELECT
         clovek_id,
         school_year,
         debate_date,

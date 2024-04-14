@@ -29,7 +29,7 @@ leagues as (
 ),
 
 judges as (
-    select 
+    select
         clovek_id,
         debata_id,
         rozhodnuti as has_voted_affirmative,
@@ -51,7 +51,7 @@ ballots as (
 -- The above CTE does not return debates that have no judges, so we'll keep
 -- a list of judgeless debate_ids to join back later
 ballotless_debates as (
-    select 
+    select
         debates.debata_id
     from debates
     left join ballots using (debata_id)
