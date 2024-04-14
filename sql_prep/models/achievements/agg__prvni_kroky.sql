@@ -2,15 +2,29 @@ WITH ib_base AS (
     SELECT * FROM {{ ref('base__debater_ib') }}
 ),
 
-aggregate_ib AS (
+rocni_ib_tab AS(
     SELECT
         clovek_id,
-        ANY_VALUE(school_year) as school_year,
-        SUM(ibody) AS celkem_ib
+        school_year,
+        SUM(ibody) AS rocni_ib
     FROM
         ib_base
     GROUP BY
         clovek_id,
+        school_year
+),
+
+aggregate_ib AS (
+    SELECT
+        clovek_id,
+        school_year,
+        rocni_ib,
+        ROUND(SUM(rocni_ib) OVER (PARTITION BY clovek_id ORDER BY school_year ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW), 3) AS celkem_ib
+    FROM
+        rocni_ib_tab
+    ORDER BY
+        clovek_id,
+        school_year
 ),
 
 achievement AS(
