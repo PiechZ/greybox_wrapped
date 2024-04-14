@@ -77,3 +77,9 @@ models:
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__vazena_pomoc
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__IB_fanatik
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__napul_cesty
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__prvni_kroky
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS 
