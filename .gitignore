@@ -167,3 +167,4 @@ clovek_debata.csv
 #folders
 data/*.db
 data/*.csv
+data/adk_wrapped.db.wal
