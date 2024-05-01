@@ -15,7 +15,11 @@ meltano:
         # or it's not, in which case we'll use the data directory.
         #
         # The relevant variables are defined either in docker-compose.data_prep.yml or in .vscode/settings.json.
-        - path: "{% if env_var('MELTANO_PROJECT_READONLY', 0) == 1 %}{{ env_var('MELTANO_PROJECT_ROOT') }}/output/{{ env_var('TARGET_DUCKDB_FINAL_FILENAME', 'adk_wrapped') }}.db{% else %}{{ env_var('VSCODE_WORKSPACE', '.') }}/data/{{ env_var('TARGET_DUCKDB_FINAL_FILENAME', 'adk_wrapped') }}.db{% endif %}"
+        - path: "{% if env_var('MELTANO_PROJECT_READONLY', 0) == 1 %}\
+            {{ env_var('MELTANO_PROJECT_ROOT') }}/output/{{ env_var('TARGET_DUCKDB_FINAL_FILENAME', 'adk_wrapped') }}.db\
+            {% else %}\
+            {{ env_var('VSCODE_WORKSPACE', '.') }}/data/{{ env_var('TARGET_DUCKDB_FINAL_FILENAME', 'adk_wrapped') }}.db\
+            {% endif %}"
           alias: final
     staging:
       <<: *dev
