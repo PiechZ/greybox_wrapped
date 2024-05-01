@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: raw
-    database: adk_wrapped
+    database: "{{ env_var('TARGET_DUCKDB_INTERMEDIATE_FILENAME') }}"
     schema: debatovanicz
     tables:
       - name: clovek

@@ -1,0 +1,43 @@
+version: '3.4'
+
+services:
+  mariadb:
+    image: mysql:5.7
+    platform: linux/x86_64
+    networks:
+      - db
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/docker-entrypoint-initdb.d
+      - mysql_storage:/var/lib/mysql
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+      - MYSQL_DATABASE=debatovanicz
+      # To prevent the container from crashing on startup with ERROR 2047
+      # - MYSQL_HOST=
+  meltano:
+    image: meltano
+    networks:
+      - db
+    depends_on:
+      - mariadb
+    links:
+      - mariadb
+    build:
+      context: ./greybox_conversion
+      dockerfile: ./Dockerfile
+    environment:
+      - TAP_MYSQL_USER=root
+      - TAP_MYSQL_PASSWORD=
+      - TARGET_DUCKDB_INTERMEDIATE_FILENAME=adk_wrapped_full
+      - TARGET_DUCKDB_FINAL_FILENAME=adk_wrapped
+    volumes:
+      - ./data:/project/output
+    command: "run tap-mysql target-duckdb dbt-duckdb:build --full-refresh --force"
+
+volumes:
+  mariadb_storage:
+  mysql_storage:
+networks:
+  db:

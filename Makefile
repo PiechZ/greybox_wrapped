@@ -1,11 +1,15 @@
-run:
-	cd sql_prep && dbt run
-test:
-	cd sql_prep && dbt test
+build:
+	docker compose -f docker-compose.data_prep.yml run --build meltano run dbt-duckdb:build
+
+ingest:
+	docker compose -f docker-compose.data_prep.yml down
+	docker volume rm greybox_wrapped_mysql_storage 
+	docker compose -f docker-compose.data_prep.yml up --build --abort-on-container-exit
+
 adk:
-	docker-compose up -d
+	docker-compose -f docker-compose.app.yml up -d
 logs:
-	docker-compose logs -f
+	docker-compose -f docker-compose.app.yml logs -f
 backend:
 	cd backend && uvicorn src.app:app --reload --port 8765
 frontend:
@@ -18,4 +22,4 @@ deploy:
 	fly deploy frontend/
 	echo "You need to manually deploy the database."
 
-.PHONY: run backend frontend setup adk logs deploy
+.PHONY: run test build ingest backend frontend setup adk logs deploy

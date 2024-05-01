@@ -1,0 +1,108 @@
+version: 1
+default_environment: dev
+project_id: 9dce0c4c-b583-4450-bf28-dc6b30988d73
+environments:
+- name: dev
+- name: staging
+- name: prod
+plugins:
+  extractors:
+  - name: tap-mysql
+    variant: transferwise
+    pip_url: pipelinewise-tap-mysql
+    config:
+      host: mariadb
+      port: 3306
+      user: root
+      database: debatovanicz
+      engine: mysql
+      ssl: false
+    metadata:
+      '*':
+        replication-method: FULL_TABLE
+      # For single-primary-key tables, we can do incremental replication
+      # (but should disable and do --full-refresh at the first sign of trouble)
+      # debatovanicz-tym:
+      #   replication-method: INCREMENTAL
+      #   replication-key: tym_ID
+      # debatovanicz-clovek:
+      #   replication-method: INCREMENTAL
+      #   replication-key: clovek_ID
+      # debatovanicz-teze:
+      #   replication-method: INCREMENTAL
+      #   replication-key: teze_ID
+      # debatovanicz-debata:
+      #   replication-method: INCREMENTAL
+      #   replication-key: debata_ID
+      # debatovanicz-turnaj:
+      #   replication-method: INCREMENTAL
+      #   replication-key: turnaj_ID
+      # debatovanicz-klub:
+      #   replication-method: INCREMENTAL
+      #   replication-key: klub_ID
+      # debatovanicz-soutez:
+      #   replication-method: INCREMENTAL
+      #   replication-key: soutez_ID
+    select:
+    - '!debatovanicz-login.*'
+    - '!debatovanicz-kontakt.*'
+    - '!debatovanicz-kategorie.*'
+    - '!debatovanicz-kategorie_teze.*'
+    # Temporary exclusions until we can figure out how to make them work
+    # - '!debatovanicz-soutez_teze.*'  # Disable if/when the double-primary-key issue reappears
+    # - '!debatovanicz-teze_jazyk.*'
+    # - '!debatovanicz-turnaj.*'
+    # - '!debatovanicz-clovek.*'
+    # - '!debatovanicz-debata.*'
+    # Exclusions of long tables that we don't need yet
+    # - '!debatovanicz-clovek_ibody.*'
+    # - '!debatovanicz-clovek_debata_ibody.*'
+    # Protected info that we don't need + some info with unnecessary Unicode
+    - '!debatovanicz-clovek.mesto'
+    - '!debatovanicz-clovek.ulice'
+    - '!debatovanicz-clovek.psc'
+    - '!debatovanicz-clovek.komentar'
+    # - '!debatovanicz-clovek.jmeno'
+    # - '!debatovanicz-clovek.prijmeni'
+    # - '!debatovanicz-clovek.nick'
+    - '!debatovanicz-clovek.email'
+    - '!debatovanicz-clovek.narozen'
+    - '!debatovanicz-clovek.prukaz'
+    - '!debatovanicz-clovek.cislo'
+    - '!debatovanicz-clovek.prihlaska'
+    - '!debatovanicz-debata.komentar'
+    - '!debatovanicz-debata.misto'
+    # Because of one date with tz? debate_id=5369 (it's because it's from 2015-10-00)
+    # - '!debatovanicz-debata.datum'
+    - '!debatovanicz-klub.nazev'
+    - '!debatovanicz-klub.kratky_nazev'
+    - '!debatovanicz-klub.misto'
+    - '!*.komentar'
+    - '!debatovanicz-clovek_ibody.tx'
+    - '!debatovanicz-turnaj.nazev'
+    - '!debatovanicz-turnaj.deadline'
+    # Hide internals and bolt-on functionality
+    - '!debatovanicz-user.*'
+    - '!debatovanicz-dotaznik*.*'
+    - '!debatovanicz-post.*'
+    - '!debatovanicz-topic.*'
+    # Everything else
+    - '*.*'
+    # - 'debatovanicz-tym.*'
+
+  loaders:
+  - name: target-duckdb
+    variant: jwills
+    pip_url: target-duckdb~=0.5
+    config:
+      filepath: output/${TARGET_DUCKDB_INTERMEDIATE_FILENAME}.db
+      default_target_schema: debatovanicz
+      batch_size_rows: 10000
+      # Because of teze_jazyk isse
+      primary_key_required: false
+  utilities:
+  - name: dbt-duckdb
+    variant: jwills
+    pip_url: dbt-core dbt-duckdb git+https://github.com/meltano/dbt-ext.git@main
+    config:
+      path: ${MELTANO_PROJECT_ROOT}/output/${TARGET_DUCKDB_INTERMEDIATE_FILENAME}.db
