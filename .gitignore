@@ -168,3 +168,9 @@ clovek_debata.csv
 data/*.db
 data/*.csv
 data/adk_wrapped.db.wal
+
+# MacOS
+.DS_Store
+
+# Meltano
+*.lock

@@ -1,0 +1,18 @@
+# DuckDB config reference:
+config:
+  send_anonymous_usage_stats: False
+  use_colors: True
+meltano:
+  target: "{{ env_var('MELTANO_ENVIRONMENT', 'dev') }}"
+  outputs:
+    dev:  &dev
+      type: duckdb
+      path: "{{ env_var('DBT_DUCKDB_PATH') }}"
+      threads: 8
+      attach:
+        - path: "{{ env_var('MELTANO_PROJECT_ROOT') }}/output/{{ env_var('TARGET_DUCKDB_FINAL_FILENAME', 'adk_wrapped') }}.db"
+          alias: final
+    staging:
+      <<: *dev
+    prod:
+      <<: *dev
