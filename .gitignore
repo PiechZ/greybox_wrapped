@@ -167,6 +167,7 @@ clovek_debata.csv
 #folders
 data/*.db
 data/*.csv
+data/*.sql
 data/adk_wrapped.db.wal
 
 # MacOS
