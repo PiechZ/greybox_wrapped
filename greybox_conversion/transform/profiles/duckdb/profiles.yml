@@ -10,7 +10,7 @@ meltano:
       path: "{{ env_var('DBT_DUCKDB_PATH') }}"
       threads: 8
       attach:
-        - path: "{{ env_var('MELTANO_PROJECT_ROOT') }}/output/{{ env_var('TARGET_DUCKDB_FINAL_FILENAME', 'adk_wrapped') }}.db"
+        - path: "{% if env_var('MELTANO_PROJECT_READONLY', 0) == 1 %}{{ env_var('MELTANO_PROJECT_ROOT') }}/output/{{ env_var('TARGET_DUCKDB_FINAL_FILENAME', 'adk_wrapped') }}.db{% else %}{{ env_var('VSCODE_WORKSPACE', '.') }}/data/{{ env_var('TARGET_DUCKDB_FINAL_FILENAME', 'adk_wrapped') }}.db{% endif %}"
           alias: final
     staging:
       <<: *dev

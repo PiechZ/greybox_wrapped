@@ -1,3 +1,23 @@
 {
-    "python.formatting.provider": "black"
+    "terminal.integrated.env.osx": {
+        // Environment variables for a dbt run outside of Docker/Meltano
+        // If you change them here, make sure to change them in terminal.integrated.env.linux/windows
+        "DBT_PROJECT_DIR": "${workspaceFolder}/greybox_conversion/transform",
+        "DBT_PROFILES_DIR": "${workspaceFolder}/greybox_conversion/transform/profiles/duckdb",
+        "DBT_DUCKDB_PATH": "${workspaceFolder}/data/adk_wrapped_full.db",
+        "MELTANO_PROJECT_ROOT": "${workspaceFolder}/greybox_conversion",
+        "TARGET_DUCKDB_FINAL_FILENAME": "adk_wrapped",
+        "TARGET_DUCKDB_INTERMEDIATE_FILENAME": "adk_wrapped_full",
+        "VSCODE_WORKSPACE": "${workspaceFolder}",
+    },
+    "terminal.integrated.env.windows": {
+        // Exact same as above
+        "DBT_PROJECT_DIR": "${workspaceFolder}/greybox_conversion/transform",
+        "DBT_PROFILES_DIR": "${workspaceFolder}/greybox_conversion/transform/profiles/duckdb",
+        "DBT_DUCKDB_PATH": "${workspaceFolder}/data/adk_wrapped_full.db",
+        "MELTANO_PROJECT_ROOT": "${workspaceFolder}/greybox_conversion",
+        "TARGET_DUCKDB_FINAL_FILENAME": "adk_wrapped",
+        "TARGET_DUCKDB_INTERMEDIATE_FILENAME": "adk_wrapped_full",
+        "VSCODE_WORKSPACE": "${workspaceFolder}",
+    },
 }
