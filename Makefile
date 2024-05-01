@@ -1,7 +1,9 @@
 run:
-	cd sql_prep && dbt run
+	cd greybox_conversion/transform && dbt run
 test:
-	cd sql_prep && dbt test
+	cd greybox_conversion/transform && dbt test
+build:
+	cd greybox_conversion/transform && dbt build
 adk:
 	docker-compose up -d
 logs:
@@ -18,4 +20,4 @@ deploy:
 	fly deploy frontend/
 	echo "You need to manually deploy the database."
 
-.PHONY: run backend frontend setup adk logs deploy
+.PHONY: run test build backend frontend setup adk logs deploy
