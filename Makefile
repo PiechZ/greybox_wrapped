@@ -5,9 +5,9 @@ test:
 build:
 	cd greybox_conversion/transform && dbt build
 adk:
-	docker-compose up -d
+	docker-compose -f docker-compose.app.yml up -d
 logs:
-	docker-compose logs -f
+	docker-compose -f docker-compose.app.yml logs -f
 backend:
 	cd backend && uvicorn src.app:app --reload --port 8765
 frontend:
