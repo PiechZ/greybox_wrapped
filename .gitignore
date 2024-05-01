@@ -172,6 +172,3 @@ data/adk_wrapped.db.wal
 
 # MacOS
 .DS_Store
-
-# Meltano
-*.lock
