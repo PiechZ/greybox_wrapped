@@ -77,3 +77,7 @@ models:
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__vazena_pomoc
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__specialist
+    description: >
+      Debatér dostal více bodů mimo standardní debatní akce než na nich.
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
