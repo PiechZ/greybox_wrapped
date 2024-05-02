@@ -1,8 +1,6 @@
 name: Test ELT pipeline
 on:
     pull_request:
-        branches:
-            - master
         paths:
             - 'greybox_conversion/**'
 jobs:
