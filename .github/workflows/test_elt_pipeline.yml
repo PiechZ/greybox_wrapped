@@ -18,8 +18,12 @@ jobs:
                   python -m pip install --upgrade pip
                   pip install -r greybox_conversion/requirements.txt
                   pip install meltano==3.4.0
-            - name: Run ELT pipeline
+            - name: Install Meltano and its taps/targets
               run: |
                   cd greybox_conversion/
                   meltano install
             # TODO: Mock out MySQL dump file and DuckDB file
+            # - name: Run ELT pipeline
+            #   run: |
+            #       cd greybox_conversion/
+            #       meltano elt tap-mysql target-duckdb dbt-duckdb:build --full-refresh --force
