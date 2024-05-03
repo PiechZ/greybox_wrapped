@@ -94,6 +94,7 @@ plugins:
   - name: target-duckdb
     variant: jwills
     pip_url: target-duckdb~=0.5
+    
     config:
       filepath: output/${TARGET_DUCKDB_INTERMEDIATE_FILENAME}.db
       default_target_schema: debatovanicz
