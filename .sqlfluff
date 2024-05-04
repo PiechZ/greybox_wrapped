@@ -3,4 +3,4 @@ dialect = duckdb
 templater = dbt
 
 [sqlfluff:templater:dbt]
-project_dir = ./sql_prep
+project_dir = ./greybox_conversion/transform
