@@ -28,7 +28,7 @@ achievement as (
         end as achievement_text
     from languages_per_debater
     where
-        clovek_id is not null
+        clovek_id is not NULL
         and pocet_jazyku > 1
 ),
 
@@ -45,7 +45,7 @@ final as (
     from
         achievement
     where
-        achievement_text is not null
+        achievement_text is not NULL
 )
 
 select * from final

@@ -22,14 +22,15 @@ final as (
         'Štěstí přeje připraveným' as achievement_name,
         'Vyhrál/a jsi víc než 60% debat na oficiální připravenou tezi.' as achievement_description,
         json_object(
-            'win_rate', win_rate, 
+            'win_rate', win_rate,
             'total_official_debates', total_official_debates
         ) as achievement_data,
         'binary' as achievement_type,
         3 as achievement_priority
     from achievement_base
-    where win_rate > 0.6
-    and total_official_debates > 4
+    where
+        win_rate > 0.6
+        and total_official_debates > 4
 )
 
 select * from final

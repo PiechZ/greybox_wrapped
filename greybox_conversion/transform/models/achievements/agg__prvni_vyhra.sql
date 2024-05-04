@@ -1,20 +1,20 @@
-WITH base AS (
-    SELECT * FROM {{ ref('base__debater_debata') }}
+with base as (
+    select * from {{ ref('base__debater_debata') }}
 ),
 
-newbies AS (
-    SELECT * from base
-    RIGHT JOIN {{ ref('base__newbies') }} using (clovek_id)
+newbies as (
+    select base.* from base
+    right join {{ ref('base__newbies') }} using (clovek_id)
 ),
 
-vyhry AS (
-    SELECT
+vyhry as (
+    select
         clovek_id,
         school_year,
-        debate_date,
-    FROM newbies
-    WHERE is_winner = true
-    ORDER BY debate_date
+        debate_date
+    from newbies
+    where is_winner = TRUE
+    order by debate_date
 ),
 
 /*achievement AS (
@@ -26,22 +26,22 @@ vyhry AS (
     GROUP BY clovek_id
 ),*/
 
-achievement AS (
-    SELECT DISTINCT ON (clovek_id) *
-    FROM vyhry
+achievement as (
+    select distinct on (clovek_id) *
+    from vyhry
 ),
 
-final AS ( 
-    SELECT    
+final as (
+    select
         clovek_id,
         school_year,
         debate_date,
-        'První výhra' AS achievement_name,
-        'Letos se ti povedlo dosáhnout první výhry, a to ' || strftime(debate_date, '%d. %m. %Y') || '!' AS achievement_description,
-        'achievement_prvni_vyhra/' || clovek_id || '/' || school_year AS achievement_id,
-        'binary' AS achievement_type,
+        'První výhra' as achievement_name,
+        'Letos se ti povedlo dosáhnout první výhry, a to ' || strftime(debate_date, '%d. %m. %Y') || '!' as achievement_description,
+        'achievement_prvni_vyhra/' || clovek_id || '/' || school_year as achievement_id,
+        'binary' as achievement_type,
         3 as achievement_priority
-    FROM achievement
+    from achievement
 )
 
-SELECT * FROM final
+select * from final

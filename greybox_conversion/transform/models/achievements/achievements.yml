@@ -28,8 +28,8 @@ models:
           - not_null
   - name: agg__gastarbeiter
     description: >
-      Debatéři, kteří debatovali alespoň jednou se členy jiných klubů ve 
-      stejném týmu. (Ocenění dostávají jen ti, kteří svůj klub zastupovali 
+      Debatéři, kteří debatovali alespoň jednou se členy jiných klubů ve
+      stejném týmu. (Ocenění dostávají jen ti, kteří svůj klub zastupovali
       sami, ne ti, kteří byli "v převaze".)
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__lepsi_nez_prumer
