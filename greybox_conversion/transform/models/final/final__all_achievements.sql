@@ -1,10 +1,10 @@
-{% 
+{#
     set achievement_relations = dbt_utils.get_relations_by_pattern(
         'adk_wrapped',
         'agg__%',
         exclude=[]
     )
-%}
+#}
 with all_achievements_unioned as (
     {{
         dbt_utils.union_relations(
@@ -42,16 +42,13 @@ final as (
         achievement_id,
         achievement_name,
         achievement_description,
-        case when achievement_data is null 
-            then json_object()
-            else achievement_data
-        end as achievement_data,
+        coalesce(achievement_data, json_object()) as achievement_data,
         achievement_type,
         achievement_priority,
         -- Grab internal name of achievement as identifier for the slide image
         regexp_extract(_dbt_source_relation, '"agg__([^"]+)"$', 1) as achievement_image
     from all_achievements_unioned
-    where achievement_id is not null
+    where achievement_id is not NULL
 )
 
 select * from final

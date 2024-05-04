@@ -3,13 +3,16 @@ dialect = duckdb
 templater = jinja
 # allow mixed-up column order, `using`, long lines, right joins
 exclude_rules = ST06,ST07,LT05,CV08
+; ignore = templating
 
 [sqlfluff:templater:dbt]
+apply_dbt_builtins = True
 project_dir = ./greybox_conversion/transform/
 
 [sqlfluff:templater:jinja]
 apply_dbt_builtins = True
 load_macros_from_path = ./greybox_conversion/transform/macros
+library_path = ./misc/sqlfluff_mocks
 
 [sqlfluff:indentation]
 indent_unit = space
