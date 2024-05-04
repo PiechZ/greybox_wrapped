@@ -11,8 +11,8 @@ repos:
 - repo: https://github.com/dbt-checkpoint/dbt-checkpoint
   rev: v2.0.1
   hooks:
-    - id: dbt-deps
-      files: ^greybox_conversion/transform/
+    # - id: dbt-deps
+    #   files: ^greybox_conversion/transform/
     - id: dbt-parse
       files: ^greybox_conversion/transform/
     - id: dbt-docs-generate
@@ -37,15 +37,15 @@ repos:
     # Run the formatter.
     - id: ruff-format
 
-# - repo: https://github.com/sqlfluff/sqlfluff
-#   rev: 3.0.5
-#   hooks:
-#     - id: sqlfluff-lint
-#       additional_dependencies:
-#         - "dbt-duckdb==1.7.0"
-#         - "sqlfluff-templater-dbt==3.0.5"
-#     - id: sqlfluff-fix
-#       additional_dependencies:
-#         - "dbt-duckdb==1.7.0"
-#         - "sqlfluff-templater-dbt==3.0.5"
-#       # args: [--config, "./pyproject.toml"]
+- repo: https://github.com/sqlfluff/sqlfluff
+  rev: 3.0.5
+  hooks:
+    - id: sqlfluff-lint
+      additional_dependencies:
+        - "dbt-duckdb==1.7.0"
+        - "sqlfluff-templater-dbt==3.0.5"
+    - id: sqlfluff-fix
+      additional_dependencies:
+        - "dbt-duckdb==1.7.0"
+        - "sqlfluff-templater-dbt==3.0.5"
+      # args: [--config, "./pyproject.toml"]

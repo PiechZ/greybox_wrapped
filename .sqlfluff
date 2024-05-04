@@ -1,6 +1,21 @@
 [sqlfluff]
 dialect = duckdb
-templater = dbt
+templater = jinja
+# allow mixed-up column order, `using`, and long lines
+exclude_rules = ST06,ST07,LT05
 
 [sqlfluff:templater:dbt]
-project_dir = ./greybox_conversion/transform
+project_dir = ./greybox_conversion/transform/
+
+[sqlfluff:templater:jinja]
+apply_dbt_builtins = True
+load_macros_from_path = ./greybox_conversion/transform/macros
+
+[sqlfluff:indentation]
+indent_unit = space
+tab_space_size = 4
+; indented_joins = True
+; indented_ctes = True
+
+[sqlfluff:rules:references.consistent]
+single_table_references = unqualified
