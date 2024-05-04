@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "redhat.vscode-yaml",
-        "innoverio.vscode-dbt-power-user"
+        "innoverio.vscode-dbt-power-user",
+        "charliermarsh.ruff"
     ]
 }

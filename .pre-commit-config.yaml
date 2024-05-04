@@ -1,0 +1,50 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.5.0
+  hooks:
+    - id: check-yaml
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+    - id: check-merge-conflict
+
+
+- repo: https://github.com/dbt-checkpoint/dbt-checkpoint
+  rev: v2.0.1
+  hooks:
+    - id: dbt-deps
+      files: ^greybox_conversion/transform/
+    - id: dbt-parse
+      files: ^greybox_conversion/transform/
+    - id: dbt-docs-generate
+      files: ^greybox_conversion/transform/
+    - id: dbt-run
+      files: ^greybox_conversion/transform/
+    - id: dbt-test
+      files: ^greybox_conversion/transform/
+    - id: check-script-semicolon
+      files: ^greybox_conversion/transform/
+    # - id: check-script-has-no-table-name
+    # - id: check-model-has-description
+
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  # Ruff version.
+  rev: v0.4.3
+  hooks:
+    # Run the linter.
+    - id: ruff
+      args: [ --fix ]
+    # Run the formatter.
+    - id: ruff-format
+
+- repo: https://github.com/sqlfluff/sqlfluff
+  rev: 3.0.5
+  hooks:
+    - id: sqlfluff-lint
+      additional_dependencies:
+        - "dbt-duckdb"
+        - "sqlfluff-templater-dbt"
+    - id: sqlfluff-fix
+      additional_dependencies:
+        - "dbt-duckdb"
+        - "sqlfluff-templater-dbt"
+      # args: [--config, "./pyproject.toml"]
