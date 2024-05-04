@@ -2,7 +2,7 @@ with debates_per_language as (
     select
         clovek_id,
         school_year,
-        language,
+        lang,
         count() as pocet_debat
     from {{ ref('base__debater_debata') }}
     group by 1, 2, 3
@@ -22,14 +22,14 @@ achievement as (
         clovek_id,
         school_year,
         pocet_jazyku,
-        case 
+        case
             when pocet_jazyku > 2 then 'multilingvní'
             when pocet_jazyku > 1 then 'bilingvní'
-            else null
         end as achievement_text
     from languages_per_debater
-    where clovek_id is not null
-    and pocet_jazyku > 1
+    where
+        clovek_id is not null
+        and pocet_jazyku > 1
 ),
 
 final as (

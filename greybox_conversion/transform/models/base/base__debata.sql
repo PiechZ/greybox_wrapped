@@ -9,10 +9,15 @@ debates_in_years as (
     from debates
 ),
 
+raw_motions as (
+    select * from {{ source('raw', 'teze') }}
+),
+
 motions as (
     select
-    *, {{ ref('official_teze_id') }}.teze_id is not null as is_official_motion
-    from {{ source('raw', 'teze') }}
+        raw_motions.*,
+        {{ ref('official_teze_id') }}.teze_id is not null as is_official_motion
+    from raw_motions
     left join {{ ref('official_teze_id') }} using (teze_id)
 ),
 
@@ -29,7 +34,7 @@ leagues as (
 ),
 
 judges as (
-    select 
+    select
         clovek_id,
         debata_id,
         rozhodnuti as has_voted_affirmative,
@@ -51,8 +56,7 @@ ballots as (
 -- The above CTE does not return debates that have no judges, so we'll keep
 -- a list of judgeless debate_ids to join back later
 ballotless_debates as (
-    select 
-        debates.debata_id
+    select debates.debata_id
     from debates
     left join ballots using (debata_id)
     where ballots.debata_id is null
@@ -63,7 +67,7 @@ single_ballot_debates as (
         ballots.debata_id,
         judges.has_voted_affirmative as is_affirmative_win,
         judges.is_persuasive as is_persuasive_win,
-        FALSE as is_draw,
+        false as is_draw,
         case
             when judges.has_voted_affirmative and judges.is_persuasive then 3
             when judges.has_voted_affirmative and not judges.is_persuasive then 2
@@ -80,7 +84,7 @@ single_ballot_debates as (
 
 multi_ballot_debates as (
     select
-        ballots.debata_id,
+        debata_id,
         affirmative_ballots > negative_ballots as is_affirmative_win,
         affirmative_ballots = 0 or negative_ballots = 0 as is_persuasive_win,
         affirmative_ballots = negative_ballots as is_draw,
@@ -95,15 +99,15 @@ multi_ballot_debates as (
         negative_ballots,
         total_ballots as judge_count
     from ballots
-    where ballots.total_ballots > 1
+    where total_ballots > 1
 ),
 
 no_ballot_debates as (
     select
-        ballotless_debates.debata_id,
-        FALSE as is_affirmative_win,
-        FALSE as is_persuasive_win,
-        TRUE as is_draw,
+        debata_id,
+        false as is_affirmative_win,
+        false as is_persuasive_win,
+        true as is_draw,
         1.5 as affirmative_ballots_normalized,
         0 as affirmative_ballots,
         0 as negative_ballots,
@@ -125,7 +129,7 @@ final as (
         3 - all_debates.affirmative_ballots_normalized as negative_ballots_normalized,
         debates_in_years.datum as debate_date,
         debates_in_years.school_year,
-        motions.jazyk as language,
+        motions.jazyk as lang,
         motions.tx as motion_text,
         motions.tx_short as motion_short,
         motions.is_official_motion,

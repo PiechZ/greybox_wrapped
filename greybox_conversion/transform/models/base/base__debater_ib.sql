@@ -1,5 +1,5 @@
 with debate_activity as (
-    select 
+    select
         clovek_id,
         rocnik as school_year,
         -- debata_id,
