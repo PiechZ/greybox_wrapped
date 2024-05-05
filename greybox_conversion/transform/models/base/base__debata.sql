@@ -16,7 +16,7 @@ raw_motions as (
 motions as (
     select
         raw_motions.*,
-        {{ ref('official_teze_id') }}.teze_id is not null as is_official_motion
+        {{ ref('official_teze_id') }}.teze_id is not NULL as is_official_motion
     from raw_motions
     left join {{ ref('official_teze_id') }} using (teze_id)
 ),
@@ -59,7 +59,7 @@ ballotless_debates as (
     select debates.debata_id
     from debates
     left join ballots using (debata_id)
-    where ballots.debata_id is null
+    where ballots.debata_id is NULL
 ),
 
 single_ballot_debates as (
@@ -67,7 +67,7 @@ single_ballot_debates as (
         ballots.debata_id,
         judges.has_voted_affirmative as is_affirmative_win,
         judges.is_persuasive as is_persuasive_win,
-        false as is_draw,
+        FALSE as is_draw,
         case
             when judges.has_voted_affirmative and judges.is_persuasive then 3
             when judges.has_voted_affirmative and not judges.is_persuasive then 2
@@ -105,9 +105,9 @@ multi_ballot_debates as (
 no_ballot_debates as (
     select
         debata_id,
-        false as is_affirmative_win,
-        false as is_persuasive_win,
-        true as is_draw,
+        FALSE as is_affirmative_win,
+        FALSE as is_persuasive_win,
+        TRUE as is_draw,
         1.5 as affirmative_ballots_normalized,
         0 as affirmative_ballots,
         0 as negative_ballots,
@@ -133,8 +133,8 @@ final as (
         motions.tx as motion_text,
         motions.tx_short as motion_short,
         motions.is_official_motion,
-        debates_in_years.turnaj_id is not null as is_tournament,
-        debates_in_years.soutez_id is not null as is_competition,
+        debates_in_years.turnaj_id is not NULL as is_tournament,
+        debates_in_years.soutez_id is not NULL as is_competition,
         leagues.nazev as league_name,
         -- tournaments.nazev as tournament_name,
         competitions.nazev as competition_name
