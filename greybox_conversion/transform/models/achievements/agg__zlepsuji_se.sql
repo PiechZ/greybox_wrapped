@@ -1,38 +1,38 @@
-WITH base AS (
-    SELECT * FROM {{ ref('base__debater_debata') }}
+with base as (
+    select * from {{ ref('base__debater_debata') }}
 ),
 
-newbies AS (
-    SELECT * from base
-    RIGHT JOIN {{ ref('base__newbies') }} using (clovek_id)
+newbies as (
+    select base.* from base
+    right join {{ ref('base__newbies') }} using (clovek_id)
 ),
 
-kidy_malych_kidu AS (
-    SELECT
+kidy_malych_kidu as (
+    select
+        clovek_id,
+        school_year,
+        debate_date
+    from newbies
+    where kidy > 75
+    order by debate_date
+),
+
+achievement as (
+    select distinct on (clovek_id) *
+    from kidy_malych_kidu
+),
+
+final as (
+    select
         clovek_id,
         school_year,
         debate_date,
-    FROM newbies
-    WHERE kidy > 75
-    ORDER BY debate_date
-),
-
-achievement AS (
-    SELECT DISTINCT ON (clovek_id) *
-    FROM kidy_malych_kidu
-),
-
-final AS ( 
-    SELECT    
-        clovek_id,
-        school_year,
-        debate_date,
-        'Zlepšuji se.' AS achievement_name,
-        'Gratulujeme, zlepšuješ se! Letos se ti povedlo mít první řeč s více než 75 řečnickými body, a to ' || strftime(debate_date, '%d. %m. %Y') || '!' AS achievement_description,
-        'achievement_zlepsuji_se/' || clovek_id || '/' || school_year AS achievement_id,
-        'binary' AS achievement_type,
-        2 AS achievement_priority
-    FROM achievement
+        'Zlepšuji se.' as achievement_name,
+        'Gratulujeme, zlepšuješ se! Letos se ti povedlo mít první řeč s více než 75 řečnickými body, a to ' || strftime(debate_date, '%d. %m. %Y') || '!' as achievement_description,
+        'achievement_zlepsuji_se/' || clovek_id || '/' || school_year as achievement_id,
+        'binary' as achievement_type,
+        2 as achievement_priority
+    from achievement
 )
 
-SELECT * FROM final
+select * from final

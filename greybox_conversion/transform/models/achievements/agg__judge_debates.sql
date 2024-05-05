@@ -1,19 +1,19 @@
-WITH debate_stats AS (
-    SELECT 
-        clovek_id, 
+with debate_stats as (
+    select
+        clovek_id,
         school_year,
-        COUNT(*) AS debate_count,
+        COUNT(*) as debate_count,
         COUNT(*) * 1.5 as hour_count
-    FROM 
+    from
         {{ ref('base__rozhodci_debata') }}
-    GROUP BY 
+    group by
         clovek_id,
         school_year
 ),
 
 summary_characteristics as (
     select
-        debate_stats.*,
+        *,
         case
             when hour_count <= 3 then 'příjemný film (a pak o něm napsat recenzi)'
             when hour_count <= 6 then 'pořádný spánek (a pak napsat argumentativní VŠ esej)'
@@ -28,19 +28,19 @@ summary_characteristics as (
     from debate_stats
 ),
 
-final AS (
-    SELECT 
-        clovek_id, 
+final as (
+    select
+        clovek_id,
         school_year,
         {{ make_achievement_id('judge_debates') }},
         'Rozhodl/a jsi ' || debate_count || ' debat!' as achievement_name,
         'Za tu dobu sis mohl/a užít ' || activity || '.' as achievement_description,
-        json_object('debate_count', debate_count, 'hour_count', hour_count) as achievement_data,
+        JSON_OBJECT('debate_count', debate_count, 'hour_count', hour_count) as achievement_data,
         2 as achievement_priority,
         'numeric' as achievement_type
-    FROM 
+    from
         summary_characteristics
-    WHERE activity is not null
+    where activity is not NULL
 )
 
-SELECT * FROM final
+select * from final

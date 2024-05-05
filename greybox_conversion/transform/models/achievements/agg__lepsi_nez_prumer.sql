@@ -1,25 +1,26 @@
-WITH achievement AS (
-    SELECT
+with achievement as (
+    select
         clovek_id,
         school_year,
-        COUNT() AS pocet_debat,
-    FROM {{ ref('base__debater_debata') }}
-    WHERE kidy > 75
-    AND school_year is not NULL
-    GROUP BY clovek_id, school_year
+        COUNT() as pocet_debat
+    from {{ ref('base__debater_debata') }}
+    where
+        kidy > 75
+        and school_year is not NULL
+    group by clovek_id, school_year
 ),
 
-final AS(
-    SELECT
+final as (
+    select
         clovek_id,
         school_year,
-        'Lepší než průměr' AS achievement_name,
-        'Gratuluji, povedlo se ti překonat hranici 75 bodů v ' || pocet_debat || ' debatách!' AS achievement_description,
-        'achievement_lepsi_nez_prumer/' || clovek_id || '/' || school_year AS achievement_id,
-        'numeric' AS achievement_type,
+        'Lepší než průměr' as achievement_name,
+        'Gratuluji, povedlo se ti překonat hranici 75 bodů v ' || pocet_debat || ' debatách!' as achievement_description,
+        'achievement_lepsi_nez_prumer/' || clovek_id || '/' || school_year as achievement_id,
+        'numeric' as achievement_type,
         3 as achievement_priority
-    FROM achievement
+    from achievement
 
 )
 
-SELECT * FROM final
+select * from final

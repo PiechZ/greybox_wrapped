@@ -25,7 +25,22 @@ repos:
     # - id: check-script-semicolon
     #   files: ^greybox_conversion/transform/
     # - id: check-script-has-no-table-name
-    # - id: check-model-has-description
+    - id: check-model-has-properties-file
+      files: ^greybox_conversion/transform/models/
+      args: [ --manifest, greybox_conversion/.meltano/manifest.json ]
+    - id: check-model-has-description
+      files: ^greybox_conversion/transform/models/
+      exclude: .meltano*
+      args: [ --manifest, greybox_conversion/.meltano/manifest.json ]
+    - id: check-model-columns-have-desc
+      files: ^greybox_conversion/transform/models/base/
+      args: [ --manifest, greybox_conversion/.meltano/manifest.json ]
+    - id: check-model-has-all-columns
+      files: ^greybox_conversion/transform/models/base/
+      args: [ --manifest, greybox_conversion/.meltano/manifest.json, --catalog, greybox_conversion/.meltano/catalog.json ]
+    - id: check-model-has-tests
+      files: ^greybox_conversion/transform/models/achievements/
+      args: [ --manifest, greybox_conversion/.meltano/manifest.json, --test-cnt, "3", -- ]
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
   # Ruff version.

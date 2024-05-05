@@ -15,7 +15,7 @@ victory_window as (
             partition by clovek_id, school_year
             order by debate_date
             rows between {{ victory_window - 1 }} preceding and current row
-        ) as victories,
+        ) as victories
     from base
 ),
 

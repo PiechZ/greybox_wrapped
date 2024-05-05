@@ -2,6 +2,8 @@ version: 2
 
 models:
   - name: agg__prehlasovan
+    description: >
+      Rozhodčí, kteří byli přehlasováni panelem ostatních rozhodčích.
     columns: &STANDARD_ACHIEVEMENT_COLUMNS
       - name: clovek_id
         tests:
@@ -28,29 +30,51 @@ models:
           - not_null
   - name: agg__gastarbeiter
     description: >
-      Debatéři, kteří debatovali alespoň jednou se členy jiných klubů ve 
-      stejném týmu. (Ocenění dostávají jen ti, kteří svůj klub zastupovali 
+      Debatéři, kteří debatovali alespoň jednou se členy jiných klubů ve
+      stejném týmu. (Ocenění dostávají jen ti, kteří svůj klub zastupovali
       sami, ne ti, kteří byli "v převaze".)
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__lepsi_nez_prumer
+    description: >
+      Debatér zaznamenal alespoň jeden výsledek nad 75.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__ultimatni_kidy
+    description: >
+      Debatér zaznamenal alespoň jeden výsledek nad 90.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__multilingvni
+    description: >
+      Debatér debatoval v alespoň dvou jazycích.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__dobry_recnik
+    description: >
+      Uděleno *každému* debatérovi se záznamem průměrných řečnických bodů a počtu debat.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__prvni_vyhra
+    description: >
+      Pro nováčky, kteří v této sezóně zaznamenali svou první výhru.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__talent
+    description: >
+      Pro nováčky, kteří mají ve své první sezóně průměr nad 75 bodů.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__dotknout_se_hvezd
+    description: >
+      Debatér zaznamenal alespoň jeden výsledek nad 85.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__zlepsuji_se
+    description: >
+      Za nováčkovu první řeč ohodnocenou více jak 75 body.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__sberatel_debat
+    description: >
+      Pro *každého* debatéra, ale s jiným textem v závislosti na tom, kolik
+      debat absolvoval.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__lpw_count
+    description: >
+      Pro debatéra, který alespoň jednou vyhrál v debatě, ve které jeho tým
+      dostal v součtu méně řečnických bodů než tým soupeře.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__neporazitelny
     description: >
@@ -58,10 +82,17 @@ models:
       ale lze flexibilně měnit.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__poprve_nejlepsi
+    description: >
+      Pro nováčky, kteří se poprvé stali nejlépe hodnoceným řečníkem debaty.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__best_speaker_role
+    description: >
+      Nejlepší řečník roku podle bodů získaných jen na konkrétní řečnické roli.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__favorite_role
+    description: >
+      Spočítaná oblíbená řečnická role v daném roce (tj. v jaké roli strávil/a
+      nejvíce debat).
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
 
   - name: agg__pripravenost
@@ -70,10 +101,22 @@ models:
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
 
   - name: agg__turnajovy_zavislak
+    description: >
+      Uděleno každému, kdo se zúčastnil/a alespoň jednoho turnaje - s jiným
+      textem na základě toho, kolikrát se zúčastnil/a.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__first_judge
+    description: >
+      Uděleno každému, kdo rozhodl svou první debatu.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__judge_debates
+    description: >
+      Uděleno každému rozhodčímu na základě toho, kolik debat rozhodl - s jiným
+      textem na základě toho, kolik času a normostránek odhadujeme, že do debat
+      tento rok investoval/a.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__vazena_pomoc
+    description: >
+      Uděleno rozhodčím, kteří tento rok jeli na alespoň jeden turnaj - s jiným
+      textem na základě toho, kolika turnajů se zúčastnili.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS

@@ -1,48 +1,48 @@
-WITH base AS (
-    SELECT * FROM {{ ref('base__debater_debata') }}
+with base as (
+    select * from {{ ref('base__debater_debata') }}
 ),
 
-prepare_hours AS(
-    SELECT
+prepare_hours as (
+    select
         clovek_id,
         school_year,
-        COUNT(*) * 2 AS hours_debated
-    FROM base
-    WHERE school_year IS NOT NULL
-    GROUP BY clovek_id, school_year
+        COUNT(*) * 2 as hours_debated
+    from base
+    where school_year is not NULL
+    group by clovek_id, school_year
 ),
 
-achievement AS (
-    SELECT *,
-       CASE
+achievement as (
+    select
+        *,
+        case
         --WHEN hours_debated > 350 THEN 'naučit se nový jazyk na úroveň B1'
         --WHEN hours_debated > 200 THEN 'dohrát Total War: Empire - Definitive Edition'
         --WHEN hours_debated > 100 THEN 'dokončit průměrný online kurz na Udemy'
         -- THESE ARE IRRELEVANT SINCE NOONE HAS THAT MUCH DEBATES
-        WHEN hours_debated >= 60 THEN 'zhlédnout všechny díly seriálu Breaking Bad'
-        WHEN hours_debated >= 40 THEN 'zaletět na otočku do Japonska'
-        WHEN hours_debated >= 32 THEN 'dohrát Cyberpunk 2077'
-        WHEN hours_debated >= 24 THEN 'zhlédnout všechny díly seriálu Comeback'
-        WHEN hours_debated >= 16 THEN 'projet všech 254 stanic metra v Dillí'
-        WHEN hours_debated >= 8 THEN 'odpracovat jednu směnu'
-        ELSE NULL
-       END AS achievement_decider 
-    FROM prepare_hours
+            when hours_debated >= 60 then 'zhlédnout všechny díly seriálu Breaking Bad'
+            when hours_debated >= 40 then 'zaletět na otočku do Japonska'
+            when hours_debated >= 32 then 'dohrát Cyberpunk 2077'
+            when hours_debated >= 24 then 'zhlédnout všechny díly seriálu Comeback'
+            when hours_debated >= 16 then 'projet všech 254 stanic metra v Dillí'
+            when hours_debated >= 8 then 'odpracovat jednu směnu'
+        end as achievement_decider
+    from prepare_hours
 
 ),
 
-final AS (
-    SELECT
+final as (
+    select
         clovek_id,
         school_year,
         hours_debated,
-        'Sběratel debat' AS achievement_name,
-        'V této sezóně se ti podařilo debatovat přibližně ' || hours_debated || ' hodin. Za tu dobu se by se dalo například ' || achievement_decider || '. Zlepšovat se v debatování však dlouhodobně může být ještě užitečnější!' AS achievement_description,
-        'achievement_sberatel_debat/' || clovek_id || '/' || school_year AS achievement_id,
-        'numeric' AS achievement_type,
-        1 AS achievement_priority
-    FROM achievement
-    WHERE achievement_decider IS NOT NULL
+        'Sběratel debat' as achievement_name,
+        'V této sezóně se ti podařilo debatovat přibližně ' || hours_debated || ' hodin. Za tu dobu se by se dalo například ' || achievement_decider || '. Zlepšovat se v debatování však dlouhodobně může být ještě užitečnější!' as achievement_description,
+        'achievement_sberatel_debat/' || clovek_id || '/' || school_year as achievement_id,
+        'numeric' as achievement_type,
+        1 as achievement_priority
+    from achievement
+    where achievement_decider is not NULL
 )
 
-SELECT * FROM final
+select * from final
