@@ -16,7 +16,7 @@ class Database:
         # This is not SQL injection because Pydantic/FastAPI guarantees
         # clovek_id passed in URI is int
         achievements = self.connection.sql(
-            "SELECT * FROM adk_wrapped.adk_wrapped.final__current_achievements "
+            "SELECT * FROM adk_wrapped.main.final__current_achievements "
             f"WHERE clovek_id = {clovek_id} "
             "ORDER BY achievement_priority DESC"
         ).df()

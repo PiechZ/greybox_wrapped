@@ -1,0 +1,212 @@
+version: 2
+
+models:
+  - name: base__debata
+    description: >
+      Přepsaný model debaty tak, aby z něj šlo spolehlivě vyčíst přesvědčivost
+      vítězství/prohry a množství rozhodčích. Granularita: jedna debata.
+    tests:
+      - dbt_utils.equal_rowcount:
+          compare_model: source('raw', 'debata')
+    columns:
+      - name: debata_id
+        description: PK
+        tests:
+          - unique
+          - not_null
+      - &is_affirmative_win
+        name: is_affirmative_win
+        description: Vyhrála strana afirmativní?
+      - &is_persuasive_win
+        name: is_persuasive_win
+        description: Byla debata vyhrána přesvědčivě?
+      - &is_draw
+        name: is_draw
+        description: Skončila debata remízou?
+      - &affirmative_ballots_normalized
+        name: affirmative_ballots_normalized
+        description: Normalizované množství afirmativních ballotů
+        tests:
+          - not_null
+      - &negative_ballots_normalized
+        name: negative_ballots_normalized
+        description: >
+          Normalizované množství negativních ballotů
+          (3 - affirmative_ballots_normalized)
+        tests:
+          - not_null
+      - &affirmative_ballots
+        name: affirmative_ballots
+        description: Množství hlasů rozhodčích pro afirmaci
+      - &negative_ballots
+        name: negative_ballots
+        description: Množství hlasů rozhodčích pro negaci
+      - &debate_date
+        name: debate_date
+        description: Datum debaty
+      - &school_year
+        name: school_year
+        description: První den školního roku, ve kterém se debata odehrála
+      - &judge_count
+        name: judge_count
+        description: Počet rozhodčích v debatě
+        tests:
+          - not_null
+          # TODO: Test, že je to větší než 0
+      - &motion_text
+        name: motion_text
+        description: Text teze debaty
+      - &motion_short
+        name: motion_short
+        description: >
+          Krátký text teze debaty, který by měl být dostatečně výstižný
+          pro zobrazení v tabulce.
+      - &lang
+        name: lang
+        description: Jazyk debaty
+      - &is_official_motion
+        name: is_official_motion
+        description: Byla debata na oficiální daného roku?
+      - &is_competition
+        name: is_competition
+        description: Byla debata součástí jakékoliv soutěže?
+        # TODO: Jaká je definice soutěže?
+      - &competition_name
+        name: competition_name
+        description: Název soutěže, v rámci které se debata odehrála
+      - &is_tournament
+        name: is_tournament
+        description: Byla debata součástí turnaje?
+      - &league_name
+        name: league_name
+        description: Název ligy, v rámci které se debata odehrála
+
+
+  - name: base__rozhodci_debata
+    tests:
+      - dbt_utils.fewer_rows_than:
+          compare_model: source('raw', 'clovek_debata')
+    description: >
+      Základní model, granularita: jeden rozhodčí za každou odrozhodovanou debatu.
+      Nadstavba nad base__debata. Pro popisy nepopsaných sloupců viz base__debata.
+    columns:
+      - name: clovek_id
+        description: Co-PK
+        tests:
+          - not_null
+      - name: debata_id
+        description: Co-PK
+        tests:
+          - not_null
+      - name: has_voted_affirmative
+        description: Hlasoval tento rozhodčí pro stranu afirmativní?
+      - name: judge_rank
+        description: >
+          Pořadí zanesení hlasu do greyboxu (1 typicky indikuje předsedu panelu)
+          mezi soudci této debaty. Ne zcela spolehlivé.
+      - name: judge_seniority
+        description: >
+          Pořadí služebního stáří rozhodčího v greyboxu (souzeno dle clovek_id)
+          mezi soudci této debaty.
+      - *debate_date
+      - *is_affirmative_win
+      - *is_persuasive_win
+      - *is_draw
+      - *affirmative_ballots_normalized
+      - *negative_ballots_normalized
+      - *affirmative_ballots
+      - *negative_ballots
+      - *school_year
+      - *judge_count
+      - *motion_text
+      - *motion_short
+      - *is_official_motion
+      - *lang
+      - *is_competition
+      - *competition_name
+      - *is_tournament
+      - *league_name
+
+
+  - name: base__debater_debata
+    tests:
+      - dbt_utils.fewer_rows_than:
+          compare_model: source('raw', 'clovek_debata')
+    description: >
+      Základní model, granularita: jeden debatér za každou svou debatu.
+      Mělo by nahradit model clovek_debata.
+    columns:
+      - name: clovek_id
+        description: ID člověka.
+      - name: debata_id
+        description: ID debaty.
+      - name: role
+        description: Řečnická role v debatě.
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['a1', 'a2', 'a3', 'n1', 'n2', 'n3']
+      - name: kidy
+        description: Individuální body za řeč.
+        # tests:
+        #   - dbt_expectations.expect_column_values_to_be_between:
+        #       min_value: 50
+        #       max_value: 100
+        #       row_condition: "kidy is not null"
+      - name: is_affirmative_speaker
+        description: Mluvčí má jednu z afirmativních rolí (A1-3)
+      - name: is_winner
+        description: Mluvčí byl na vítězné straně (a debata měla vítěze)
+      - name: klub_id
+        description: Identifikátor původového klubu debatéra
+      - *debate_date
+      - *is_affirmative_win
+      - *is_persuasive_win
+      - *is_draw
+      - *affirmative_ballots_normalized
+      - *negative_ballots_normalized
+      - *affirmative_ballots
+      - *negative_ballots
+      - *school_year
+      - *judge_count
+      - *is_official_motion
+      - *motion_text
+      - *motion_short
+      - *lang
+      - *is_competition
+      - *competition_name
+      - *is_tournament
+      - *league_name
+
+  - name: base__newbies
+    description: >
+      Seznam ID lidí, kteří začali v této sezóně. Pro začátečnické achievementy
+      na něj lze učinit `right join using (clovek_id)`.
+    columns:
+      - name: clovek_id
+        description: ID člověka, pro kterého platí, že začal v této sezóně.
+        tests:
+          - unique
+
+
+  - name: base__debater_ib
+    description: >
+      Základní model, granularita: jeden debatér za každé udělení IB bodů.
+    columns:
+      - name: clovek_id
+        description: ID člověka.
+        tests:
+          - not_null
+      - name: school_year
+        description: Školní rok, ve kterém byly body uděleny.
+        tests:
+          - not_null
+      - name: ibody
+        description: Počet IB bodů udělených za danou okolnost.
+        tests:
+          - not_null
+      - name: activity_type
+        description: Typ aktivity, za kterou byly body uděleny.
+        tests:
+          - accepted_values:
+              values: ['debate', 'other']

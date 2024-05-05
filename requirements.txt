@@ -1,14 +1,17 @@
 # This is an overall requirements file for local development
 
 # Data preparation
-dbt-duckdb ~= 1.4.0
-pandas ~= 1.5.3
+dbt-duckdb ~= 1.7.0
+pandas ~= 2.0
 
 # Data transfer API
 fastapi[all] ~= 0.92.0
 pydantic ~= 1.10.6
-duckdb ~= 0.7.1
+duckdb ~= 0.10.2
 
 # Miscellenea / dev things
 # pip ~= 23.0.1 # not necessary and breaks some things
-black ~= 23.1.0
+pre-commit ~= 3.7.0
+ruff ~= 0.4.3
+sqlfluff ~= 3.0.5
+sqlfluff-templater-dbt ~= 3.0.5

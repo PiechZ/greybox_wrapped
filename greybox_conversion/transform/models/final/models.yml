@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: final__all_achievements
+    description: >
+      A table of all achievements for all years
+    columns: &STANDARD_ACHIEVEMENT_COLUMNS
+      - name: clovek_id
+        description: Unique identifier of a person
+      - name: school_year
+        description: School year in which the achievement was awarded.
+      - name: achievement_id
+        description: >
+          Unique ID of the achievement, typically
+          {achievement_name}/{clovek_id}/{school_year}.
+      - name: achievement_name
+        description: >
+          Name of the achievement. External handler will be looking for an
+          image that shares this name.
+      - name: achievement_description
+        description: >
+          Achievement text. (Maybe will support interpolation with
+          achievement_data?)
+      - name: achievement_data
+        description: >
+          JSON dict of additional meta/data relevant to the given achievement.
+      - name: achievement_priority
+        description: >
+          Integer indicating achievement importance. Higher numbers will be
+          displayed earlier - or, in case of too many achievements, won't be
+          hidden.
+      - name: achievement_type
+        description: >
+          Type of achievement, relevant to the external handler (e.g. what type
+          of slide will be used to display the information)
+        tests:
+          - accepted_values:
+              values:
+                - binary
+                - percentile
+                - numeric
+  - name: final__current_achievements
+    description: >
+      Only the achievements for the year specified in dbt_project.yml
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS

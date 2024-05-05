@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: raw
+    database: "{{ env_var('TARGET_DUCKDB_INTERMEDIATE_FILENAME') }}"
+    schema: debatovanicz
+    tables:
+      - name: clovek
+      - name: clovek_debata
+      - name: debata
+      - name: debata_tym
+      - name: klub
+      - name: tym
+      - name: turnaj
+      - name: liga
+      - name: soutez
+      - name: teze
+      - name: soutez_teze
+      - name: clovek_debata_ibody
+      - name: clovek_ibody

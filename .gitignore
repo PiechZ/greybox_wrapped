@@ -167,3 +167,8 @@ clovek_debata.csv
 #folders
 data/*.db
 data/*.csv
+data/*.sql
+data/*.wal
+
+# MacOS
+.DS_Store

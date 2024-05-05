@@ -1,0 +1,11 @@
+{
+  "plugin_type": "files",
+  "name": "files-dbt-duckdb",
+  "namespace": "files_dbt_duckdb",
+  "variant": "meltano",
+  "label": "dbt DuckDB",
+  "docs": "https://hub.meltano.com/files/files-dbt-duckdb--meltano",
+  "repo": "https://github.com/meltano/files-dbt-duckdb",
+  "pip_url": "git+https://github.com/meltano/files-dbt-duckdb",
+  "logo_url": "https://hub.meltano.com/assets/logos/files/dbt-duckdb.png"
+}
