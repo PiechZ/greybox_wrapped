@@ -9,16 +9,17 @@ debates_in_years as (
     from debates
 ),
 
-raw_motions as (
+motions as (
     select * from {{ source('raw', 'teze') }}
 ),
 
-motions as (
-    select
-        raw_motions.*,
-        {{ ref('official_teze_id') }}.teze_id is not NULL as is_official_motion
-    from raw_motions
-    left join {{ ref('official_teze_id') }} using (teze_id)
+official_motions as (
+    -- We're doing de-duplication here because due to an artifact of the ingest process,
+    -- some official motions are duplicated and re-duplicated in the source data
+    select distinct on (teze_id, soutez_id)
+        *,
+        TRUE as is_official_motion
+    from {{ source('raw', 'soutez_teze') }}
 ),
 
 tournaments as (
@@ -132,7 +133,7 @@ final as (
         motions.jazyk as lang,
         motions.tx as motion_text,
         motions.tx_short as motion_short,
-        motions.is_official_motion,
+        coalesce(official_motions.is_official_motion, FALSE) as is_official_motion,
         debates_in_years.turnaj_id is not NULL as is_tournament,
         debates_in_years.soutez_id is not NULL as is_competition,
         leagues.nazev as league_name,
@@ -143,6 +144,7 @@ final as (
     left join motions using (teze_id)
     left join tournaments using (turnaj_id)
     left join competitions on debates_in_years.soutez_id = competitions.soutez_id
+    left join official_motions on debates_in_years.teze_id = official_motions.teze_id and debates_in_years.soutez_id = official_motions.soutez_id
     left join leagues on tournaments.liga_id = leagues.liga_id
 )
 
