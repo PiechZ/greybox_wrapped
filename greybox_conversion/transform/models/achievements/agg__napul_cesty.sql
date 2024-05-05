@@ -38,7 +38,7 @@ achievement as (
 final as (
     select
         clovek_id,
-        celkem_ib,
+        school_year,
         {{ make_achievement_id('napul_cesty') }},
         'Napůl cesty' as achievement_name,
         'Momentálně jsi za polovinou cesty k bronzovému odznáčku, konkrétně máš ' || celkem_ib || ' IB bodů!' as achievement_description,
