@@ -17,7 +17,7 @@ with tournament_debates as (
 
 achievement as (
     select
-        tournament_debates.*,
+        *,
         case
 
             when num_tournaments = 1 then 'turnajový začátečník'
@@ -45,7 +45,7 @@ final as (
         'binary' as achievement_type
     from
         achievement
-    where characteristic is not null
+    where characteristic is not NULL
 )
 
 select * from final

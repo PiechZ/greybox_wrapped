@@ -1,33 +1,33 @@
-WITH base AS (
-    SELECT * FROM {{ ref('base__debater_debata') }}
+with base as (
+    select * from {{ ref('base__debater_debata') }}
 ),
 
-newbies AS (
-    SELECT * from base
-    RIGHT JOIN {{ ref('base__newbies') }} using (clovek_id)
+newbies as (
+    select base.* from base
+    right join {{ ref('base__newbies') }} using (clovek_id)
 ),
 
-achievement AS (
-    SELECT
+achievement as (
+    select
         clovek_id,
         school_year,
-        AVG(kidy) AS prumerne_kidy,
-        COUNT() AS pocet_debat,
-    FROM newbies
-    GROUP BY clovek_id, school_year
+        AVG(kidy) as prumerne_kidy,
+        COUNT() as pocet_debat
+    from newbies
+    group by clovek_id, school_year
 ),
 
-final AS ( 
-    SELECT    
+final as (
+    select
         clovek_id,
         school_year,
-        'Talent' AS achievement_name,
-        'Gratulujeme, jsi talent! Debatuješ první rok, a v ' || pocet_debat || ' debatách máš průměrně ' || round(prumerne_kidy, 2) || ' řečnických bodů!' AS achievement_description,
-        'achievement_talent/' || clovek_id || '/' || school_year AS achievement_id,
-        'binary' AS achievement_type,
-        5 AS achievement_priority
-    FROM achievement
-    WHERE prumerne_kidy > 75
+        'Talent' as achievement_name,
+        'Gratulujeme, jsi talent! Debatuješ první rok, a v ' || pocet_debat || ' debatách máš průměrně ' || ROUND(prumerne_kidy, 2) || ' řečnických bodů!' as achievement_description,
+        'achievement_talent/' || clovek_id || '/' || school_year as achievement_id,
+        'binary' as achievement_type,
+        5 as achievement_priority
+    from achievement
+    where prumerne_kidy > 75
 )
 
-SELECT * FROM final
+select * from final

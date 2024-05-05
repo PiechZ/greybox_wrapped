@@ -9,6 +9,7 @@
         "TARGET_DUCKDB_FINAL_FILENAME": "adk_wrapped",
         "TARGET_DUCKDB_INTERMEDIATE_FILENAME": "adk_wrapped_full",
         "VSCODE_WORKSPACE": "${workspaceFolder}",
+        "DBT_TARGET_PATH": "${workspaceFolder}/greybox_conversion/.meltano"
     },
     "terminal.integrated.env.windows": {
         // Exact same as above
@@ -19,5 +20,6 @@
         "TARGET_DUCKDB_FINAL_FILENAME": "adk_wrapped",
         "TARGET_DUCKDB_INTERMEDIATE_FILENAME": "adk_wrapped_full",
         "VSCODE_WORKSPACE": "${workspaceFolder}",
+        "DBT_TARGET_PATH": "${workspaceFolder}/greybox_conversion/.meltano"
     },
 }

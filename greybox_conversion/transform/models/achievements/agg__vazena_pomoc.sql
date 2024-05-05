@@ -1,51 +1,51 @@
 -- NOTE: Doesn't actually count up separate tournament_id's because they're not in the base model
 -- -- only approximates the tournament count by counting up the number of tournament debates
-WITH tournament_debates AS (
-    SELECT
+with tournament_debates as (
+    select
         clovek_id,
         school_year,
         count(*) as num_tournament_debates,
         ceil(count(*) / 5) as num_tournaments
-    FROM
+    from
         {{ ref('base__rozhodci_debata') }}
-    WHERE
+    where
         is_tournament
-    GROUP BY
+    group by
         clovek_id,
         school_year
 ),
 
-achievement AS (
-    SELECT
-        tournament_debates.*,
-        CASE
-            WHEN num_tournaments < 1 THEN null
-            WHEN num_tournaments = 1 THEN 'skvělý pomocník'
-            WHEN num_tournaments <= 2 THEN 'vážená pomoc při organizování turnajů'
-            WHEN num_tournaments <= 4 THEN 'srdcař, díky kterému mohou být turnaje tak skvělé. Děkujeme'
-            WHEN num_tournaments <= 6 THEN 'turnajový závislák, díky kterému turnaje mohou probíhat jedna radost. Takové my milujeme'
-            WHEN num_tournaments > 6 THEN 'doslova duše našich turnajů a epická pomoc. Jsme Ti opravdu vděčni'
-        END AS characteristic
-    FROM
+achievement as (
+    select
+        *,
+        case
+            when num_tournaments < 1 then NULL
+            when num_tournaments = 1 then 'skvělý pomocník'
+            when num_tournaments <= 2 then 'vážená pomoc při organizování turnajů'
+            when num_tournaments <= 4 then 'srdcař, díky kterému mohou být turnaje tak skvělé. Děkujeme'
+            when num_tournaments <= 6 then 'turnajový závislák, díky kterému turnaje mohou probíhat jedna radost. Takové my milujeme'
+            when num_tournaments > 6 then 'doslova duše našich turnajů a epická pomoc. Jsme Ti opravdu vděčni'
+        end as characteristic
+    from
         tournament_debates
 ),
 
-final AS (
-    SELECT
+final as (
+    select
         clovek_id,
         school_year,
         {{ make_achievement_id('vazena_pomoc') }},
-        'Díky za pomoc na turnajích!' AS achievement_name,
-        'Děkujeme za pomoc při rozhodování na ' || num_tournaments::integer || ' turnajích. Jsi ' || characteristic || '!' AS achievement_description,
-        1 AS achievement_priority,
+        'Díky za pomoc na turnajích!' as achievement_name,
+        'Děkujeme za pomoc při rozhodování na ' || num_tournaments::integer || ' turnajích. Jsi ' || characteristic || '!' as achievement_description,
+        1 as achievement_priority,
         json_object(
             'num_tournaments', num_tournaments,
             'num_tournament_debates', num_tournament_debates
-        ) AS achievement_data,
-        'binary' AS achievement_type
-    FROM
+        ) as achievement_data,
+        'binary' as achievement_type
+    from
         achievement
-    WHERE characteristic IS NOT NULL
+    where characteristic is not NULL
 )
 
-SELECT * FROM final
+select * from final

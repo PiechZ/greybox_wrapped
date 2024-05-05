@@ -11,4 +11,7 @@ duckdb ~= 0.10.2
 
 # Miscellenea / dev things
 # pip ~= 23.0.1 # not necessary and breaks some things
-black ~= 23.1.0
+pre-commit ~= 3.7.0
+ruff ~= 0.4.3
+sqlfluff ~= 3.0.5
+sqlfluff-templater-dbt ~= 3.0.5

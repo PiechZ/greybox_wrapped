@@ -1,0 +1,66 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.5.0
+  hooks:
+    - id: check-yaml
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+    - id: check-merge-conflict
+
+
+- repo: https://github.com/dbt-checkpoint/dbt-checkpoint
+  rev: v2.0.1
+  hooks:
+    # - id: dbt-deps
+    #   files: ^greybox_conversion/transform/
+    - id: dbt-parse
+      files: ^greybox_conversion/transform/
+    - id: dbt-docs-generate
+      files: ^greybox_conversion/transform/
+    - id: dbt-run
+      files: ^greybox_conversion/transform/
+    - id: dbt-test
+      files: ^greybox_conversion/transform/
+    # FIXME: Needs to access the right target path
+    # - id: check-script-semicolon
+    #   files: ^greybox_conversion/transform/
+    # - id: check-script-has-no-table-name
+    - id: check-model-has-properties-file
+      files: ^greybox_conversion/transform/models/
+      args: [ --manifest, greybox_conversion/.meltano/manifest.json ]
+    - id: check-model-has-description
+      files: ^greybox_conversion/transform/models/
+      exclude: .meltano*
+      args: [ --manifest, greybox_conversion/.meltano/manifest.json ]
+    - id: check-model-columns-have-desc
+      files: ^greybox_conversion/transform/models/base/
+      args: [ --manifest, greybox_conversion/.meltano/manifest.json ]
+    - id: check-model-has-all-columns
+      files: ^greybox_conversion/transform/models/base/
+      args: [ --manifest, greybox_conversion/.meltano/manifest.json, --catalog, greybox_conversion/.meltano/catalog.json ]
+    - id: check-model-has-tests
+      files: ^greybox_conversion/transform/models/achievements/
+      args: [ --manifest, greybox_conversion/.meltano/manifest.json, --test-cnt, "3", -- ]
+
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  # Ruff version.
+  rev: v0.4.3
+  hooks:
+    # Run the linter.
+    - id: ruff
+      args: [ --fix ]
+    # Run the formatter.
+    - id: ruff-format
+
+- repo: https://github.com/sqlfluff/sqlfluff
+  rev: 3.0.5
+  hooks:
+    - id: sqlfluff-lint
+      additional_dependencies:
+        - "dbt-duckdb==1.7.0"
+        - "sqlfluff-templater-dbt==3.0.5"
+    - id: sqlfluff-fix
+      additional_dependencies:
+        - "dbt-duckdb==1.7.0"
+        - "sqlfluff-templater-dbt==3.0.5"
+      # args: [--config, "./pyproject.toml"]

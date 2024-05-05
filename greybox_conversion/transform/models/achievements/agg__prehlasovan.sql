@@ -6,10 +6,10 @@ achievement as (
     select
         clovek_id,
         school_year,
-        count(*) as outvoted_debate_count,
+        count(*) as outvoted_debate_count
     from base
     where
-        judge_count > 1 
+        judge_count > 1
         and not is_draw
         and (
             (is_affirmative_win and not has_voted_affirmative)

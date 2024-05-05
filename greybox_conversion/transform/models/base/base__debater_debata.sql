@@ -1,5 +1,5 @@
 with people as (
-    select 
+    select
         clovek_id,
         klub_id
     from {{ source('raw', 'clovek') }}
@@ -26,7 +26,7 @@ debaters_in_debates as (
 final as (
     select
         debaters_in_debates.*,
-        debates.*,
+        {{ dbt_utils.star(from=ref('base__debata'), except=['debata_id'], relation_alias='debates') }},
         people.klub_id,
         not debates.is_draw and (
             (debaters_in_debates.is_affirmative_speaker and debates.is_affirmative_win)

@@ -1,6 +1,5 @@
 with all_achievements as (
-    select
-        *
+    select *
     from {{ ref('final__all_achievements') }}
 ),
 

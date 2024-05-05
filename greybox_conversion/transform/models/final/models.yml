@@ -11,23 +11,23 @@ models:
         description: School year in which the achievement was awarded.
       - name: achievement_id
         description: >
-          Unique ID of the achievement, typically 
+          Unique ID of the achievement, typically
           {achievement_name}/{clovek_id}/{school_year}.
       - name: achievement_name
         description: >
-          Name of the achievement. External handler will be looking for an 
+          Name of the achievement. External handler will be looking for an
           image that shares this name.
       - name: achievement_description
         description: >
-          Achievement text. (Maybe will support interpolation with 
+          Achievement text. (Maybe will support interpolation with
           achievement_data?)
       - name: achievement_data
         description: >
           JSON dict of additional meta/data relevant to the given achievement.
       - name: achievement_priority
         description: >
-          Integer indicating achievement importance. Higher numbers will be 
-          displayed earlier - or, in case of too many achievements, won't be 
+          Integer indicating achievement importance. Higher numbers will be
+          displayed earlier - or, in case of too many achievements, won't be
           hidden.
       - name: achievement_type
         description: >

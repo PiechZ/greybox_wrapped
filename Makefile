@@ -3,7 +3,7 @@ build:
 
 ingest:
 	docker compose -f docker-compose.data_prep.yml down
-	docker volume rm greybox_wrapped_mysql_storage 
+	docker volume rm greybox_wrapped_mysql_storage
 	docker compose -f docker-compose.data_prep.yml up --build --abort-on-container-exit
 
 adk:
@@ -17,6 +17,7 @@ frontend:
 setup:
 	python -m venv env
 	env/Scripts/pip install -r requirements.txt
+	pre-commit install
 deploy:
 	fly deploy backend/
 	fly deploy frontend/
