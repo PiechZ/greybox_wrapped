@@ -1,5 +1,5 @@
 # registry.gitlab.com/meltano/meltano:latest is also available in GitLab Registry
-ARG MELTANO_IMAGE=meltano/meltano:latest
+ARG MELTANO_IMAGE=meltano/meltano:v3.4.0
 FROM $MELTANO_IMAGE
 
 WORKDIR /project

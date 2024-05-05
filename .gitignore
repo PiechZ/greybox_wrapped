@@ -168,7 +168,7 @@ clovek_debata.csv
 data/*.db
 data/*.csv
 data/*.sql
-data/adk_wrapped.db.wal
+data/*.wal
 
 # MacOS
 .DS_Store
