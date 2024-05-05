@@ -120,7 +120,7 @@ models:
       Uděleno rozhodčím, kteří tento rok jeli na alespoň jeden turnaj - s jiným
       textem na základě toho, kolika turnajů se zúčastnili.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
-  - name: agg__IB_fanatik
+  - name: agg__ib_fanatik
     description: Debatér má přes 25 IB bodů za sezónu.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
   - name: agg__napul_cesty
