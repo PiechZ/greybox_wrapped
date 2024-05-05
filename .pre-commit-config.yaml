@@ -26,10 +26,11 @@ repos:
     #   files: ^greybox_conversion/transform/
     # - id: check-script-has-no-table-name
     - id: check-model-has-properties-file
-      files: ^greybox_conversion/transform/
+      files: ^greybox_conversion/transform/models/
       args: [ --manifest, greybox_conversion/.meltano/manifest.json ]
     - id: check-model-has-description
-      files: ^greybox_conversion/transform/
+      files: ^greybox_conversion/transform/models/
+      exclude: .meltano*
       args: [ --manifest, greybox_conversion/.meltano/manifest.json ]
     - id: check-model-columns-have-desc
       files: ^greybox_conversion/transform/models/base/
