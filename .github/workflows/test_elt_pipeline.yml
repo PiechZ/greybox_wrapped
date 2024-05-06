@@ -1,0 +1,29 @@
+name: Test ELT pipeline
+on:
+    pull_request:
+        paths:
+            - 'greybox_conversion/**'
+jobs:
+    test_setup:
+        name: Set up ELT pipeline
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - name: Set up Python 3.8
+              uses: actions/setup-python@v5
+              with:
+                  python-version: 3.9
+            - name: Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  pip install -r greybox_conversion/requirements.txt
+                  pip install meltano==3.4.0
+            - name: Install Meltano and its taps/targets
+              run: |
+                  cd greybox_conversion/
+                  meltano install
+            # TODO: Mock out MySQL dump file and DuckDB file
+            # - name: Run ELT pipeline
+            #   run: |
+            #       cd greybox_conversion/
+            #       meltano elt tap-mysql target-duckdb dbt-duckdb:build --full-refresh --force
