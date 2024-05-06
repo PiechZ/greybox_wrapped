@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: int__debater_ib_per_year
+    description: >
+      Počet IB bodů debatéra posbírané za dané školní období.
+    columns:
+      - name: clovek_id
+        description: ID debatéra.
+        tests:
+          - not_null
+      - name: school_year
+        description: Školní rok, ve kterém byly body uděleny.
+        tests:
+          - not_null
+      - name: rocni_ib
+        description: Počet IB bodů udělených za daný školní rok.
+        tests:
+          - not_null
+  - name: int__debater_cumulative_ib
+    description: >
+      Kumulativní počet IB bodů debatéra.
+    columns:
+      - name: clovek_id
+        description: ID debatéra.
+        tests:
+          - not_null
+      - name: school_year
+        description: Školní rok, do kterého byly body nastřádány (včetně).
+        tests:
+          - not_null
+      - name: celkem_ib
+        description: Celkový počet IB bodů debatéra do daného školního roku (včetně).
+        tests:
+          - not_null
