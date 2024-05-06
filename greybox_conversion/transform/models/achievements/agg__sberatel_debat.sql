@@ -16,15 +16,19 @@ achievement as (
     select
         *,
         case
-        --WHEN hours_debated > 350 THEN 'naučit se nový jazyk na úroveň B1'
-        --WHEN hours_debated > 200 THEN 'dohrát Total War: Empire - Definitive Edition'
-        --WHEN hours_debated > 100 THEN 'dokončit průměrný online kurz na Udemy'
-        -- THESE ARE IRRELEVANT SINCE NOONE HAS THAT MUCH DEBATES
+            when hours_debated > 350 then 'naučit se nový jazyk na úroveň B1'
+            when hours_debated > 200 then 'dohrát Total War: Empire - Definitive Edition'
+            when hours_debated > 100 then 'dokončit průměrný online kurz na Udemy'
+            when hours_debated >= 80 then 'TODO'
+            -- ^ Nobody actually achieves this, but we can tease them as possible goals
             when hours_debated >= 60 then 'zhlédnout všechny díly seriálu Breaking Bad'
             when hours_debated >= 40 then 'zaletět na otočku do Japonska'
-            when hours_debated >= 32 then 'dohrát Cyberpunk 2077'
+            when hours_debated >= 36 then 'TODO'
+            when hours_debated >= 30 then 'dohrát Cyberpunk 2077'
             when hours_debated >= 24 then 'zhlédnout všechny díly seriálu Comeback'
+            when hours_debated >= 20 then 'TODO'
             when hours_debated >= 16 then 'projet všech 254 stanic metra v Dillí'
+            when hours_debated >= 12 then 'TODO'
             when hours_debated >= 8 then 'odpracovat jednu směnu'
         end as achievement_decider
     from prepare_hours
