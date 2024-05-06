@@ -40,6 +40,8 @@ models:
   greybox_transformation:
     base:
       +materialized: view
+    intermediate:
+      +materialized: view
     achievements:
       +materialized: table
     final:
