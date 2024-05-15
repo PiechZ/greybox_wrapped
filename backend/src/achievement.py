@@ -1,11 +1,11 @@
 from pydantic import BaseModel
 from pydantic.types import PositiveInt
-from typing import Any, Literal, Mapping
+from typing import Any, Literal, Mapping, Optional
 
 
 class Achievement(BaseModel):
     clovek_id: PositiveInt
-    school_year: PositiveInt
+    school_year: Optional[PositiveInt]
 
     achievement_id: str
     achievement_name: str
