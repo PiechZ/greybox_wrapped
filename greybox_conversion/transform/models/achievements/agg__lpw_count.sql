@@ -55,7 +55,12 @@ achievement_base as (
     select
         clovek_id,
         school_year,
-        count(*) as lpw_debate_count
+        count(*) as lpw_debate_count,
+        case
+            when count(*) between 1 and 2 then 'Vyhrál/a jsi pár debat navzdory všem předpokladům.'
+            when count(*) between 3 and 5 then 'Ukázal/a jsi konzistentní výkony v náročných debatách.'
+            when count(*) >= 6 then 'Prokázal/a jsi mimořádnou schopnost vyhrávat debaty proti týmům s vyšším skóre.'
+        end as achievement_description
     from lpw
     where is_low_point_win
     group by 1, 2
@@ -67,7 +72,7 @@ final as (
         school_year,
         {{ make_achievement_id('lpw_count') }},
         'Co je doma, to se počítá' as achievement_name,
-        'Vyhrál/a jsi alespoň jednu debatu, ve které měl soupeř dohromady více bodů než tvůj tým.' as achievement_description,
+        achievement_description,
         json_object(
             'lpw_debate_count', lpw_debate_count
         ) as achievement_data,
