@@ -120,3 +120,7 @@ models:
       Uděleno rozhodčím, kteří tento rok jeli na alespoň jeden turnaj - s jiným
       textem na základě toho, kolika turnajů se zúčastnili.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
+  - name: agg__specialist
+    description: >
+      Debatér dostal více bodů mimo standardní debatní akce než na nich.
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS
