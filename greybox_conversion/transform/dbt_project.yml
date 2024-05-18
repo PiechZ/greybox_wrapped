@@ -15,7 +15,7 @@ macro-paths:
 - macros
 snapshot-paths:
 - snapshots
-target-path: ../.meltano/transformers/dbt/target
+target-path: ../.meltano/
 log-path: logs
 packages-install-path: dbt_packages
 clean-targets:
@@ -25,8 +25,8 @@ clean-targets:
 
 # Project-wide variables
 vars:
-  # Which school year begins Year 1 - important because the count starts at 4 and 
-  # not all debates are league debates that come with year designation. Used 
+  # Which school year begins Year 1 - important because the count starts at 4 and
+  # not all debates are league debates that come with year designation. Used
   # primarily in base__debata.sql.
   first_school_year: '2000-04-25'
   # Which achievements do we want to return by default for the current year?
@@ -39,6 +39,8 @@ models:
     columns: true
   greybox_transformation:
     base:
+      +materialized: view
+    intermediate:
       +materialized: view
     achievements:
       +materialized: table

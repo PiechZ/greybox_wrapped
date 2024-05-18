@@ -30,7 +30,7 @@ repos:
       args: [ --manifest, greybox_conversion/.meltano/manifest.json ]
     - id: check-model-has-description
       files: ^greybox_conversion/transform/models/
-      exclude: .meltano*
+      exclude: greybox_conversion/.meltano
       args: [ --manifest, greybox_conversion/.meltano/manifest.json ]
     - id: check-model-columns-have-desc
       files: ^greybox_conversion/transform/models/base/
