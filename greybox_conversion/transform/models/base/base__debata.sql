@@ -1,12 +1,21 @@
-with debates as (
+with soutez_years as (
+    select
+        soutez_id,
+        rocnik as school_year
+    from {{ source('raw', 'soutez') }}
+),
+
+debates as (
     select * from {{ source('raw', 'debata') }}
 ),
 
 debates_in_years as (
     select
-        *,
-        date_sub('year', DATE '{{ var("first_school_year") }}', datum) as school_year
+        debates.*,
+        soutez_years.school_year,
+        date_sub('year', DATE '{{ var("first_school_year") }}', datum) as school_year_calc
     from debates
+    left join soutez_years on debates.soutez_id = soutez_years.soutez_id
 ),
 
 motions as (
@@ -130,6 +139,7 @@ final as (
         3 - all_debates.affirmative_ballots_normalized as negative_ballots_normalized,
         debates_in_years.datum as debate_date,
         debates_in_years.school_year,
+        debates_in_years.school_year_calc,
         motions.jazyk as lang,
         motions.tx as motion_text,
         motions.tx_short as motion_short,
@@ -137,7 +147,6 @@ final as (
         debates_in_years.turnaj_id is not NULL as is_tournament,
         debates_in_years.soutez_id is not NULL as is_competition,
         leagues.nazev as league_name,
-        -- tournaments.nazev as tournament_name,
         competitions.nazev as competition_name
     from all_debates
     left join debates_in_years using (debata_id)
