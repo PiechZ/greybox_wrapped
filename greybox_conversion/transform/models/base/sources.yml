@@ -13,7 +13,6 @@ sources:
       - name: tym
       - name: turnaj
       - name: liga
-      - name: soutez
       - name: teze
       - name: soutez_teze
       - name: clovek_debata_ibody
