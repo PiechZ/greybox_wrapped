@@ -1,15 +1,14 @@
 # greybox Wrapped
 
-greybox Wrapped is a project that allows us to display statistics and achievements from academic debates.
-As the Czech Debating Association, we track all academic debates that take place at our events. From this database, data can be extracted to analyse performance and award individuals with achievements.
-This project will allow us to analyse the data and award individuals' achievements on the backend. On the frontend, individuals will be able to request personalised presentation of their achievements each year, just as other applications do a "rewind" of the year.
-**Sometimes in the code, greybox wrapped can be called ADK wrapped, which is the same thing, only an older name.**
+greybox Wrapped[^1] is a project that displays statistics and achievements from academic high-school debates in a "rewind" style popularized by Spotify Wrapped.
+
+At the Czech Debating Association, we track all debates that take place at our events in a database called "greybox" [^2]. This project allows us to analyse the data and award individuals' achievements on the backend. On the frontend, individuals are be able to request personalised presentation of their achievements each year.
 
 ## Architecture
 
 We're using a standard client-server architecture with a stationary pre-filled backend database.
 
-- `sql_prep/`: A training component that restructures the data into a series of achievements / presentable statistics. **This is handled using dbt/SQL with a sprinkle of Python on top of a DuckDB database**, since our dataset is small (&lt;50MB).
+- `greybox_conversion/`: A training component that restructures the data into a series of achievements / presentable statistics. **This is handled using dbt/SQL with a sprinkle of Python on top of a DuckDB database**, since our dataset is small (&lt;50MB).
 - `backend/`: A transfer component that communicates the data to the presentation layer via API. **FastAPI handles this.**
 - `frontend/`: A presentation component that displays the data in a meaningful/beautiful way. **React/Spectacle handles this.**
 
@@ -22,7 +21,7 @@ graph TD
     DB2 -->|Loads data via Meltano into| C(DuckDB)
   end
   subgraph Frontend Container
-    A(Spectacle/React) 
+    A(Spectacle/React)
   end
   subgraph Backend Container
     A(Spectacle/React) -->|Requests data from| B(FastAPI)
@@ -36,27 +35,15 @@ graph TD
 
 ```
 
+## Environment (data prep)
+
+See [greybox_conversion/README.md](greybox_conversion/README.md) for the data preparation pipeline.
 ## Environment (dev)
 
-
-1. Get a DuckDB export of the dataset and place it in `data/adk_wrapped.db`.
-2. Create a `profiles.yml` file in `~/.dbt` with the following contents:
-    ```yaml
-    adk_wrapped:
-        outputs:
-            dev:
-                path: "path/to/data/adk_wrapped.db"
-                schema: adk_wrapped
-                type: duckdb
-                threads: 4
-                extensions:
-                    - httpfs
-                    - parquet
-        target: dev
-    ```
+1. Get a DuckDB export of the dataset and place it in `data/adk_wrapped_full.db`.
 2. Optionally, get a copy of the rainbow tables and place them in `data/rainbow_tables.csv`. Ensure that the column names are `greybox_id` and `hash`.
 3. For local development, run `make setup` to install the dependencies, including and especially `dbt-duckdb`. (This doesn't set up the frontend, though.)
-    1. Run `make run` to let `dbt` populate the database with transformations.
+    1. Run `make build` to let `dbt` populate the database with transformations.
     2. Run `make backend` to start the FastAPI server.
     3. In a separate terminal, run `make frontend` to start the React server. (To be able to do that, you'll need to set up [Node Version Manager for Windows - `nvm`](https://github.com/coreybutler/nvm-windows) first and, using it, Node v18.15.0.)
 4. For deployment/testing, `docker-compose up` should do everything.
@@ -90,7 +77,7 @@ cd frontend
 fly apps create adk-wrapped
 cd ../backend
 fly apps create adk-wrapped-api
-fly volumes create adk_wrapped_data --region ams --size 
+fly volumes create adk_wrapped_data --region ams --size
 ```
 
 The app is currently deployed to the Amsterdam (`ams`) region.
@@ -113,3 +100,8 @@ puts ../data/adk_wrapped.db
 ```
 
 Before you can do either, you need to be a member of the deploying organization, which is Simon's personal one, and install fly CLI + authenticate.
+
+---
+
+[^1]: In the code, `greybox_wrapped` can sometimes be called `adk_wrapped` - this is the same thing, only an earlier name.
+[^2]: The name has an odd history - it was built in early 2000s to combine the "whitebox" and "blackbox" setups that were used in the Czech Debating Association at the time. We've used the project ever since.
