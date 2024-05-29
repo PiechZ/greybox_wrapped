@@ -47,6 +47,8 @@ models:
       - &school_year
         name: school_year
         description: První den školního roku, ve kterém se debata odehrála
+        tests:
+          - not_null
       - &judge_count
         name: judge_count
         description: Počet rozhodčích v debatě
