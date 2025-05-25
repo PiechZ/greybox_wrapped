@@ -79,6 +79,9 @@ plugins:
     - '!debatovanicz-klub.misto'
     - '!*.komentar'
     - '!debatovanicz-clovek_ibody.tx'
+    # Might need to manually delete the double primary key constraints
+    # - '!debatovanicz-soutez_teze.*'
+    - '!debatovanicz-tezenove.*'
     - '!debatovanicz-turnaj.nazev'
     - '!debatovanicz-turnaj.deadline'
     # Hide internals and bolt-on functionality
