@@ -1,0 +1,7 @@
+version: 2
+
+seeds:
+  - name: vybor_pro_srandu
+    description: "Členové neoficiálního výboru pro srandu"
+    columns:
+      - name: clovek_id
