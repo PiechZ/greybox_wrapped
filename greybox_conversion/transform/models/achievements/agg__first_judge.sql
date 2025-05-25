@@ -1,5 +1,6 @@
 with debates as (
     select * from {{ ref('base__rozhodci_debata') }}
+    where school_year is not null
 ),
 
 earliest_debate_id as (

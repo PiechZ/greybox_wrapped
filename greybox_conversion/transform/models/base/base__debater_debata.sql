@@ -10,6 +10,7 @@ with people as (
 debates as (
     select * from {{ ref('base__debata') }}
     where debata_id != 0
+    and school_year is not null
 ),
 
 debaters_in_debates as (
@@ -35,6 +36,7 @@ final as (
     from debaters_in_debates
     left join debates using (debata_id)
     left join people using (clovek_id)
+    where debates.debata_id is not null  -- drop debates without corresponding records in base__debata
 )
 
 select * from final
