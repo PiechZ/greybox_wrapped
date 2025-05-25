@@ -33,6 +33,7 @@ with all_achievements_unioned as (
                 ref("agg__ib_fanatik"),
                 ref("agg__napul_cesty"),
                 ref("agg__prvni_kroky"),
+                ref("agg__fun_committee"),
             ],
         )
     }}
