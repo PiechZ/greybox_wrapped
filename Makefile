@@ -2,8 +2,8 @@ build:
 	docker compose -f docker-compose.data_prep.yml run --build meltano run dbt-duckdb:build
 
 ingest:
-	docker compose -f docker-compose.data_prep.yml down
-	docker volume rm greybox_wrapped_mysql_storage
+	docker compose -f docker-compose.data_prep.yml down || true
+	docker volume rm greybox_wrapped_mysql_storage || true
 	docker compose -f docker-compose.data_prep.yml up --build --abort-on-container-exit
 
 adk:

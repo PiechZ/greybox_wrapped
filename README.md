@@ -84,7 +84,7 @@ The app is currently deployed to the Amsterdam (`ams`) region.
 
 ### Deployment
 
-`make deploy` pushes both the frontend and backend to fly.io. However, to update the volume, we must ssh/SFTP into the backend nad `puts` it there manually.
+`make deploy` pushes both the frontend and backend to fly.io. However, to update the volume, we must ssh/SFTP into the backend nad `put` it there manually.
 
 ```bash
 cd backend
@@ -95,7 +95,7 @@ exit
 fly ssh sftp shell
 # SFTP prompt will appear
 cd /data
-puts ../data/adk_wrapped.db
+put ../data/adk_wrapped.db
 # press Ctrl+D to exit
 ```
 
