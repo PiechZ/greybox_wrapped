@@ -7,7 +7,7 @@ ingest:
 	docker compose -f docker-compose.data_prep.yml up --build --abort-on-container-exit
 
 adk:
-	docker-compose -f docker-compose.app.yml up -d
+	docker-compose -f docker-compose.app.yml up -d --build
 logs:
 	docker-compose -f docker-compose.app.yml logs -f
 backend:
