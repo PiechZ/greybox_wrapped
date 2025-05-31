@@ -13,7 +13,7 @@ final as (
         'Člen neoficiálního výboru pro srandu!' as achievement_name,
         '...byl/a jsi členem neoficiálního výboru pro srandu. Fun!' as achievement_description,
         JSON_OBJECT() as achievement_data,
-        5 as achievement_priority,
+        2 as achievement_priority, -- make it appear relatively late
         'binary' as achievement_type
     from
         individuals
