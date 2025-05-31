@@ -7,7 +7,7 @@ pandas ~= 2.0
 # Data transfer API
 fastapi[all] ~= 0.92.0
 pydantic ~= 1.10.6
-duckdb ~= 0.10.2
+duckdb ~= 1.3.0
 
 # Miscellenea / dev things
 # pip ~= 23.0.1 # not necessary and breaks some things

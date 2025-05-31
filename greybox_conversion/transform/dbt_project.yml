@@ -30,7 +30,7 @@ vars:
   # primarily in base__debata.sql.
   first_school_year: '2000-04-25'
   # Which achievements do we want to return by default for the current year?
-  current_school_year: 23
+  current_school_year: 24
 
 
 models:

@@ -1,5 +1,6 @@
 with debates as (
     select * from {{ ref('base__debata') }}
+    where school_year is not null
 ),
 
 judges as (
@@ -22,6 +23,7 @@ final as (
         debates.*
     from judges
     left join debates using (debata_id)
+    where debates.school_year is not null
 )
 
 select * from final

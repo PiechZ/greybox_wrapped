@@ -129,3 +129,8 @@ models:
   - name: agg__prvni_kroky
     description: Debater získal první IB body (6.5-12.5) za sezónu.
     columns: *STANDARD_ACHIEVEMENT_COLUMNS
+
+  - name: agg__fun_committee
+    description: >
+      Členové neoficiálního výboru pro srandu.
+    columns: *STANDARD_ACHIEVEMENT_COLUMNS

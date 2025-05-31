@@ -16,6 +16,7 @@ debates_in_years as (
         date_sub('year', DATE '{{ var("first_school_year") }}', datum) as school_year_calc
     from debates
     left join soutez_years on debates.soutez_id = soutez_years.soutez_id
+    where school_year is not null
 ),
 
 motions as (
@@ -155,6 +156,7 @@ final as (
     left join competitions on debates_in_years.soutez_id = competitions.soutez_id
     left join official_motions on debates_in_years.teze_id = official_motions.teze_id and debates_in_years.soutez_id = official_motions.soutez_id
     left join leagues on tournaments.liga_id = leagues.liga_id
+    where debates_in_years.school_year is not null
 )
 
 select * from final
