@@ -1,0 +1,8 @@
+---
+description: Instructions for reading Github issue and creating Github pull requests
+globs: 
+alwaysApply: false
+---
+Use the `gh` CLI tool to get the information you need.
+
+- `gh issue view 137` to view issue 137.

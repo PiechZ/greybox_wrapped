@@ -1,0 +1,8 @@
+---
+description: Use and change the data-loading, frontend and backend environments
+globs: 
+alwaysApply: false
+---
+## Frontend environment
+
+Frontend uses `npm`, but the relevant files (`package.json` etc.) are located in `frontend/`, which means you have to `cd` there first to correctly install the files.
